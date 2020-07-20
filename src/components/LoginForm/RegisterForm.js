@@ -15,23 +15,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginForm(props) {
+export default function RegisterForm(props) {
   const classes = useStyles();
 
   return (
     <Card>
       <CardContent>
         <form className={classes.root} noValidate autoComplete="off">
-          <TextField id="outlined-basic" label="Username" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="First Name"
+            variant="outlined"
+          />
+          <TextField id="outlined-basic" label="Last Name" variant="outlined" />
           <TextField id="outlined-basic" label="Password" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="Confirm Password"
+            variant="outlined"
+          />
         </form>
       </CardContent>
       <CardActions>
         <Button size="small" onClick={props.onClick}>
-          Register Now
+          Login Now
         </Button>
         <Button variant="contained" color="primary" size="medium">
-          Login
+          Register
         </Button>
       </CardActions>
     </Card>

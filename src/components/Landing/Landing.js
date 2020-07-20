@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Landing.scss';
-
+import LoginForm from '../LoginForm/LoginForm';
 
 
 export default class Landing extends Component {
@@ -56,7 +56,7 @@ export default class Landing extends Component {
             <div className="landing-page page">
                 <div className="overlay"></div>
              {moviesMapped}
-                
+                <LoginForm />
             </div>
         )
     }

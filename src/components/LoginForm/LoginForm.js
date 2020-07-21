@@ -19,7 +19,6 @@ export default function LoginForm(props) {
   const classes = useStyles();
 
   return (
-      <div className="">
     <Card >
       <CardContent >
         <form className={classes.root} noValidate autoComplete="off">
@@ -36,6 +35,5 @@ export default function LoginForm(props) {
         </Button>
       </CardActions>
     </Card>
-    </div>
   );
 }

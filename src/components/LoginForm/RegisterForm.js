@@ -19,6 +19,7 @@ export default function RegisterForm(props) {
   const classes = useStyles();
 
   return (
+    
     <Card>
       <CardContent>
         <form className={classes.root} noValidate autoComplete="off">

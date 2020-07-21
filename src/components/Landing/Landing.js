@@ -73,6 +73,7 @@ export default class Landing extends Component {
       <div className="landing-page page">
         <div className="overlay"></div>
         {moviesMapped}
+        <div className="login-div">
         <ReactCardFlip
           isFlipped={this.state.isFlipped}
           flipDirection="horizontal"
@@ -83,6 +84,7 @@ export default class Landing extends Component {
           {/* back of card */}
           <RegisterForm onClick={this.handleClick}></RegisterForm>
         </ReactCardFlip>
+        </div>
       </div>
     );
   }

@@ -75,10 +75,12 @@ export default class Landing extends Component {
         {moviesMapped}
         <ReactCardFlip
           isFlipped={this.state.isFlipped}
-          flipDirection="vertical"
+          flipDirection="horizontal"
+          infinite="true"
         >
+            {/* front of card */}
           <LoginForm onClick={this.handleClick}></LoginForm>
-
+          {/* back of card */}
           <RegisterForm onClick={this.handleClick}></RegisterForm>
         </ReactCardFlip>
       </div>

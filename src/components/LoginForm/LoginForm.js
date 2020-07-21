@@ -19,8 +19,9 @@ export default function LoginForm(props) {
   const classes = useStyles();
 
   return (
-    <Card>
-      <CardContent>
+      <div className="">
+    <Card >
+      <CardContent >
         <form className={classes.root} noValidate autoComplete="off">
           <TextField id="outlined-basic" label="Username" variant="outlined" />
           <TextField id="outlined-basic" label="Password" variant="outlined" />
@@ -35,5 +36,6 @@ export default function LoginForm(props) {
         </Button>
       </CardActions>
     </Card>
+    </div>
   );
 }

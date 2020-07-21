@@ -1,3 +1,6 @@
+@import '../..//App.scss';
+
+
 .landing-page{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -46,3 +49,26 @@
     align-items: center;
     
 }
+
+
+.logo{
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    font-size: $logoSize;
+    font-family: $RegularFont; 
+    color: $primaryColor;
+    
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .landing-page{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: (4, 1fr);
+        grid-gap: 10px;
+        height: 100vh;
+    }
+  }

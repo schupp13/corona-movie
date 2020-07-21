@@ -4,7 +4,6 @@ import "./Landing.scss";
 import LoginForm from "../LoginForm/LoginForm";
 import RegisterForm from "../LoginForm/RegisterForm";
 import ReactCardFlip from "react-card-flip";
-import HomePage from "../HomePage/HomePage";
 
 export default class Landing extends Component {
   constructor(props) {
@@ -71,24 +70,21 @@ export default class Landing extends Component {
       );
     });
     return (
-      <div>
-        <HomePage />
-
-        <div className="landing-page page">
-          <div className="overlay"></div>
-          {moviesMapped}
-          <div className="login-div">
-            <ReactCardFlip
-              isFlipped={this.state.isFlipped}
-              flipDirection="horizontal"
-              infinite="true"
-            >
-              {/* front of card */}
-              <LoginForm onClick={this.handleClick}></LoginForm>
-              {/* back of card */}
-              <RegisterForm onClick={this.handleClick}></RegisterForm>
-            </ReactCardFlip>
-          </div>
+      <div className="landing-page page">
+        <div className="overlay"></div>
+        <h1 className="logo">Keep it Reel</h1>
+        {moviesMapped}
+        <div className="login-div">
+        <ReactCardFlip
+          isFlipped={this.state.isFlipped}
+          flipDirection="horizontal"
+          infinite="true"
+        >
+            {/* front of card */}
+          <LoginForm onClick={this.handleClick}></LoginForm>
+          {/* back of card */}
+          <RegisterForm onClick={this.handleClick}></RegisterForm>
+        </ReactCardFlip>
         </div>
       </div>
     );

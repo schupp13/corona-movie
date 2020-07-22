@@ -1,0 +1,29 @@
+.navbar{
+    grid-area: navbar;
+    background-color: blue;
+}
+
+.banner{
+    grid-area: banner;
+    border: 2px solid black;
+   
+}
+
+.search-results{
+    grid-area: searchResults;
+   
+}
+
+
+
+.homepage{
+    min-height: 100vh;
+    display: grid;
+    grid-template-areas:
+    'navbar'
+    'banner'
+    'searchResults';
+
+    grid-template-rows: auto 1fr 2fr;
+
+}

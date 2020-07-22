@@ -1,0 +1,44 @@
+@import '../..//App.scss';
+
+.Navbar {
+ background: $SecondaryColor;
+ height: 100px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: 1.2rem;
+ display: flex;
+ justify-content: space-between;
+}
+
+.Navbar-logo {
+ color: black;
+ margin: 10px;
+}
+
+.Navbar-links {
+ display: flex;
+ justify-content: space-between;
+ margin: 20px;
+}
+
+a {
+ text-decoration: none;
+}
+
+ul {
+ list-style: none;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+}
+
+li {
+ color: white;
+ margin: 10px;
+}
+
+li:hover {
+ color: $AccentColor;
+ cursor: pointer;
+}

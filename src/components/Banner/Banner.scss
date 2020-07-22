@@ -1,0 +1,38 @@
+
+
+.item-1 { grid-area: header; }
+.item-2 { grid-area: menu; }
+.item-3 { grid-area: main; }
+.item-4 { grid-area: right; }
+.item-5 { grid-area: footer; }
+
+
+
+
+.banner-display {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+    grid-gap: 10px;
+}
+
+.banner-display  > div{
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: right;
+  
+}
+
+
+.banner-overlay{
+    position: absolute;
+    
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(1,180,228,0.4) 35%, rgba(144,206,161,0.4) 100%);
+}
+
+

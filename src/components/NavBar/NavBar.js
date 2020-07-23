@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "./NavBar.scss";
 
-<<<<<<< Updated upstream
-import "./Navbar.scss";
-=======
-import "../NavBar/NavBar.scss";
->>>>>>> Stashed changes
 
 class Navbar extends Component {
   render() {

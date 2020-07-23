@@ -1,10 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,700&display=swap');
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding:0;
-}
 $RegularFont:  'Roboto', sans-serif;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $RegularFont;
+}
+
 
 /* Color Theme Swatches in Hex */
 $primaryColor: #0d253f;
@@ -15,3 +18,29 @@ $AccentColor: #90cea1;
 $logoSize: 50px;
 
 
+.App{
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+/// mixin
+@mixin pageCenter ($pagewidth) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100%;
+  width: $pagewidth;
+
+
+}
+
+@mixin pageHeader {
+  font-family: $subHeaderFont;
+  font-size: 50px;
+  margin: 30px;
+}

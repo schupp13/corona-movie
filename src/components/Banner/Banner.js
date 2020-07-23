@@ -25,7 +25,7 @@ export default class Banner extends Component {
           .then((result) => {
             console.log(result.data.results);
             this.setState({
-              poster: result.data.results[1].poster_path,
+              poster: result.data.results[1].backdrop_path,
             });
           })
           .catch((error) => {
@@ -51,16 +51,12 @@ export default class Banner extends Component {
 
 
     render() {
+        console.log(this.state);
         let Background = `https://image.tmdb.org/t/p/original/${this.state.poster}`;
 
             return (
-            <div className="banner-display" >
-                
-                <div className="item-1" style={{ backgroundImage: `url(${Background})` }}></div>
-                <div className="item-2" style={{ backgroundImage: `url(${Background})` }}></div>
-                <div className="item-3" style={{ backgroundImage: `url(${Background})` }}></div>
-                <div className="item-4" style={{ backgroundImage: `url(${Background})` }}></div>
-                <div className="item-5" style={{ backgroundImage: `url(${Background})` }}></div>
+            <div className="banner-display" style={{ backgroundImage: `url(${Background})` }} >
+              <div className="banner-overlay"></div>
             </div>
         )
     }

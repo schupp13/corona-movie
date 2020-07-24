@@ -24,7 +24,7 @@ export default class TrendingMovies extends Component {
     }
 
     getTrendingMovies = (when = 'day') => {
-        let header = when == 'day'? 'Today': 'This Week';
+        let header = when === 'day'? 'Today': 'This Week';
         
         axios
           .get(

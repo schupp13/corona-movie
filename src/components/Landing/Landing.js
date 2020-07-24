@@ -44,8 +44,10 @@ export default class Landing extends Component {
         "https://api.themoviedb.org/3/configuration?api_key=12aa3499b6032630961640574aa332a9"
       )
       .then((res) => {
-        this.state.config = res.data.images;
-        console.log(this.state.config);
+          this.setState({
+              config: res.data.images
+          });
+    
       })
       .catch((error) => {
         console.log(error);

@@ -22,10 +22,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MovieCard(props) {
+function TVShowsCard(props) {
   const classes = useStyles();
-  const description = props.movie.overview.slice(0, 120) + "...";
-  let pic = `https://image.tmdb.org/t/p/w500/${props.movie.backdrop_path}`;
+
+  const description = props.tvshow.overview.slice(0, 120) + "...";
+  console.log(props.tvshow);
+  let pic = `https://image.tmdb.org/t/p/w500/${props.tvshow.poster_path}`;
 
   return (
     <Card className={classes.root}>
@@ -37,7 +39,7 @@ export default function MovieCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.movie.title}
+            {props.tvshow.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {description}
@@ -52,7 +54,9 @@ export default function MovieCard(props) {
           Learn More
         </Button>
       </CardActions>
-      <AverageRating rating={props.movie.vote_average * 10} />
+      <AverageRating rating={props.tvshow.vote_average * 10} />
     </Card>
   );
 }
+
+export default TVShowsCard;

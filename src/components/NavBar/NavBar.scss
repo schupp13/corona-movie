@@ -2,7 +2,7 @@
 
 .Navbar {
  background: $SecondaryColor;
- height: 100px;
+ height: 80px;
  display: flex;
  justify-content: center;
  align-items: center;
@@ -13,6 +13,13 @@
 
 .Navbar-logo {
  color: black;
+ margin: 10px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.tv-icon {
  margin: 10px;
 }
 

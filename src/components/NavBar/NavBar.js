@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import LiveTvIcon from "@material-ui/icons/LiveTv";
 
-<<<<<<< Updated upstream
-import "./Navbar.scss";
-=======
 import "../NavBar/NavBar.scss";
->>>>>>> Stashed changes
 
 class Navbar extends Component {
   render() {
     return (
       <nav className="Navbar">
-        <h1 className="Navbar-logo">KeepItReel</h1>
+        <div className="Navbar-logo">
+          <h1>KeepItReel</h1>
+          <LiveTvIcon className="tv-icon" />
+        </div>
         <div className="Navbar-links">
           <ul>
             <Link to="/movies">

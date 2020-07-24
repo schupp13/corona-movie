@@ -72,7 +72,7 @@ export default class Landing extends Component {
     return (
       <div className="landing-page page">
         <div className="overlay"></div>
-        <h1 className="logo">Keep it Reel</h1>
+        
         {moviesMapped}
         <div className="login-div">
         <ReactCardFlip

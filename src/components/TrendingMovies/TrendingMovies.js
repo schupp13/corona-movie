@@ -43,8 +43,8 @@ export default class TrendingMovies extends Component {
 
 
     render() {
-        let movies = this.state.results.map(movie =>{
-           return  <MoviieCard movie={movie}/>
+        let movies = this.state.results.map((movie, index) =>{
+           return  <MoviieCard movie={movie} key={index}/>
         });
 
         return (

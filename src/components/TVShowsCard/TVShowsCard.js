@@ -26,7 +26,6 @@ function TVShowsCard(props) {
   const classes = useStyles();
 
   const description = props.tvshow.overview.slice(0, 120) + "...";
-  console.log(props.tvshow);
   let pic = `https://image.tmdb.org/t/p/w500/${props.tvshow.poster_path}`;
 
   return (

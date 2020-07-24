@@ -25,7 +25,6 @@ class TopRatedTVShow extends Component {
         "https://api.themoviedb.org/3/tv/top_rated?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1"
       )
       .then((res) => {
-        console.log(res.data.results);
         this.setState({ results: res.data.results.slice(0, 10) });
       })
       .catch((err) => {
@@ -39,7 +38,6 @@ class TopRatedTVShow extends Component {
         "https://api.themoviedb.org/3/configuration?api_key=12aa3499b6032630961640574aa332a9"
       )
       .then((res) => {
-        console.log(res);
         this.setState({ config: res.data.images });
       })
       .catch((err) => {
@@ -48,7 +46,6 @@ class TopRatedTVShow extends Component {
   };
 
   render() {
-    console.log(this.state);
     let tvshows = this.state.results.map((tvshow, index) => {
       return <TVShowsCard tvshow={tvshow} key={index} />;
     });

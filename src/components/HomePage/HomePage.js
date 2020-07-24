@@ -3,6 +3,7 @@ import "./HomePage.scss";
 import MultiSearch from "../MultiSearch/MultiSearch";
 import TrendingMovies from "../TrendingMovies/TrendingMovies";
 import TopRatedTVShow from "../TopRatedTVShow/TopRatedTVShow";
+import MoviesByGenre from "../MoviesByGenre/MoviesByGenre";
 import axios from "axios";
 
 export default class HomePage extends Component {
@@ -25,7 +26,6 @@ export default class HomePage extends Component {
         "https://api.themoviedb.org/3/trending/movie/week?api_key=12aa3499b6032630961640574aa332a9"
       )
       .then((result) => {
-        console.log(result.data.results);
         this.setState({
           poster: result.data.results[1].backdrop_path,
         });
@@ -73,6 +73,9 @@ export default class HomePage extends Component {
           </div>
           <div className="search-results">
             <TopRatedTVShow />
+          </div>
+          <div className="search-results">
+            <MoviesByGenre />
           </div>
         </div>
       </div>

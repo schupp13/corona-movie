@@ -1,6 +1,7 @@
 @import '../..//App.scss';
 
 .Navbar {
+
  background: $primaryColor;
  height: 64px;
  display: flex;
@@ -15,6 +16,13 @@
 
 .Navbar-logo {
  color: white;
+ margin: 10px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.tv-icon {
  margin: 10px;
 }
 

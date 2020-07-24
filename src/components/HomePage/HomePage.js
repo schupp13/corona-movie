@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import Navbar from "../NavBar/NavBar";
 import './HomePage.scss';
-import Banner from "../Banner/Banner";
 import MultiSearch from "../MultiSearch/MultiSearch";
 import TrendingMovies from "../TrendingMovies/TrendingMovies";
 import axios from 'axios';
@@ -44,7 +42,10 @@ export default class HomePage extends Component {
             "https://api.themoviedb.org/3/configuration?api_key=12aa3499b6032630961640574aa332a9"
           )
           .then((res) => {
-            this.state.config = res.data.images;
+              this.setState({
+                  config: res.data.images
+              }
+              )
           })
           .catch((error) => {
             console.log(error);
@@ -62,7 +63,7 @@ export default class HomePage extends Component {
         <div className="banner" style={{ backgroundImage: `url(${Background})`}}>
             <div className="banner-overlay">
                 <div className="banner-content"> 
-                <h1>Welcome to Kepp it Reel...</h1>
+                <h1>Welcome to Keep it Reel...now keep it real</h1>
                     <MultiSearch />
                 </div> 
             </div> 
@@ -70,11 +71,7 @@ export default class HomePage extends Component {
         {/* Search  */}
         <div className="search-results">
         
-
-         {/* Trending Movies */}
-         {/* <TrendingMovies /> */}
-        
-<TrendingMovies />   
+            <TrendingMovies />   
         
         </div>
         </div>

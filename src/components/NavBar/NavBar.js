@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import LiveTvIcon from "@material-ui/icons/LiveTv";
 
-import "../NavBar/NavBar.scss";
+import "./NavBar.scss";
+
 
 class Navbar extends Component {
   render() {

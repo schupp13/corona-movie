@@ -3,7 +3,7 @@
 .Navbar {
 
  background: $primaryColor;
- height: 64px;
+ height: $navHeight;
  display: flex;
  justify-content: center;
  align-items: center;

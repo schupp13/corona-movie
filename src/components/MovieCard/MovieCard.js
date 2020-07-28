@@ -8,6 +8,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import AverageRating from "../AverageRating/AverageRating";
+import {Link} from "react-router-dom";
+import './MovieCard.scss';
+import TrailerModal from "../TrailerModal/TrailerModal";
+
 
 const useStyles = makeStyles({
   root: {
@@ -26,6 +30,7 @@ export default function MovieCard(props) {
   const classes = useStyles();
   const description = props.movie.overview.slice(0, 120) + "...";
   let pic = `https://image.tmdb.org/t/p/w500/${props.movie.backdrop_path}`;
+  let link = `/movies/${props.movie.id}`
 
   return (
     <Card className={classes.root}>
@@ -45,14 +50,15 @@ export default function MovieCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+          <TrailerModal movieID={props.movie.id}/>
+        <Button component={Link} to={link} size="small" color="primary">
+          More Info
         </Button>
       </CardActions>
+      <div className="rating-div">
       <AverageRating rating={props.movie.vote_average * 10} />
+      </div>
+
     </Card>
   );
 }

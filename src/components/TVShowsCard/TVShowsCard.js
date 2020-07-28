@@ -54,7 +54,9 @@ function TVShowsCard(props) {
           Learn More
         </Button>
       </CardActions>
+      <div className="rating-div">
       <AverageRating rating={props.tvshow.vote_average * 10} />
+      </div>
     </Card>
   );
 }

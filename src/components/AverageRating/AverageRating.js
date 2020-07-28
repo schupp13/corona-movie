@@ -32,6 +32,7 @@ export default function AverageRating(props) {
         tooltips: {
              enabled: false
         },
+     
         
     }
     return (

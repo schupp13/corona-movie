@@ -96,14 +96,13 @@ export default class MoviePage extends Component {
                 <div className="movie-rating">
                     <AverageRating rating={movie.vote_average * 10}/>
                     <p>Votes: {movie.vote_count}</p>
-                
                 </div>
                 <div className="movie-homepage">
-                <a href={movie.homepage} target="__blank">
-                   
-                    {homepageOption}
-                    
+                    <a href={movie.homepage} target="__blank">
+                        {homepageOption}    
                     </a>
+                </div>
+                <div className="movie-trailer">
                     <TrailerModal movieID={movieID}/>
                 </div>
             </div>

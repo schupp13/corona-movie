@@ -4,6 +4,8 @@ import Modal from '@material-ui/core/Modal';
 import './TrailerModal.scss';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import axios from 'axios';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -70,9 +72,10 @@ export default function TrailerModal(props) {
   );
 
   return (
-    <div>
-       <PlayCircleOutlineIcon type="button" onClick={handleOpen}></PlayCircleOutlineIcon>
-      
+    <div className="trailer-div">
+        <Tooltip title="Trailer">
+       <PlayCircleOutlineIcon fontSize="large" type="button" className="play-trailer" onClick={handleOpen}/>
+       </Tooltip>
       <Modal
         open={open}
         onClose={handleClose}

@@ -26,7 +26,6 @@ function TVShowsCard(props) {
   const classes = useStyles();
 
   const description = props.tvshow.overview.slice(0, 120) + "...";
-  console.log(props.tvshow);
   let pic = `https://image.tmdb.org/t/p/w500/${props.tvshow.poster_path}`;
 
   return (
@@ -55,7 +54,7 @@ function TVShowsCard(props) {
         </Button>
       </CardActions>
       <div className="rating-div">
-      <AverageRating rating={props.tvshow.vote_average * 10} />
+        <AverageRating rating={props.tvshow.vote_average * 10} />
       </div>
     </Card>
   );

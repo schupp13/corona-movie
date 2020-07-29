@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TrailerModal(props) {
   const classes = useStyles();
-  console.log(props)
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen, ] = React.useState(false);

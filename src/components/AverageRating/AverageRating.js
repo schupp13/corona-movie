@@ -8,9 +8,8 @@ export default function AverageRating(props) {
     let okayColor = 'rgb(1, 180, 228, 1)';
     let badColor =  'rgb(228, 1, 66, 1)';
     let color = props.rating > 80 ? goodColor: props.rating < 79 && props.rating > 60 ? okayColor: badColor;
-    console.log("hajhdfl;ajlfl  " + props.rating)
    let data = {
-        text: ';dfljaldjlkfajsdl;fjl;askdfjlk;asdjlkf;lkasdflkasjl;k',
+       
         datasets: [{
             label: '# of Votes',
             data: [props.rating,100- props.rating],

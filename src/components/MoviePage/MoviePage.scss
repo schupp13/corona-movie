@@ -10,24 +10,35 @@
             .banner-content{
                 width: 80%;
                 height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
                 h1{
                     font-size: 50px;
-                    margin-top: 50px;
                 }
+
            
-               
+               .directors{
+                   font-size: 15px;
+                   font-weight: bold;
+                   margin: 15px 0;
+
+               }
             }
             
         }
 
         .movie-page-content{
-            margin-top: 50px;
-            background-color: rgb(184, 184, 184);
+           
             padding: 30px;
             display: flex;
             justify-content: space-evenly;
+            align-items: center;
+            background-color: white;
+
+            
             .poster-div{
-                width: 20%;
+                width: 35%;
     
                 img{
                     width: 100%;
@@ -36,18 +47,28 @@
                 }
             }
             .movie-details{
-                
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
                padding: 3%;
                 line-height: 1.5em;
+
+               
+
+                .chips{
+                    margin: 15px 0;
+                }
 
                 .chips > *{
                     margin-right: 5px;
                 }
 
                 .movie-bottom{
-
+                    width: 100%;
                     display: flex;
-                    align-items: center;
+                    align-items: flex-end;
                     justify-content: space-evenly;
                     .movie-rating{
                         width: 150px;
@@ -78,5 +99,57 @@
         }
    
     }
+
+
+    .actors-div{
+        width: 100%;
+        padding: 15px;
+        background-color: white;
+        
+
+        .actors-div-scroll{
+            width: 100%;
+            display: flex;
+            overflow-x:scroll;
+            overflow-y: hidden;
+        }
+    }
+
+    .scroll-container-div{
+        width: 100%;
+     
+        background-color: white;
+        
+        h2{
+            padding: 12px;
+        }
+        .scroll-div{
+            width: 100%;
+            display: flex;
+            overflow-x:scroll;
+            overflow-y: hidden;
+            padding: 15px;
+        }
+    }
 }
 
+
+.parallax {
+    /* The image used */
+  
+    /* Set a specific height */
+    min-height: 300px; 
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .movie-page-content {
+     flex-direction: column;
+    }
+  }

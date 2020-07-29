@@ -30,7 +30,7 @@ export default function MovieCard(props) {
   const classes = useStyles();
   const description = props.movie.overview.slice(0, 120) + "...";
   let pic = `https://image.tmdb.org/t/p/w500/${props.movie.backdrop_path}`;
-  let link = `/movies/${props.movie.id}`
+  let link = `/movies/${props.movie.id}`;
 
   return (
     <Card className={classes.root}>

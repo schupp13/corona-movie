@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import MovieCard from "../MovieCard/MovieCard";
-import TVShowsCard from "../TVShowsCard/TVShowsCard";
-import ActorCard from "../ActorCard/ActorCard";
 import MultiCard from "../MultiCard/MultiCard";
 import './SearchPage.scss';
-import MultiSearch from "../MultiSearch/MultiSearch";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
@@ -42,12 +38,11 @@ export default class SearchPage extends Component {
 
 searchClick = () =>{
     this.setState({
-        search: this.state.input_search
+        search: this.state.input_search,
     }, this.getMultiSearch);
 }
 
 searchInput = (e)=>{
-    console.log(e.target.value);
     this.setState({
         input_search: e.target.value.trim()
     });
@@ -62,7 +57,6 @@ searchInput = (e)=>{
         `https://api.themoviedb.org/3/search/${search_type}?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=${page}`
       )
       .then((search) => {
-        console.log(search);
         this.setState({
           results: search.data.results,
           total_pages: search.data.total_pages,
@@ -86,8 +80,7 @@ searchInput = (e)=>{
 
   render() {
     let { results, search_type, search } = this.state;
-    console.log(this.state);
-    let jsx = results.map((element) => {
+    let jsx = results.map((element, key) => {
       return element.media_type === "movie" ? (
         <MultiCard
         overview={element.overview}
@@ -95,7 +88,8 @@ searchInput = (e)=>{
         title={element.title}
         image={element.poster_path}
         movie={element}
-        id={element.id}
+        key={element.id}
+
       />
       ) :element.media_type === "collection" ?(
         <MultiCard
@@ -104,7 +98,7 @@ searchInput = (e)=>{
         title={element.title}
         image={element.poster_path}
         movie={element}
-        id={element.id}
+        key={element.id}
       />
       ) : element.media_type === "tv" ? (
         <MultiCard
@@ -113,7 +107,7 @@ searchInput = (e)=>{
           title={element.name}
           image={element.poster_path}
           tvshow={element}
-          id={element.id}
+          key={element.id}
         />
       ) : search_type === "movie" ? (
         <MultiCard
@@ -122,7 +116,7 @@ searchInput = (e)=>{
           title={element.title}
           image={element.poster_path}
           movie={element}
-          id={element.id}
+          key={element.id}
         />
       ) : search_type === "tv" ? (
         <MultiCard
@@ -131,20 +125,25 @@ searchInput = (e)=>{
           title={element.name}
           image={element.poster_path}
           tvshow={element}
-          id={element.id}
+          key={element.id}
         />
       ) : search_type === "collection" ? (
         <MultiCard
-        overview={"test"}
+        overview={element.overview}
         date={element.first_air_date}
           title={element.name}
           image={element.poster_path}
           tvshow={element}
-          id={element.id}
+          key={element.id}
         />
-      ) : (
-        <MultiCard title={element.name} image={element.profile_path} overview={'acting'} />
-      );
+      ) : <MultiCard
+      overview={""}
+      date={element.known_for_department}
+        title={element.name}
+        image={element.profile_path}
+     
+        key={element.id}
+      />
     });
 
     return (
@@ -158,7 +157,7 @@ searchInput = (e)=>{
         <div className="search-page-main">
         <div className="search-results-container">
         <h2>{search[0].toUpperCase()+search.slice(1).toLowerCase()} Results</h2>
-          <button onClick={this.handleClick} name="multi" className="search-button" autofocus>
+          <button onClick={this.handleClick} name="multi" className="search-button" autoFocus>
             Most Popular
           </button>
           <button onClick={this.handleClick} name="movie" className="search-button">

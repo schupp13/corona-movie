@@ -31,7 +31,7 @@ export default class MultiSearch extends Component {
         return (
             <div className="search-input">
                 
-          <TextField id="outlined-basic" label="Search for Movies, TV Shows, Actors and more..." variant="outlined" name="results" fullWidth onChange={this.handchange}/> 
+          <TextField id="outlined-basic" label="Search here" variant="outlined" name="results" fullWidth onChange={this.handchange}/> 
           <Button variant="contained" component={Link} to={link}>Default</Button>
 
             </div>

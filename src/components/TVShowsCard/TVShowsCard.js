@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import AverageRating from "../AverageRating/AverageRating";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -27,6 +28,7 @@ function TVShowsCard(props) {
 
   const description = props.tvshow.overview.slice(0, 120) + "...";
   let pic = `https://image.tmdb.org/t/p/w500/${props.tvshow.poster_path}`;
+  let link = `/tvshows/${props.tvshow.id}`;
 
   return (
     <Card className={classes.root}>
@@ -49,7 +51,7 @@ function TVShowsCard(props) {
         <Button size="small" color="primary">
           Share
         </Button>
-        <Button size="small" color="primary">
+        <Button to={link} component={Link} size="small" color="primary">
           Learn More
         </Button>
       </CardActions>

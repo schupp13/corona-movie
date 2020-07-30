@@ -4,6 +4,12 @@ import MovieCard from "../MovieCard/MovieCard";
 import TVShowsCard from "../TVShowsCard/TVShowsCard";
 import ActorCard from "../ActorCard/ActorCard";
 import MultiCard from "../MultiCard/MultiCard";
+import './SearchPage.scss';
+import MultiSearch from "../MultiSearch/MultiSearch";
+import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button';
+import {Link} from 'react-router-dom';
+
 
 export default class SearchPage extends Component {
   constructor(props) {
@@ -16,15 +22,41 @@ export default class SearchPage extends Component {
       total_results: "",
       results: [],
       search_type: "multi",
+      input_search: ''
     };
   }
 
   componentDidMount() {
+    this.setState({search: this.props.match.params.search});
     this.getMultiSearch();
   }
 
-  getMultiSearch = (search_type = "multi") => {
-    let { page, search } = this.state;
+  componentDidUpdate(prevProps){
+    if (this.props.match.params.search !== prevProps.match.params.search) {
+        this.searchClick();
+      }
+    
+}
+
+
+
+searchClick = () =>{
+    this.setState({
+        search: this.state.input_search
+    }, this.getMultiSearch);
+}
+
+searchInput = (e)=>{
+    console.log(e.target.value);
+    this.setState({
+        input_search: e.target.value.trim()
+    });
+  }
+
+
+
+  getMultiSearch = () => {
+    let { page, search, search_type } = this.state;
     axios
       .get(
         `https://api.themoviedb.org/3/search/${search_type}?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=${page}`
@@ -43,19 +75,46 @@ export default class SearchPage extends Component {
       });
   };
 
+  
+
+
   handleClick = (e) => {
-    console.log(e.target.name);
-    this.getMultiSearch(e.target.name);
+    this.setState({
+        search_type: e.target.name
+    }, this.getMultiSearch);
   };
 
   render() {
-    let { results, search_type } = this.state;
+    let { results, search_type, search } = this.state;
     console.log(this.state);
     let jsx = results.map((element) => {
       return element.media_type === "movie" ? (
-        <MovieCard movie={element} />
+        <MultiCard
+        overview={element.overview}
+        date={element.release_date}
+        title={element.title}
+        image={element.poster_path}
+        movie={element}
+        id={element.id}
+      />
+      ) :element.media_type === "collection" ?(
+        <MultiCard
+        overview={element.overview}
+        date={element.release_date}
+        title={element.title}
+        image={element.poster_path}
+        movie={element}
+        id={element.id}
+      />
       ) : element.media_type === "tv" ? (
-        <TVShowsCard tvshow={element} />
+        <MultiCard
+          overview={element.overview}
+          date={element.first_air_date}
+          title={element.name}
+          image={element.poster_path}
+          tvshow={element}
+          id={element.id}
+        />
       ) : search_type === "movie" ? (
         <MultiCard
           overview={element.overview}
@@ -63,6 +122,7 @@ export default class SearchPage extends Component {
           title={element.title}
           image={element.poster_path}
           movie={element}
+          id={element.id}
         />
       ) : search_type === "tv" ? (
         <MultiCard
@@ -71,30 +131,52 @@ export default class SearchPage extends Component {
           title={element.name}
           image={element.poster_path}
           tvshow={element}
+          id={element.id}
+        />
+      ) : search_type === "collection" ? (
+        <MultiCard
+        overview={"test"}
+        date={element.first_air_date}
+          title={element.name}
+          image={element.poster_path}
+          tvshow={element}
+          id={element.id}
         />
       ) : (
-        <MultiCard title={element.name} image={element.profile_path} />
+        <MultiCard title={element.name} image={element.profile_path} overview={'acting'} />
       );
     });
 
     return (
-      <div>
+      <div className="search-page">
+  
+          <div className="search-page-container">
+          <div className="search-input">    
+                <TextField id="outlined-basic" label="Search Here" variant="outlined" name="results" fullWidth onChange={this.searchInput}/>
+                <Button variant="contained" component={Link} to={`/search/${this.state.input_search}`}>Search</Button>
+        </div>
+        <div className="search-page-main">
         <div className="search-results-container">
-          <h2>Search Results</h2>
-          <button onClick={this.handleClick} name="movie">
+        <h2>{search[0].toUpperCase()+search.slice(1).toLowerCase()} Results</h2>
+          <button onClick={this.handleClick} name="multi" className="search-button" autofocus>
+            Most Popular
+          </button>
+          <button onClick={this.handleClick} name="movie" className="search-button">
             Movies
           </button>
-          <button onClick={this.handleClick} name="tv">
+          <button onClick={this.handleClick} name="tv" className="search-button">
             TV Shows
           </button>
-          <button onClick={this.handleClick} name="person">
+          <button onClick={this.handleClick} name="person" className="search-button">
             People
           </button>
-          <button onClick={this.handleClick} name="collection">
+          <button onClick={this.handleClick} name="collection" className="search-button">
             Collection
           </button>
         </div>
-        <div>{jsx}</div>
+        <div className="search-results">{jsx}</div>
+        </div>
+        </div>
       </div>
     );
   }

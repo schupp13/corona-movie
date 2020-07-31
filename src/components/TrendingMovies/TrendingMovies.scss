@@ -1,13 +1,13 @@
-.trending{
+.trending {
     padding: 15px;
-    
-    .trending-movies{
-   
-        overflow: auto;       
+
+    .trending-items {
+
+        overflow: auto;
         display: flex;
     }
 }
 
-.trending > *{
+.trending>* {
     margin-bottom: 15px;
 }

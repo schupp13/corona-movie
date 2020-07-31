@@ -3,6 +3,7 @@ import "./HomePage.scss";
 import MultiSearch from "../MultiSearch/MultiSearch";
 import TrendingMovies from "../TrendingMovies/TrendingMovies";
 import TopRatedTVShow from "../TopRatedTVShow/TopRatedTVShow";
+import PopularActors from "../PopularActors/PopularActors";
 import axios from "axios";
 
 export default class HomePage extends Component {
@@ -49,6 +50,7 @@ export default class HomePage extends Component {
         console.log(error);
       });
   };
+
   render() {
     let Background = `https://image.tmdb.org/t/p/original/${this.state.poster}`;
 
@@ -73,6 +75,9 @@ export default class HomePage extends Component {
           </div>
           <div className="search-results">
             <TopRatedTVShow />
+          </div>
+          <div className="search-results">
+            <PopularActors />
           </div>
         </div>
       </div>

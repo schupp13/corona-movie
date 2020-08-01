@@ -12,13 +12,23 @@
 
         .search-input{
             display:flex;
+            form{
+                width: 100%;
+            }
         }
 
         .search-page-main{
             display:flex;
+            align-items:flex-start;
             min-width:100%;
-            .search-results-container{
+        
+            .search-left{
                 min-width: 30%;
+                display: flex;
+                justify-content: center;
+            
+            .search-results-container{
+                min-width: 90%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -29,7 +39,6 @@
                 margin-top: 15px;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
                 border: 1px solid rgba(var(--lightGrey), 1);
-
                 h2{
                     background-color: $SecondaryColor;
                     padding: 15px;
@@ -44,12 +53,23 @@
                     border:none;
                     font-size: 15px;
                     padding: 5px;
-
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                   
+                    div{
+                        margin-left: auto;
+                    }
+                    
                 }
+
+                
                 button:nth-last-child(){
                     border-radius:0 0 5px 5px;
 
                 }
+
+                
 
                 button:hover{
                     
@@ -71,9 +91,50 @@
                 }
 
             }
+        }
+
+        .search-right{
+            max-height: 80vh;
+            min-width: 70%;
+            overflow: scroll;
+            overflow-x: hidden;
+            
             .search-results{
-                min-width: 70%;
+                min-width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 90%;
+                
+
+                .pagination-div{
+                    display: flex;
+                    justify-content: flex-start;
+                    width: 500px;
+                }
             }
+           
     }
+    .search-right::-webkit-scrollbar {
+        display: none;
+      }
     }
-}
+    }}
+
+
+    @media only screen and (max-width: 600px) {
+       .search-page-container{
+           width: 100%;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-self: start;
+       }
+            .search-page-main{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        
+      }

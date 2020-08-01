@@ -1,11 +1,11 @@
 a{
-   
+    margin: 15px;
         color: inherit;
         text-decoration: none;
-    
+        width: 90%;
 .multicard-container {
- margin: 15px;
- width: 90%;
+
+ width: 100%;
  display: flex;
  border-radius: 8px;
  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -36,8 +36,9 @@ a{
 
   .overview{ 
       margin-top: 5px;
-      line-height:1.6;
+      line-height:1.5;
        color: grey;
+       font-size: 11px;
   }
  }
 }

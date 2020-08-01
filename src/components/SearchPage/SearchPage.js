@@ -5,6 +5,11 @@ import './SearchPage.scss';
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
+import Pagination from '../Pagination/Pagination';
+import Chip from "@material-ui/core/Chip";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 
 export default class SearchPage extends Component {
@@ -18,28 +23,40 @@ export default class SearchPage extends Component {
       total_results: "",
       results: [],
       search_type: "multi",
-      input_search: ''
+      input_search: '',
+      movies_count: 0,
+      most_popular_count: 0,
+      people_count: 0,
+      collection_count: 0,
+      tvshow_count: 0,
+      company_count: 0,
     };
   }
 
   componentDidMount() {
     this.setState({search: this.props.match.params.search});
     this.getMultiSearch();
+    this.getAllSearch();
   }
 
   componentDidUpdate(prevProps){
     if (this.props.match.params.search !== prevProps.match.params.search) {
-        this.searchClick();
+      this.setState({
+        search: this.state.input_search,
+    }, this.componentDidMount);
       }
     
 }
 
-
+submitForm = (e) => {
+  e.preventDefault()
+  this.props.history.push(`/search/${this.state.input_search}`); // <--- The page you want to redirect your user to.
+}
 
 searchClick = () =>{
     this.setState({
         search: this.state.input_search,
-    }, this.getMultiSearch);
+    }, this.componentDidMount);
 }
 
 searchInput = (e)=>{
@@ -48,15 +65,59 @@ searchInput = (e)=>{
     });
   }
 
+  paginate = (e,value) =>{
+    this.setState({
+      page: value
+    }, this.getMultiSearch);
+  }
+
+  
+  getAllSearch = () =>{
+    let {search} = this.state;
+    
+      let URLMulti = `https://api.themoviedb.org/3/search/multi?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;  
+      let URLTv = `https://api.themoviedb.org/3/search/tv?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+      let URLMovie = `https://api.themoviedb.org/3/search/movie?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+      let URLPerson = `https://api.themoviedb.org/3/search/person?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+      let URLCollection = `https://api.themoviedb.org/3/search/collection?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+      let URLCompany = `https://api.themoviedb.org/3/search/company?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+
+      const multi = axios.get(URLMulti);
+      const tv = axios.get(URLTv);
+      const movie = axios.get(URLMovie);
+      const person = axios.get(URLPerson);
+      const collection = axios.get(URLCollection);
+      const company = axios.get(URLCompany);
+
+Promise.all([multi, tv, movie, person, collection, company]).then((values) => {
+  console.log(values);
+  this.setState({
+    most_popular_count: values[0].data.total_results,
+    tvshow_count: values[1].data.total_results,
+    movies_count: values[2].data.total_results,
+    people_count: values[3].data.total_results,
+    collection_count: values[4].data.total_results,
+    company_count: values[5].data.total_results,
+    
+  });
+}).catch(error=>{
+  console.log(error);
+  
+});
+
+  }
 
 
   getMultiSearch = () => {
     let { page, search, search_type } = this.state;
+    
     axios
       .get(
         `https://api.themoviedb.org/3/search/${search_type}?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=${page}`
       )
       .then((search) => {
+        console.log(search);
+
         this.setState({
           results: search.data.results,
           total_pages: search.data.total_pages,
@@ -74,13 +135,15 @@ searchInput = (e)=>{
 
   handleClick = (e) => {
     this.setState({
-        search_type: e.target.name
+        search_type: e.target.name,
+        page: 1
     }, this.getMultiSearch);
   };
 
   render() {
-    let { results, search_type, search } = this.state;
+    let { page, results, search_type, search, total_pages, movies_count, most_popular_count, people_count,collection_count, tvshow_count} = this.state;
     let jsx = results.map((element, key) => {
+      
       return element.media_type === "movie" ? (
         <MultiCard
         overview={element.overview}
@@ -89,8 +152,11 @@ searchInput = (e)=>{
         image={element.poster_path}
         movie={element}
         key={element.id}
+        id={element.id}
+        type={'movies'}
 
       />
+      
       ) :element.media_type === "collection" ?(
         <MultiCard
         overview={element.overview}
@@ -99,6 +165,8 @@ searchInput = (e)=>{
         image={element.poster_path}
         movie={element}
         key={element.id}
+        id={element.id}
+        type={'collections'}
       />
       ) : element.media_type === "tv" ? (
         <MultiCard
@@ -108,6 +176,8 @@ searchInput = (e)=>{
           image={element.poster_path}
           tvshow={element}
           key={element.id}
+          id={element.id}
+          type={'tvshows'}
         />
       ) : search_type === "movie" ? (
         <MultiCard
@@ -117,6 +187,8 @@ searchInput = (e)=>{
           image={element.poster_path}
           movie={element}
           key={element.id}
+          id={element.id}
+          type={'movies'}
         />
       ) : search_type === "tv" ? (
         <MultiCard
@@ -126,6 +198,8 @@ searchInput = (e)=>{
           image={element.poster_path}
           tvshow={element}
           key={element.id}
+          id={element.id}
+          type="tvshows"
         />
       ) : search_type === "collection" ? (
         <MultiCard
@@ -135,14 +209,17 @@ searchInput = (e)=>{
           image={element.poster_path}
           tvshow={element}
           key={element.id}
+          id={element.id}
+          type="collections"
         />
       ) : <MultiCard
       overview={""}
       date={element.known_for_department}
         title={element.name}
         image={element.profile_path}
-     
+        id={element.id}
         key={element.id}
+        types="actors"
       />
     });
 
@@ -150,31 +227,70 @@ searchInput = (e)=>{
       <div className="search-page">
   
           <div className="search-page-container">
-          <div className="search-input">    
-                <TextField id="outlined-basic" label="Search Here" variant="outlined" name="results" fullWidth onChange={this.searchInput}/>
-                <Button variant="contained" component={Link} to={`/search/${this.state.input_search}`}>Search</Button>
+          <div className="search-input"> 
+          <form onSubmit={this.submitForm}>
+          <TextField id="outlined-basic" label="Search here" variant="outlined" name="results" fullWidth onChange={this.searchInput} InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <IconButton   >
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            )
+          }}/>    
+          </form>
         </div>
         <div className="search-page-main">
+          <div className="search-left">
         <div className="search-results-container">
-        <h2>{search[0].toUpperCase()+search.slice(1).toLowerCase()} Results</h2>
+        <h2>Results</h2>
+        {most_popular_count  ? 
           <button onClick={this.handleClick} name="multi" className="search-button" autoFocus>
-            Most Popular
-          </button>
-          <button onClick={this.handleClick} name="movie" className="search-button">
-            Movies
-          </button>
+           <p> Most Popular </p> <div><Chip label={most_popular_count} /></div>
+          </button>: ''
+          }
+
+        {movies_count ?
+        <button onClick={this.handleClick} name="movie" className="search-button">
+          Movies <Chip label={movies_count} />
+        </button> : ''
+        }
+         
+
+         {tvshow_count ? 
           <button onClick={this.handleClick} name="tv" className="search-button">
-            TV Shows
-          </button>
-          <button onClick={this.handleClick} name="person" className="search-button">
-            People
-          </button>
+            TV Shows <Chip label={tvshow_count} />
+          </button> :''
+          }
+          
+          {people_count ?
+            <button onClick={this.handleClick} name="person" className="search-button">
+            People <Chip label={people_count} />
+            </button> : ''
+          }
+
+          { collection_count ?
           <button onClick={this.handleClick} name="collection" className="search-button">
-            Collection
-          </button>
+          Collection <Chip label={collection_count} />
+          </button> : ''
+          }
+          
+        
+         
         </div>
-        <div className="search-results">{jsx}</div>
         </div>
+        <div className="search-right">
+        <div className="search-results">
+          {results.length > 0 ? jsx : 'No Results'}
+          {results.length && <div className="pagination-div">
+
+          </div>}
+          </div>
+         
+        </div>
+        </div>
+        <Pagination page={page} count={total_pages} setPage={this.paginate}/>
+
         </div>
       </div>
     );

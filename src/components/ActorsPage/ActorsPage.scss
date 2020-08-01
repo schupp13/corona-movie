@@ -1,0 +1,35 @@
+@import "../../App.scss";
+
+.actor-page {
+ @include pageCenter(100%);
+
+ .container {
+@include container();
+display:flex;
+
+.left-container {
+ border: 2px solid blue;
+ min-width: 33%;
+
+ .actor-profile {
+
+  img {
+   max-width: 100%;
+  }
+ }
+}
+
+ .right-container {
+   min-width: 66%;
+
+  border: 2px solid red;
+
+  .actor-known-for {
+  display: flex;
+min-width: 90%;
+overflow: scroll;
+
+  }
+ }
+}
+}

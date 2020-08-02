@@ -1,74 +1,70 @@
-@import '../..//App.scss';
+@import "../..//App.scss";
 
+.landing-page {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: (4, 1fr);
+  grid-gap: 10px;
+  min-height: calc(100vh - $navHeight);
+}
 
-.landing-page{
+.movie-div {
+  background-size: cover;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(1, 180, 228, 0.4) 35%,
+    rgba(144, 206, 161, 0.4) 100%
+  );
+}
+
+.landing-page > div:nth-of-type(2) {
+  grid-column: 1/3;
+}
+
+.landing-page > div:nth-of-type(6) {
+  grid-column: 2/4;
+}
+
+.landing-page > div:nth-of-type(8) {
+  grid-column: 1/5;
+}
+.landing-page > div:nth-of-type(11) {
+  grid-column: 3/5;
+}
+
+.login-div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  font-size: $logoSize;
+  font-family: $RegularFont;
+  color: $primaryColor;
+}
+
+@media only screen and (max-width: 600px) {
+  .landing-page {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: (4, 1fr);
     grid-gap: 10px;
     height: 100vh;
-}
-
-.movie-div{
-    
-    background-size: cover;
-}
-
-.overlay{
-    position: absolute;
-    width:100%;
-    height: 100%;
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(1,180,228,0.4) 35%, rgba(144,206,161,0.4) 100%);
-}
-
-
-.landing-page > div:nth-of-type(2){
-    grid-column: 1/3;
-}
-
-
-.landing-page > div:nth-of-type(6){
-    grid-column: 2/4;
-}
-
-.landing-page > div:nth-of-type(8){
-    grid-column: 1/5;
-}
-.landing-page > div:nth-of-type(11){
-    grid-column: 3/5;
-}
-
-.login-div{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-}
-
-
-.logo{
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    font-size: $logoSize;
-    font-family: $RegularFont; 
-    color: $primaryColor;
-    
-}
-
-
-
-@media only screen and (max-width: 600px) {
-    .landing-page{
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: (4, 1fr);
-        grid-gap: 10px;
-        height: 100vh;
-    }
   }
+}

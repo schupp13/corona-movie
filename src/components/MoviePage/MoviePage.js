@@ -12,6 +12,7 @@ import ActorCard from "../ActorCard/ActorCard";
 import MovieReviewCard from "../MovieReviewCard/MovieReviewCard";
 import MovieCard from "../MovieCard/MovieCard";
 import MovieVideo from "../MovieVideo/MovieVideo";
+import MoviePoster from "../MoviePoster/MoviePoster";
 
 export default class MoviePage extends Component {
   constructor(props) {
@@ -177,13 +178,14 @@ export default class MoviePage extends Component {
 
     let poster = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
 
-    let homepageOption = homepage !== null && homepage.includes("netflix.com")  ? (
-      <img src={netflixpic}></img>
-    ) :homepage !== null && homepage.includes("apple.com") ? (
-      <AppleIcon />
-    ) : (
-      <HomeIcon />
-    );
+    let homepageOption =
+      homepage !== null && homepage.includes("netflix.com") ? (
+        <img src={netflixpic}></img>
+      ) : homepage !== null && homepage.includes("apple.com") ? (
+        <AppleIcon />
+      ) : (
+        <HomeIcon />
+      );
     let chips = genres.map((genre) => {
       return <Chip label={genre.name} />;
     });
@@ -222,7 +224,14 @@ export default class MoviePage extends Component {
           </div>
           <div className="movie-page-content">
             <div className="poster-div">
-              <img src={poster}></img>
+              {/* <img src={poster}></img> */}
+              <MoviePoster
+                title={movie.title}
+                poster={movie.poster_path}
+                rating={movie.vote_average}
+                releaseDate={movie.release_date}
+                id={movie.id}
+              />
             </div>
             <div className="movie-details">
               <div className="movie-overview">
@@ -235,7 +244,7 @@ export default class MoviePage extends Component {
                   <AverageRating rating={movie.vote_average * 10} />
                   <p>Votes: {movie.vote_count}</p>
                 </div>
-                 <div className="movie-homepage" >
+                <div className="movie-homepage">
                   <a href={movie.homepage} target="__blank">
                     {homepageOption}
                   </a>

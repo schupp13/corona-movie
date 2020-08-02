@@ -1,35 +1,48 @@
 @import "../../App.scss";
 
 .actor-page {
- @include pageCenter(100%);
+  @include pageCenter(100%);
 
- .container {
-@include container();
-display:flex;
+  .container {
+    @include container();
 
-.left-container {
- border: 2px solid blue;
- min-width: 33%;
+    .top-of-page {
+      display: flex;
 
- .actor-profile {
+      .left-container {
+        border: 2px solid blue;
+        min-width: 33%;
 
-  img {
-   max-width: 100%;
+        .actor-profile {
+          img {
+            max-width: 100%;
+          }
+        }
+      }
+
+      .right-container {
+        min-width: 66%;
+
+        border: 2px solid red;
+
+        .actor-known-for {
+          display: flex;
+          min-width: 90%;
+          overflow: scroll;
+        }
+      }
+    }
+    .movie-options-container {
+      .movie-options {
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 50vh;
+        overflow: scroll;
+        justify-content: space-evenly;
+      }
+      .pagination {
+        width: 70%;
+      }
+    }
   }
- }
-}
-
- .right-container {
-   min-width: 66%;
-
-  border: 2px solid red;
-
-  .actor-known-for {
-  display: flex;
-min-width: 90%;
-overflow: scroll;
-
-  }
- }
-}
 }

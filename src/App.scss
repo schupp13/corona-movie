@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,700&display=swap');
-$RegularFont:  'Roboto', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,700&display=swap");
+$RegularFont: "Roboto", sans-serif;
 
 * {
   margin: 0;
@@ -8,52 +8,41 @@ $RegularFont:  'Roboto', sans-serif;
   font-family: $RegularFont;
 }
 
-
 /* Color Theme Swatches in Hex */
 $primaryColor: #0d253f;
 $SecondaryColor: #01b4e4;
 $AccentColor: #90cea1;
 
-
-
 /* Color Theme Swatches in RGBA */
-$primaryRGBA: rgba(13,37,63, 1);
-$secondaryRGBA: rgba(1,180,228, 1);
-$accentRGBA: rgba(144,206,161, 1);
-
-
-
-
+$primaryRGBA: rgba(13, 37, 63, 1);
+$secondaryRGBA: rgba(1, 180, 228, 1);
+$accentRGBA: rgba(144, 206, 161, 1);
 
 $logoSize: 50px;
 
 $navHeight: 64px;
 
-
-.App{
+.App {
   max-width: 100vw;
   min-height: 100vh;
-  
 }
-.rating-div{
+.rating-div {
   width: 150px;
 }
 
 @mixin container {
   width: 100%;
-        max-width: 1300px;
+  max-width: 1300px;
 }
 
 /// mixin
-@mixin pageCenter ($pagewidth) {
+@mixin pageCenter($pagewidth) {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: 100vh ;
+  min-height: calc(100vh - $navHeight);
   width: $pagewidth;
-
-
 }
 
 @mixin pageHeader {
@@ -62,34 +51,30 @@ $navHeight: 64px;
   margin: 30px;
 }
 
-
 @mixin banner {
-  
-          
-    min-height: 300px;
-    height: calc(100vh / 2.5);
-    max-height: 360px;
-    background-position: top center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  min-height: 300px;
+  height: calc(100vh / 2.5);
+  max-height: 360px;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
 
-    .banner-overlay{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        color: white;
-        width: 100%;
-        height: 100%;
-        background: rgb(2,0,36);
-        background: linear-gradient(to bottom, rgba(13,37,63, 1),  rgba(1,180,228, 0));;
-        
-
-
-      
-    }
-
+  .banner-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: white;
+    width: 100%;
+    height: 100%;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 37, 63, 1),
+      rgba(1, 180, 228, 0)
+    );
+  }
 }
 
 // /* width */
@@ -99,17 +84,17 @@ $navHeight: 64px;
 
 // /* Track */
 // ::-webkit-scrollbar-track {
-//   box-shadow: inset 0 0 5px grey; 
+//   box-shadow: inset 0 0 5px grey;
 //   border-radius: 10px;
 // }
- 
+
 // /* Handle */
 // ::-webkit-scrollbar-thumb {
-//   background: red; 
+//   background: red;
 //   border-radius: 10px;
 // }
 
 // /* Handle on hover */
 // ::-webkit-scrollbar-thumb:hover {
-//   background: #b30000; 
+//   background: #b30000;
 // }

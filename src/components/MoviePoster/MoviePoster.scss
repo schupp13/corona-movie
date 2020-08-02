@@ -11,7 +11,8 @@
 
   .movie-poster-image {
     position: relative;
-    width: 100%;
+    // width: 100%;
+    align-items: center;
 
     .average-rating {
       position: absolute;

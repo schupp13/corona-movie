@@ -219,7 +219,7 @@ Promise.all([multi, tv, movie, person, collection, company]).then((values) => {
         image={element.profile_path}
         id={element.id}
         key={element.id}
-        types="actors"
+        type="actors"
       />
     });
 

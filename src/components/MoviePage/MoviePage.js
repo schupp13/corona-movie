@@ -177,9 +177,9 @@ export default class MoviePage extends Component {
 
     let poster = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
 
-    let homepageOption = homepage.includes("netflix.com") ? (
+    let homepageOption = homepage !== null && homepage.includes("netflix.com")  ? (
       <img src={netflixpic}></img>
-    ) : homepage.includes("apple.com") ? (
+    ) :homepage !== null && homepage.includes("apple.com") ? (
       <AppleIcon />
     ) : (
       <HomeIcon />
@@ -235,7 +235,7 @@ export default class MoviePage extends Component {
                   <AverageRating rating={movie.vote_average * 10} />
                   <p>Votes: {movie.vote_count}</p>
                 </div>
-                <div className="movie-homepage">
+                 <div className="movie-homepage" >
                   <a href={movie.homepage} target="__blank">
                     {homepageOption}
                   </a>

@@ -6,26 +6,49 @@ import "./NavBar.scss";
 
 
 class Navbar extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      active: '',
+      liTransform: ''
+    }
+  }
+
+  navSlide = () =>{
+    this.setState({
+      active: this.state.active === '' ? 'nav-active' : ''
+    })
+  }
   render() {
     return (
       <nav className="Navbar">
-        <div className="Navbar-logo">
-          <h1>KeepItReel</h1>
+        <div className="logo">
+          <h3>KeepItReel</h3>
           <LiveTvIcon className="tv-icon" />
         </div>
-        <div className="Navbar-links">
-          <ul>
+          <ul className={`${this.state.active} nav-links`}>
+          <li>
             <Link to="/movies">
-              <li>Movies</li>
+              Movies
             </Link>
+            </li>
+            <li>
             <Link to="/tvshows">
-              <li>TV Shows</li>
+              TV Shows
             </Link>
+            </li>
+            <li>
             <Link to="/actors">
-              <li>Actors</li>
+              Actors
             </Link>
+            </li>
           </ul>
-        </div>
+
+          <div className="burger" onClick={this.navSlide}>
+            <div className="line1"></div>
+            <div className="line2"></div>
+            <div className="line3"></div>
+          </div>
       </nav>
     );
   }

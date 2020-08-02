@@ -1,54 +1,166 @@
 @import '../..//App.scss';
 
-.Navbar {
 
- background: $primaryColor;
- height: $navHeight;
- display: flex;
- justify-content: center;
- align-items: center;
- font-size: 1.2rem;
- display: flex;
- justify-content: space-between;
- width: 100%;
+
+
+nav{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: $primaryColor;
+
+    .burger{
+        display:none;
+        div{
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin:5px;
+        }
+    }
+    .logo{
+        color: rgb(187, 187, 187);
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        font-size: 20px;
+        display: flex;
+    }
+
+    .nav-links{
+        width: 30%;
+        display:flex;
+        justify-content: space-around;
+        li{
+            list-style: none;
+        
+        a{
+            color: rgb(212, 212, 212);
+            text-decoration: none;
+            letter-spacing: 3px;
+            font-weight: bold;
+            font-size: 14px;
+
+          
+        }
+    }
+
+    }
+}
+
+@media screen and (max-width: 1300px){
+    $times: 1, 2, 3;
+
+    nav{
+    
+       
+    .nav-links{
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top:8vh;
+        background-color: $primaryColor;
+        display: flex;
+        flex-direction: column;
+        
+        align-items: center;
+        z-index: 2;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform .5s ease-in-out;
+
+     
+    }
+    .nav-active{
+        transform: translateX(0%) ;
+        li:nth-child(1){
+            animation:navLinkFade 1.5s linear;
+        }
+        li:nth-child(2){
+            animation:navLinkFade 2s linear;
+        }
+        li:nth-child(3){
+            animation:navLinkFade 2.5s linear;
+        }
+        
+
+        // @each $time in $times{
+        //     li:nth-child($time){
+        //         opacity: 0;
+        //         animation:navLinkFade $time linear;
+        //     }
+        // }
+
+    }
+    .burger{
+        display:block;
+    }
+}
+
+
+}
+
+
+@keyframes navLinkFade{
+    from {
+        opacity: 0;
+        transform: translateX(100%)
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px)
+    }
+}
+
+// .Navbar {
+
+//  background: $primaryColor;
+//  height: $navHeight;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  font-size: 1.2rem;
+//  display: flex;
+//  justify-content: space-between;
+//  width: 100%;
  
-}
+// }
 
-.Navbar-logo {
- color: white;
- margin: 10px;
- display: flex;
- justify-content: space-between;
- align-items: center;
-}
+// .Navbar-logo {
+//  color: white;
+//  margin: 10px;
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: center;
+// }
 
-.tv-icon {
- margin: 10px;
-}
+// .tv-icon {
+//  margin: 10px;
+// }
 
-.Navbar-links {
- display: flex;
- justify-content: space-between;
- margin: 20px;
-}
+// .Navbar-links {
+//  display: flex;
+//  justify-content: space-between;
+//  margin: 20px;
+// }
 
-a {
- text-decoration: none;
-}
+// a {
+//  text-decoration: none;
+// }
 
-ul {
- list-style: none;
- display: flex;
- flex-direction: row;
- justify-content: space-between;
-}
+// ul {
+//  list-style: none;
+//  display: flex;
+//  flex-direction: row;
+//  justify-content: space-between;
+// }
 
-li {
- color: white;
- margin: 10px;
-}
+// li {
+//  color: white;
+//  margin: 10px;
+// }
 
-li:hover {
- color: $AccentColor;
- cursor: pointer;
-}
+// li:hover {
+//  color: $AccentColor;
+//  cursor: pointer;
+// }

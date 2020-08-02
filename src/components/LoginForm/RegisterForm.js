@@ -9,13 +9,16 @@ import './LoginForm.scss';
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      display: "flex",
-      flexDirection: "column",
-      
-    margin: theme.spacing(1),
-    width: "350px",
+        display: "flex",
+        flexDirection: "column",
+      margin: theme.spacing(1),
+      width: "350px",
     },
   },
+  button:{
+    background: 'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(1,180,228,1) 35%, rgba(144,206,161,1) 100%)',
+
+  }
 }));
 
 export default function RegisterForm(props) {
@@ -39,7 +42,7 @@ export default function RegisterForm(props) {
             label="Confirm Password"
             variant="outlined"
           />
-          <Button variant="contained" color="primary" size="medium">
+          <Button className={classes.button} variant="contained" color="primary" size="medium">
           Continue
         </Button>
         </form>

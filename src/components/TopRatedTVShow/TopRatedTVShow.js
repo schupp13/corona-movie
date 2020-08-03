@@ -52,7 +52,7 @@ class TopRatedTVShow extends Component {
 
     return (
       <div className="trending">
-        <h2>Top Rated TV Shows ({this.state.header})</h2>
+        <h2>Top Rated TV Shows </h2>
 
         <div className="trending-items">{tvshows}</div>
       </div>

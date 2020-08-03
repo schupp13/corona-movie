@@ -10,41 +10,46 @@ class Navbar extends Component {
     super(props)
     this.state = {
       active: '',
-      liTransform: ''
+      liTransform: '',
+      burger:''
     }
   }
 
   navSlide = () =>{
     this.setState({
-      active: this.state.active === '' ? 'nav-active' : ''
+      active: this.state.active === '' ? 'nav-active' : '',
+      burger: this.state.burger === '' ? 'burger-close': ''
     })
   }
   render() {
     return (
-      <nav className="Navbar">
-        <div className="logo">
+      <nav className="nav-bar">
+      
+        <div className="logo-div">
+        <Link to="/">
           <h3>KeepItReel</h3>
           <LiveTvIcon className="tv-icon" />
+          </Link>
         </div>
           <ul className={`${this.state.active} nav-links`}>
           <li>
-            <Link to="/movies">
+            <Link to="/movies" onClick={this.navSlide}>
               Movies
             </Link>
             </li>
             <li>
-            <Link to="/tvshows">
+            <Link to="/tvshows" onClick={this.navSlide}>
               TV Shows
             </Link>
             </li>
             <li>
-            <Link to="/actors">
+            <Link to="/actors" onClick={this.navSlide}>
               Actors
             </Link>
             </li>
           </ul>
 
-          <div className="burger" onClick={this.navSlide}>
+          <div className={`${this.state.burger} burger`} onClick={this.navSlide}>
             <div className="line1"></div>
             <div className="line2"></div>
             <div className="line3"></div>

@@ -72,22 +72,27 @@ export default class Landing extends Component {
       );
     });
     return (
-      <div className="landing-page page">
+      <div className="landing-page-container">
         <div className="overlay"></div>
+
+        <div className="landing-page page">
+
+          
+          {moviesMapped}
         
-        {moviesMapped}
-        <div className="login-div">
-        <ReactCardFlip
-          isFlipped={this.state.isFlipped}
-          flipDirection="horizontal"
-          infinite="true"
-        >
-            {/* front of card */}
-          <LoginForm onClick={this.handleClick}></LoginForm>
-          {/* back of card */}
-          <RegisterForm onClick={this.handleClick}></RegisterForm>
-        </ReactCardFlip>
         </div>
+        <div className="login-div">
+          <ReactCardFlip
+            isFlipped={this.state.isFlipped}
+            flipDirection="horizontal"
+            infinite="true"
+          >
+              {/* front of card */}
+            <LoginForm onClick={this.handleClick}></LoginForm>
+            {/* back of card */}
+            <RegisterForm onClick={this.handleClick}></RegisterForm>
+          </ReactCardFlip>
+          </div>
       </div>
     );
   }

@@ -21,12 +21,14 @@ class ActorsPage extends Component {
       page: 1,
       total_pages: 0,
       total_results: 0,
+      actor_images: []
     };
   }
 
   componentDidMount() {
     this.getActor();
     this.discoverActorByID();
+    this.getActorImages();
   }
 
   getActor = () => {
@@ -51,7 +53,6 @@ class ActorsPage extends Component {
         `https://api.themoviedb.org/3/discover/movie?api_key=12aa3499b6032630961640574aa332a9&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=1&with_people=${actorsID}&page=${page}`
       )
       .then((results) => {
-        console.log(results);
         this.setState({
           known_for: results.data.results,
           page: results.data.page,
@@ -59,8 +60,28 @@ class ActorsPage extends Component {
           total_results: results.data.total_results,
         });
       })
-      .catch();
+      .catch(error =>{
+        console.log(error);
+      });
   };
+
+  getActorImages = () =>{
+    let actorsID = this.props.match.params.id;
+    axios
+      .get(
+        `https://api.themoviedb.org/3/person/${actorsID}/images?api_key=12aa3499b6032630961640574aa332a9&language=en-US`
+      )
+      .then((results) => {
+        console.log(results);
+        this.setState({
+          actor_images: results.data.profiles
+
+        });
+      })
+      .catch(error =>{
+        console.log(error);
+      });
+  }
 
   sortAction = (sort) => {
     this.setState(
@@ -82,11 +103,18 @@ class ActorsPage extends Component {
   };
 
   render() {
-    const { actor, known_for, total_pages, total_results, page } = this.state;
+    const { actor, known_for, total_pages, total_results, page , actor_images} = this.state;
 
     let ActorProfile = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
 
     console.log(this.state);
+
+    let actorImages = actor_images.map(element =>{
+      console.log(element);
+      let actorImage = `https://image.tmdb.org/t/p/original/${element.file_path}`;
+
+      return <div className="actor-image" ><img src={actorImage}/> </div>
+    })
 
     let DiscoverActor = known_for.map((element) => {
       return (
@@ -110,12 +138,11 @@ class ActorsPage extends Component {
               </div>
             </div>
             <div className="right-container">
-              <h1 className="actor-name">{actor.name}</h1>
               <p className="actor-bio">{actor.biography}</p>
-              <div className="actor-known-for">{DiscoverActor}</div>
+    <div className="actor-images">{actorImages}</div>
             </div>
           </div>
-        </div>
+        
         <div className="movie-options-container">
           <ButtonGroup>
             <Button onClick={() => this.sortAction("popularity.desc")}>
@@ -133,6 +160,7 @@ class ActorsPage extends Component {
               setPage={this.paginate}
             />
           </div>
+        </div>
         </div>
       </div>
     );

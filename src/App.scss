@@ -9,6 +9,7 @@ $RegularFont: "Roboto", sans-serif;
 }
 
 body{
+  
   overflow-x: hidden;
 }
 
@@ -29,6 +30,8 @@ $navHeight: 65px;
 .App {
   max-width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
+
 }
 .rating-div {
   width: 150px;

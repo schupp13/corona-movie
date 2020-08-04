@@ -5,6 +5,7 @@ import MoviePoster from "../MoviePoster/MoviePoster";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Pagination from "../Pagination/Pagination";
+import ProfileCard from "../ProfileCard/ProfileCard";
 import "./ActorsPage.scss";
 
 class ActorsPage extends Component {
@@ -105,18 +106,7 @@ class ActorsPage extends Component {
           <div className="top-of-page">
             <div className="left-container">
               <div className="actor-profile">
-                <img src={ActorProfile}></img>
-              </div>
-              <div className="actor-personal-info">
-                <h3>Personal Info</h3>
-                <div className="actor-birthday">
-                  <h4>Birthday</h4>
-                  {actor.birthday}
-                </div>
-                <div className="actor-place-of-birth">
-                  <h4>Place of Birth</h4>
-                  {actor.place_of_birth}
-                </div>
+                <ProfileCard actor={actor} />
               </div>
             </div>
             <div className="right-container">
@@ -125,23 +115,23 @@ class ActorsPage extends Component {
               <div className="actor-known-for">{DiscoverActor}</div>
             </div>
           </div>
-          <div className="movie-options-container">
-            <ButtonGroup>
-              <Button onClick={() => this.sortAction("popularity.desc")}>
-                Popular
-              </Button>
-              <Button onClick={() => this.sortAction("release_date.desc")}>
-                Filmography
-              </Button>
-            </ButtonGroup>
-            <div className="movie-options">{DiscoverActor} </div>
-            <div className="pagination">
-              <Pagination
-                page={page}
-                count={total_pages}
-                setPage={this.paginate}
-              />
-            </div>
+        </div>
+        <div className="movie-options-container">
+          <ButtonGroup>
+            <Button onClick={() => this.sortAction("popularity.desc")}>
+              Popular
+            </Button>
+            <Button onClick={() => this.sortAction("release_date.desc")}>
+              Filmography
+            </Button>
+          </ButtonGroup>
+          <div className="movie-options">{DiscoverActor} </div>
+          <div className="pagination">
+            <Pagination
+              page={page}
+              count={total_pages}
+              setPage={this.paginate}
+            />
           </div>
         </div>
       </div>

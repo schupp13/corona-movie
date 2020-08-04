@@ -28,7 +28,7 @@ export default class HomePage extends Component {
       .then((result) => {
         console.log(result.data.results);
         this.setState({
-          poster: result.data.results[1].backdrop_path,
+          poster: result.data.results[0].backdrop_path,
         });
       })
       .catch((error) => {

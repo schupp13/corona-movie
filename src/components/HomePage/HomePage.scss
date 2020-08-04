@@ -7,6 +7,9 @@
         .banner{
           
            @include banner();
+           position: sticky;
+           top: $navHeight;
+           z-index: 2;
            .banner-content{
             width: 80%;
             max-width: 800px;
@@ -14,7 +17,7 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            z-index: 2;
+            z-index: 3;
             }
         }
 

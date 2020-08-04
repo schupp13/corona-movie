@@ -7,6 +7,23 @@ import { withRouter } from 'react-router-dom';
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
+import { withStyles } from '@material-ui/core/styles';
+const styles = {
+  'input-label': {
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    width: '100%',
+    color: 'red'
+  },
+
+  'input': {
+    '&::placeholder': {
+      textOverflow: 'ellipsis !important',
+      color: 'blue'
+    }
+  }
+};
 
  class MultiSearch extends Component {
     constructor(props){
@@ -15,6 +32,7 @@ import SearchIcon from "@material-ui/icons/Search";
             search: ''    
         }
     }
+    
 
       handchange = (e)=>{
         console.log(e.target.value);
@@ -34,7 +52,16 @@ import SearchIcon from "@material-ui/icons/Search";
         return (
             <div className="search-input">
               <form  onSubmit={this.submitForm}>
-          <TextField id="outlined-basic" label="Search here" variant="outlined" fullWidth onChange={this.handchange} InputProps={{
+          <TextField InputLabelProps={{
+              style: {
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                width: '100%',
+                color: 'white',
+                border: 'white'
+              } }} id="outlined-basic" label="Search here" variant="filled" fullWidth onChange={this.handchange} InputProps={{
+            
             endAdornment: (
               <InputAdornment>
                 <IconButton >

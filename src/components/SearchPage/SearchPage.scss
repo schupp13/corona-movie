@@ -122,19 +122,28 @@
     }}
 
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 900px) {
        .search-page-container{
            width: 100%;
            display: flex;
            flex-direction: column;
            justify-content: center;
-           align-self: start;
+           align-self: center;
        }
             .search-page-main{
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+
+                .search-left{
+                    width: 90%;
+                    align-items: center;
+                }
+                .search-right{
+                    width: 90%;
+                }
             }
         
       }

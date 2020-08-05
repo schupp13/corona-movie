@@ -30,6 +30,8 @@ export default class MoviePage extends Component {
       reviews: [],
       similar: [],
       videos: [],
+      movie_posters:[],
+      movie_backdrops:[]
     };
   }
 
@@ -39,6 +41,7 @@ export default class MoviePage extends Component {
     this.getCast();
     this.getReviews();
     this.getSimilar();
+    this.getVideos();
     this.getImages();
     this.setState({
       movieID: this.props.match.params.id,
@@ -76,6 +79,22 @@ export default class MoviePage extends Component {
       .then((results) => {
         this.setState({
           trailer: results.data.results[0],
+        });
+      })
+      .catch();
+  };
+
+  getImages = () => {
+    let movieID = this.props.match.params.id;
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${movieID}/images?api_key=12aa3499b6032630961640574aa332a9&language=en-US&include_image_language=en`
+      )
+      .then((results) => {
+        console.log(results)
+        this.setState({
+          movie_posters: results.data.posters,
+          movie_backdrops: results.data.backdrops
         });
       })
       .catch();
@@ -137,7 +156,7 @@ export default class MoviePage extends Component {
       });
   };
 
-  getImages = () => {
+  getVideos = () => {
     let movieID = this.props.match.params.id;
     axios
       .get(
@@ -154,6 +173,7 @@ export default class MoviePage extends Component {
   };
 
   render() {
+    console.log(this.state);
     let {
       movie,
       genres,
@@ -163,8 +183,11 @@ export default class MoviePage extends Component {
       reviews,
       similar,
       videos,
+      movie_posters,
+      movie_backdrops
     } = this.state;
     let movieID = this.props.match.params.id;
+
     let directors = director.map((element, index) => {
       return (
         <span>
@@ -172,6 +195,14 @@ export default class MoviePage extends Component {
           {element.name}
         </span>
       );
+    });
+
+    let moviePosters = movie_posters.map(element =>{
+      return <div className="movie-posters" style={{margin:'15px'}}><img src={`https://image.tmdb.org/t/p/w154/${element.file_path}`}></img></div>
+    });
+
+    let movieBackdrops = movie_backdrops.map(element =>{
+      return <div className="movie-backdrops" style={{margin:'15px'}}><img src={`https://image.tmdb.org/t/p/w300/${element.file_path}`}></img></div>
     });
 
     let Background = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
@@ -269,6 +300,14 @@ export default class MoviePage extends Component {
           </div>
           {/* <div className="parallax" style={{ backgroundImage: `url(${Background})` }}></div> */}
 
+          <div className="scroll-container-div">
+            <h2>Posters</h2>
+            <div className="scroll-div">{moviePosters}</div>
+          </div>
+          <div className="scroll-container-div">
+            <h2>Backdrops</h2>
+            <div className="scroll-div">{movieBackdrops}</div>
+          </div>
           <div
             className="scroll-container-div parallax"
             style={{ backgroundImage: `url(${Background})` }}

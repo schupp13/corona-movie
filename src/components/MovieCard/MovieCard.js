@@ -12,51 +12,54 @@ import { Link } from "react-router-dom";
 import "./MovieCard.scss";
 import TrailerModal from "../TrailerModal/TrailerModal";
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 345,
-    margin: 15,
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-    backgroundSize: "cover",
-    backgroundPosition: "top",
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     minWidth: 245,
+//     margin: 15,
+//     maxWidth: 245,
+//   },
+//   media: {
+//     height: 140,
+//     backgroundSize: "cover",
+//     backgroundPosition: "top",
+//   },
+// });
 
 export default function MovieCard(props) {
-  const classes = useStyles();
   const description = props.movie.overview.slice(0, 120) + "...";
   let pic = `https://image.tmdb.org/t/p/w500/${props.movie.backdrop_path}`;
   let link = `/movies/${props.movie.id}`;
 
   return (
-    <Card className={classes.root}>
+    <Card className="movie-card">
       <CardActionArea>
         <CardMedia
-          className={classes.media}
+          className="movie-card-media"
           image={pic}
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.movie.title}
-          </Typography>
+        <div className="title-div">
+          <Typography component="h2" variant="body2">
+           <h2>{props.movie.title}</h2> 
+           </Typography >
+            <div className="rating-div" >
+              <AverageRating rating={props.movie.vote_average * 10} />
+            </div>
+          </div>
           <Typography variant="body2" color="textSecondary" component="p">
             {description}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <TrailerModal type="movie" id={props.movie.id} />
-        <Button component={Link} to={link} size="small" color="primary">
+      <CardActions className="card-actions">
+        <Button  component={Link} to={link} size="small" color="primary">
           More Info
         </Button>
+        <TrailerModal type="movie" id={props.movie.id} />
+
       </CardActions>
-      <div className="rating-div">
-        <AverageRating rating={props.movie.vote_average * 10} />
-      </div>
+    
     </Card>
   );
 }

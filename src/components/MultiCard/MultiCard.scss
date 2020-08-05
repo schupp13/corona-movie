@@ -22,24 +22,30 @@ a{
       border-radius: 8px 0px 0px 8px;
   }
  }
-
+ .multicard-content::-webkit-scrollbar {
+    display: none;
+  }
  .multicard-content {
-  overflow: hidden;
   padding: 10px;
   height: 141px;
+    overflow: scroll;
 
   .date{
-      fontsize: 70%;
+      font-size: 70%;
       color: grey;
       
   }
 
   .overview{ 
+    
       margin-top: 5px;
       line-height:1.5;
        color: grey;
        font-size: 11px;
+         text-overflow: ellipsis;
+
   }
  }
 }
 }
+

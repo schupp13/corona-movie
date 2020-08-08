@@ -3,8 +3,7 @@ import axios from "axios";
 import MultiCard from "../MultiCard/MultiCard";
 import './SearchPage.scss';
 import TextField from "@material-ui/core/TextField";
-import Button from '@material-ui/core/Button';
-import {Link} from 'react-router-dom';
+
 import Pagination from '../Pagination/Pagination';
 import Chip from "@material-ui/core/Chip";
 import IconButton from "@material-ui/core/IconButton";
@@ -141,7 +140,7 @@ Promise.all([multi, tv, movie, person, collection, company]).then((values) => {
   };
 
   render() {
-    let { page, results, search_type, search, total_pages, movies_count, most_popular_count, people_count,collection_count, tvshow_count} = this.state;
+    let { page, results, search_type, total_pages, movies_count, most_popular_count, people_count,collection_count, tvshow_count} = this.state;
     let jsx = results.map((element, key) => {
       
       return element.media_type === "movie" ? (

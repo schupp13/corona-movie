@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import StarIcon from '@material-ui/icons/Star';
 
 import { Link } from "react-router-dom";
 
@@ -29,28 +30,7 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(15),
     height: theme.spacing(15),
   },
-  // root: {
-  //   color: "white",
-  //   // width: "200px",
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   alignItems: "center",
-  //   margin: "15px",
-  //   padding: "5px",
-  //   backgroundColor: "#222",
-  //   borderRadius: "5px",
-  //   "& > *": {
-  //     margin: theme.spacing(0.5),
-  //   },
-  // },
-  // small: {
-  //   width: theme.spacing(3),
-  //   height: theme.spacing(3),
-  // },
-  // large: {
-  //   width: theme.spacing(15),
-  //   height: theme.spacing(15),
-  // },
+ 
 }));
 
 export default function ActorCard(props) {
@@ -58,9 +38,11 @@ export default function ActorCard(props) {
   let profile = `https://image.tmdb.org/t/p/original/${props.actor.profile_path}`;
   let link = `/actors/${props.actor.id}`;
 
+  let description = props.actor.job ?  props.actor.job: props.actor.character ? 'as ' + props.actor.character: <StarIcon fontSize="large" style={{color:'#ffb400'}}></StarIcon>;
+
   return (
     <Card className={classes.root}>
-    <CardContent>    
+    <CardContent style={{margin: '0px'}}>    
       
        <Avatar alt={props.actor.name} src={profile} className={classes.large} />
 
@@ -68,8 +50,8 @@ export default function ActorCard(props) {
      {props.actor.name}
     </Typography>
     
-    <Typography variant="body2" component="p">
-      {props.actor.character && "as " + props.actor.character}
+    <Typography variant="body2" component="p" style={{margin: '0px', fontSize:'18px', display:'flex', justifyContent:'center'}}>
+      {description}
     </Typography>
   </CardContent>
   <CardActions>
@@ -77,15 +59,5 @@ export default function ActorCard(props) {
           Bio     </Button>
   </CardActions>
     </Card>
-    // <div className={classes.root}>
-    //   <Avatar alt={props.actor.name} src={profile} className={classes.large} />
-    //   <h5>{props.actor.name}</h5>
-    //   <h6>{props.actor.character && "as " + props.actor.character}</h6>
-    //   <CardActions>
-    //     <Button to={link} component={Link} size="small" color="primary">
-    //       Bio
-    //     </Button>
-    //   </CardActions>
-    // </div>
   );
 }

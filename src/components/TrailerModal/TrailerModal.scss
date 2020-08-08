@@ -3,14 +3,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
-
-
 }
 
 iframe{
-    width: 90vw; 
-    height: 90.25vh;
+    width: 70vw; 
+    height: 36.4vw;
+}
+iframe:hover{
+    cursor: pointer;
+    color: white;
 }
 
 
@@ -20,3 +21,10 @@ iframe{
 }
 
 
+@media only screen and (max-width: 500px) {
+    
+iframe{
+    width: 90vw; 
+    height: 30vh;
+}
+  }

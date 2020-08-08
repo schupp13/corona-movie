@@ -6,7 +6,7 @@ export default function MovieVideo(props) {
 
     return (
         <div className="movie-video-card">
-             <iframe src={source} allowfullscreen="true"></iframe>
+             <iframe src={source} allowfullscreen="true" title={props.movie.name}></iframe>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ActorCard from "../ActorCard/ActorCard";
 import MoviePoster from "../MoviePoster/MoviePoster";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -103,17 +102,13 @@ class ActorsPage extends Component {
   };
 
   render() {
-    const { actor, known_for, total_pages, total_results, page , actor_images} = this.state;
+    const { actor, known_for, total_pages, page , actor_images} = this.state;
 
-    let ActorProfile = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
-
-    console.log(this.state);
-
-    let actorImages = actor_images.map(element =>{
+    let actorImages = actor_images.map((element, index) =>{
       console.log(element);
       let actorImage = `https://image.tmdb.org/t/p/original/${element.file_path}`;
 
-      return <div className="actor-image" ><img src={actorImage}/> </div>
+      return <div className="actor-image" ><img src={actorImage} alt={actor.name + " profile" + index}/> </div>
     })
 
     let DiscoverActor = known_for.map((element) => {

@@ -3,6 +3,7 @@ import "./App.scss";
 import { HashRouter } from "react-router-dom";
 import routes from "./routes/routes";
 import Navbar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
      <div className="App">
         <Navbar />
         {routes}
+        <Footer />
       </div>
     </HashRouter>
   );

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import TVShowsCard from "../TVShowsCard/TVShowsCard";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
+import MovieCard from "../MovieCard/MovieCard";
+
 import axios from "axios";
 
 class TopRatedTVShow extends Component {
@@ -47,7 +46,7 @@ class TopRatedTVShow extends Component {
 
   render() {
     let tvshows = this.state.results.map((tvshow, index) => {
-      return <TVShowsCard tvshow={tvshow} key={index} />;
+      return <MovieCard tvshow={tvshow} key={index} id={tvshow.id} title={tvshow.name} overview={tvshow.overview} voteAverage={tvshow.vote_average} backdropPath={tvshow.backdrop_path} type="tvshows"/>;
     });
 
     return (

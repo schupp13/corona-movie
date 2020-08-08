@@ -28,7 +28,7 @@ export default class Landing extends Component {
         "https://api.themoviedb.org/3/trending/movie/week?api_key=12aa3499b6032630961640574aa332a9"
       )
       .then((result) => {
-        console.log(result.data.results);
+       
         this.setState({
           movies: result.data.results.slice(0, 10),
         });

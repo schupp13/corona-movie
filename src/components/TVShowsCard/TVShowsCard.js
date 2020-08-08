@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import AverageRating from "../AverageRating/AverageRating";
 import { Link } from "react-router-dom";
+import TrailerModal from "../TrailerModal/TrailerModal";
 
 const useStyles = makeStyles({
   root: {
@@ -54,6 +55,7 @@ function TVShowsCard(props) {
         <Button to={link} component={Link} size="small" color="primary">
           Learn More
         </Button>
+        <TrailerModal type="tv" id={props.tvshow.id}/>
       </CardActions>
       <div className="rating-div">
         <AverageRating rating={props.tvshow.vote_average * 10} />

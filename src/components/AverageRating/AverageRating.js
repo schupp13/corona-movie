@@ -18,9 +18,6 @@ export default function AverageRating(props) {
   
 
             ],
-            // borderColor: [
-            //     'rgba(255, 99, 132, 1)',
-            // ],
             borderWidth: 1
         }],
         

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import MovieDetails from "../MovieDetails/MovieDetails";
 import axios from "axios";
 import "./MoviePage.scss";
-import AverageRating from "../AverageRating/AverageRating";
 import Chip from "@material-ui/core/Chip";
 import HomeIcon from "@material-ui/icons/Home";
 import netflixpic from "../../img/netflix.png";
@@ -110,16 +108,7 @@ export default class MoviePage extends Component {
         this.setState({
           actors: result.data.cast,
           crew: result.data.crew,
-          director: result.data.crew.filter((element) => {
-            if (element.job == "Director") {
-              return element;
-            }
-          }),
-          wirter: result.data.crew.filter((element) => {
-            if (element.department == "Writing") {
-              return element;
-            }
-          }),
+         
         });
       });
   };
@@ -184,7 +173,8 @@ export default class MoviePage extends Component {
       similar,
       videos,
       movie_posters,
-      movie_backdrops
+      movie_backdrops,
+      crew
     } = this.state;
     let movieID = this.props.match.params.id;
 
@@ -198,20 +188,19 @@ export default class MoviePage extends Component {
     });
 
     let moviePosters = movie_posters.map(element =>{
-      return <div className="movie-posters" style={{margin:'15px'}}><img src={`https://image.tmdb.org/t/p/w154/${element.file_path}`}></img></div>
+      return <div className="movie-posters" style={{margin:'15px'}}><img alt={element.name} src={`https://image.tmdb.org/t/p/w154/${element.file_path}`}></img></div>
     });
 
     let movieBackdrops = movie_backdrops.map(element =>{
-      return <div className="movie-backdrops" style={{margin:'15px'}}><img src={`https://image.tmdb.org/t/p/w300/${element.file_path}`}></img></div>
+      return <div className="movie-backdrops" style={{margin:'15px'}}><img alt={element.name} src={`https://image.tmdb.org/t/p/w300/${element.file_path}`}></img></div>
     });
 
     let Background = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
 
-    let poster = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
 
     let homepageOption =
       homepage !== null && homepage.includes("netflix.com") ? (
-        <img src={netflixpic}></img>
+        <img src={netflixpic} alt="netflix logo"></img>
       ) : homepage !== null && homepage.includes("apple.com") ? (
         <AppleIcon />
       ) : (
@@ -222,15 +211,19 @@ export default class MoviePage extends Component {
     });
 
     let actorsJSX = actors.map((actor) => {
-      return <ActorCard actor={actor} />;
+      return <ActorCard actor={actor}  />;
+    });
+
+    let crewJSX = crew.map((actor) => {
+      return <ActorCard actor={actor}  />;
     });
 
     let reviewsJSX = reviews.map((review) => {
       return <MovieReviewCard review={review} />;
     });
 
-    let similarJSX = similar.map((movie) => {
-      return <MovieCard movie={movie} />;
+    let similarJSX = similar.map((movie,index) => {
+      return <MovieCard movie={movie} key={index} id={movie.id} title={movie.title} overview={movie.overview} voteAverage={movie.vote_average} backdropPath={movie.backdrop_path} type="movies"/>;
     });
 
     let videosJSX = videos.map((movie) => {
@@ -267,14 +260,12 @@ export default class MoviePage extends Component {
             <div className="movie-details">
               <div className="movie-overview">
                 <h4>Overview</h4>
-                {movie.overview}
+                <p>{movie.overview}</p>
+                <p>{movie.release_date && movie.release_date.substring(0,4)}</p>
               </div>
               <div className="chips">{chips}</div>
               <div className="movie-bottom">
-                <div className="movie-rating">
-                  <AverageRating rating={movie.vote_average * 10} />
-                  <p>Votes: {movie.vote_count}</p>
-                </div>
+                
                 <div className="movie-homepage">
                   <a href={movie.homepage} target="__blank">
                     {homepageOption}
@@ -316,10 +307,17 @@ export default class MoviePage extends Component {
             <div className="scroll-div">{videosJSX}</div>
           </div>
           {/* <div className="parallax" style={{ backgroundImage: `url(${Background})` }}></div> */}
-
+         
           <div className="scroll-container-div">
             <h2>Similar Films</h2>
             <div className="scroll-div">{similarJSX}</div>
+          </div>
+          <div
+            className="scroll-container-div "
+             
+          >
+            <h2>Crew</h2>
+            <div className="scroll-div">{crewJSX}</div>
           </div>
         </div>
       </div>

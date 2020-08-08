@@ -1,29 +1,12 @@
 import React, { Component } from 'react';
 import TextField from "@material-ui/core/TextField";
 import './MultiSearch.scss';
-import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
-import { withStyles } from '@material-ui/core/styles';
-const styles = {
-  'input-label': {
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    width: '100%',
-    color: 'red'
-  },
 
-  'input': {
-    '&::placeholder': {
-      textOverflow: 'ellipsis !important',
-      color: 'blue'
-    }
-  }
-};
 
  class MultiSearch extends Component {
     constructor(props){
@@ -42,7 +25,6 @@ const styles = {
       }
 
       submitForm = (e) => {
-        let link = `/search/${this.state.search}`;
         e.preventDefault()
         this.props.history.push(`/search/${this.state.search}`);  
       }

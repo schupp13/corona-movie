@@ -7,8 +7,7 @@
         .banner{
           
            @include banner();
-           position: sticky;
-           top: $navHeight;
+           
            z-index: 2;
            .banner-content{
             width: 80%;

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ActorCard from "../ActorCard/ActorCard";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
+// import Button from "@material-ui/core/Button";
+// import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 export default class PopularActors extends Component {
   constructor(props) {
@@ -22,8 +22,6 @@ export default class PopularActors extends Component {
         `https://api.themoviedb.org/3/person/popular?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1`
       )
       .then((results) => {
-        console.log(results.data.results);
-
         this.setState({ popActors: results.data.results });
       })
       .catch((err) => {
@@ -32,9 +30,8 @@ export default class PopularActors extends Component {
   };
 
   render() {
-    console.log(this.state);
     let actors = this.state.popActors.map((actor, index) => {
-      return <ActorCard actor={actor} key={index} />;
+      return <ActorCard actor={actor} key={index}  />;
     });
 
     return (

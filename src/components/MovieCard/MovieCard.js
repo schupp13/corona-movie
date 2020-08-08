@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -12,24 +11,12 @@ import { Link } from "react-router-dom";
 import "./MovieCard.scss";
 import TrailerModal from "../TrailerModal/TrailerModal";
 
-// const useStyles = makeStyles({
-//   root: {
-//     minWidth: 245,
-//     margin: 15,
-//     maxWidth: 245,
-//   },
-//   media: {
-//     height: 140,
-//     backgroundSize: "cover",
-//     backgroundPosition: "top",
-//   },
-// });
 
 export default function MovieCard(props) {
-  const description = props.movie.overview.slice(0, 120) + "...";
-  let pic = `https://image.tmdb.org/t/p/w500/${props.movie.backdrop_path}`;
-  let link = `/movies/${props.movie.id}`;
-
+  const description = props.overview ? props.overview.slice(0, 120) + "...": '';
+  let pic = `https://image.tmdb.org/t/p/w500/${props.backdropPath}`;
+  let link = `/${props.type}/${props.id}`;
+  let trailerLink = props.type === 'movies' ? 'movie':props.type === 'episode'? 'episode':  'tv';
   return (
     <Card className="movie-card">
       <CardActionArea>
@@ -41,10 +28,10 @@ export default function MovieCard(props) {
         <CardContent>
         <div className="title-div">
           <Typography component="h2" variant="body2">
-           <h2>{props.movie.title}</h2> 
+           {props.title}
            </Typography >
             <div className="rating-div" >
-              <AverageRating rating={props.movie.vote_average * 10} />
+              <AverageRating rating={Math.round(props.voteAverage * 10)} />
             </div>
           </div>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -56,7 +43,7 @@ export default function MovieCard(props) {
         <Button  component={Link} to={link} size="small" color="primary">
           More Info
         </Button>
-        <TrailerModal type="movie" id={props.movie.id} />
+        <TrailerModal type={trailerLink} id={props.id} movie={props.movie}/>
 
       </CardActions>
     

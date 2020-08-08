@@ -8,7 +8,7 @@ export default function MoviePoster(props) {
     <div className="movie-poster-container">
       <div className="movie-poster-image">
         <Link to={`/movies/${props.id}`}>
-          <img src={`https://image.tmdb.org/t/p/w154/${props.poster}`} />
+          <img alt={props.title} src={`https://image.tmdb.org/t/p/w154/${props.poster}`} />
         </Link>
         <div className="average-rating">
           <AverageRating rating={props.rating * 10} />

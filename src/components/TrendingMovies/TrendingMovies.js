@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import MoviieCard from "../MovieCard/MovieCard";
+import MovieCard from "../MovieCard/MovieCard";
 import "./TrendingMovies.scss";
 export default class TrendingMovies extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export default class TrendingMovies extends Component {
 
   render() {
     let movies = this.state.results.map((movie, index) => {
-      return <MoviieCard movie={movie} key={index} />;
+      return <MovieCard movie={movie} key={index} id={movie.id} title={movie.title} overview={movie.overview} voteAverage={movie.vote_average} backdropPath={movie.backdrop_path} type="movies"/>;
     });
 
     return (

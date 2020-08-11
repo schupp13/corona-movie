@@ -1,6 +1,9 @@
 @import "../../App.scss";
 .trending {
     padding: 15px;
+    h2{
+        margin: 20px 0 20px 0;
+    }
 
     .trending-items {
 
@@ -12,8 +15,17 @@
         color: $AccentColor;
     }
 
-    .active{
 
+    .active{
+        color:$AccentColor;
+        background-color: $primaryColor;
+        transition: .7s ease-in-out;
+    }
+
+    .trending-button{
+        color: $AccentColor;
+        border:none;
+        border-radius: 15px 15px 15px 15px !important;
     }
 }
 

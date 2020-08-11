@@ -5,12 +5,18 @@
     margin-top: 15px;
 
     width: 70%;
-    color: white;
+    color: textColorWhite;
 
     form{
+        color: textColorWhite;
         input{
-            outline-color: red;
+          color:$textColorWhite;
+          
+          .icon-searc{
+              color: white;
+          }
         }
+
     }
 
 }

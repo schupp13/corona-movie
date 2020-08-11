@@ -41,13 +41,13 @@ import SearchIcon from "@material-ui/icons/Search";
                 overflow: 'hidden',
                 width: '100%',
                 color: 'white',
-                border: 'white'
+                borderColor: 'white'
               } }} id="outlined-basic" label="Search here" variant="filled" fullWidth onChange={this.handchange} InputProps={{
             
             endAdornment: (
               <InputAdornment>
                 <IconButton >
-                  <SearchIcon />
+                 Search <SearchIcon className="search-icon"/>
                 </IconButton>
               </InputAdornment>
             )

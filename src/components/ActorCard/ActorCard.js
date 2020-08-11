@@ -15,13 +15,18 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 175,
     display:'flex',
     flexDirection: 'column',
-    justifyContent:'center',
+    justifyContent:'flex-start',
     alignItems:'center',
-    margin: '15px'
+    margin: '15px',
+    boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)'
+
+
+
   },
   
   title: {
     fontSize: 14,
+    textAlign:'center'
   },
   pos: {
     marginBottom: 12,
@@ -29,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
    large: {
     width: theme.spacing(15),
     height: theme.spacing(15),
+    margin: 'auto',
   },
  
 }));
@@ -50,7 +56,7 @@ export default function ActorCard(props) {
      {props.actor.name}
     </Typography>
     
-    <Typography variant="body2" component="p" style={{margin: '0px', fontSize:'18px', display:'flex', justifyContent:'center'}}>
+    <Typography variant="body2" component="p" style={{margin: 'auto', fontSize:'12px', textAlign:'center'}}>
       {description}
     </Typography>
   </CardContent>

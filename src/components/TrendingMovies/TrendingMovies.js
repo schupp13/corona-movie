@@ -117,7 +117,7 @@ export default class TrendingMovies extends Component {
               this.getTrendingMovies("day");
             }}
             name="day"
-            autoFocus
+            className={this.state.header === 'Today' ? 'active trending-button': 'trending-button'}
           >
             Today
           </Button>
@@ -126,6 +126,8 @@ export default class TrendingMovies extends Component {
               this.getTrendingMovies("week");
             }}
             name="week"
+            className={this.state.header === 'This Week' ? 'active trending-button': 'trending-button'}
+
           >
             Week
           </Button>
@@ -134,16 +136,13 @@ export default class TrendingMovies extends Component {
               this.getTrendingMovies("now_playing");
             }}
             name="week"
+            className={this.state.header === 'In Theaters' ? 'active trending-button': 'trending-button'}
+
           >
             In Theaters
           </Button>
         </ButtonGroup>
         <ScrollDiv cards={movies} handleScroll={this.handleScroll} page={page} total_pages={total_pages} addPage={this.addPage}></ScrollDiv>
-          {/* <div 
-          className="trending-items" 
-          id="scroll-div" 
-          onScroll={()=>this.handleScroll()}>
-            {movies}{this.state.page <= this.state.total_pages && <Button onClick={()=>this.addPage()}><ArrowForwardIosIcon></ArrowForwardIosIcon></Button>}</div> */}
       </div>
     );
   }

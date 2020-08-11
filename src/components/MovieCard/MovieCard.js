@@ -10,7 +10,8 @@ import AverageRating from "../AverageRating/AverageRating";
 import { Link } from "react-router-dom";
 import "./MovieCard.scss";
 import TrailerModal from "../TrailerModal/TrailerModal";
-import Badge from "@material-ui/core/Badge";
+import Chip from "@material-ui/core/Chip";
+
 
 export default function MovieCard(props) {
   const shortTitle = props.title && props.title.length > 20 ? props.title.slice(0,20) + "...": props.title ? props.title: '';
@@ -48,14 +49,8 @@ export default function MovieCard(props) {
                     <div className="rating-div" >
                       <AverageRating rating={Math.round(props.voteAverage * 10)} />
                     </div>
-                      <Badge 
-                        badgeContent={props.message ? props.message:''} 
-                        className='movie-badge'
-                        anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                        }}> 
-                        </Badge> 
+                  
+                        <Chip className='movie-badge' label={props.message}  />;
                   </div>
                   <Typography variant="body2" color="textSecondary" component="p">
                     {showMore ? props.overview : shortDescription  }

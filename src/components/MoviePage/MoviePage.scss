@@ -28,12 +28,11 @@
     .movie-page-content {
       padding: 30px;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       background-color: white;
 
       .poster-div {
-        min-width: 35%;
 
         img {
           // width: 100%;

@@ -216,7 +216,7 @@ export default class MoviePage extends Component {
     });
 
     let similarJSX = similar.map((movie,index) => {
-      return <MovieCard message={`Similar to ${this.state.movie.title}`} movie={movie} key={index} id={movie.id} title={movie.title} overview={movie.overview} voteAverage={movie.vote_average} backdropPath={movie.backdrop_path} type="movies"/>;
+      return <MovieCard message={`#${index + 1} similar`} movie={movie} key={index} id={movie.id} title={movie.title} overview={movie.overview} voteAverage={movie.vote_average} backdropPath={movie.backdrop_path} type="movies"/>;
     });
 
     let videosJSX = videos.map((movie, index) => {

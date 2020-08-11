@@ -68,10 +68,8 @@ export default function TrailerModal(props) {
   };
 
   const getTrailer = () => {
-    // if the type is episode then it will call the endpoint for episode, else it will dynamically call the endpoint for movies and tvshows
-    console.log(props);
+
     let {movie} = props;
-    console.log(movie);
     props.type === 'episode' && movie.season_number && movie.episode_number && movie.show_id ? 
     axios.get(`https://api.themoviedb.org/3/tv/${movie.show_id}/season/${movie.season_number}/episode/${movie.episode_number}/videos?api_key=12aa3499b6032630961640574aa332a9&language=en-US`)
     .then(results =>{
@@ -122,9 +120,9 @@ export default function TrailerModal(props) {
     <div className="trailer-div">
     
       <Tooltip title="Trailer">
-      <Button onClick={handleOpen} className={classes.button} size="small">
+      <Button  onClick={handleOpen} className={classes.button} size="small">
       <PlayCircleOutlineIcon
-          fontSize="medium"
+          fontSize="large"
           type="button"
           className="play-trailer"
           

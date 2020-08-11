@@ -13,8 +13,7 @@ export default (
     <Route exact path="/" component={Landing}></Route>
     <Route path="/welcome" component={HomePage}></Route>
     <Route path="/movies/:id" component={MoviePage}></Route>
-    <Route path="/tvshows/:id/seasons/:seasonid" component={SeasonPage} render={(props) => <Component {...props} />}
-></Route>
+    <Route path="/tvshows/:id/seasons/:seasonid" component={SeasonPage} render={(props) => <Component {...props} />}></Route>
 
     <Route path="/tvshows/:id" component={TVShowPage}></Route>
     <Route path="/search/:search" component={SearchPage}></Route>

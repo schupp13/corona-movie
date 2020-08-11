@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -10,43 +10,66 @@ import AverageRating from "../AverageRating/AverageRating";
 import { Link } from "react-router-dom";
 import "./MovieCard.scss";
 import TrailerModal from "../TrailerModal/TrailerModal";
-
+import Badge from "@material-ui/core/Badge";
 
 export default function MovieCard(props) {
-  const description = props.overview ? props.overview.slice(0, 120) + "...": '';
+  const shortTitle = props.title && props.title.length > 20 ? props.title.slice(0,20) + "...": props.title ? props.title: '';
+  const shortDescription = props.overview && props.overview.length > 100 ? props.overview.slice(0, 100) + "...": props.overview ? props.overview: '';
   let pic = `https://image.tmdb.org/t/p/w500/${props.backdropPath}`;
+  const [showMore, setShowMore] = useState(false);
   let link = `/${props.type}/${props.id}`;
   let trailerLink = props.type === 'movies' ? 'movie':props.type === 'episode'? 'episode':  'tv';
+   const handleError = (e) =>{
+    console.log(e);
+    e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
+
+}
   return (
+   
     <Card className="movie-card">
-      <CardActionArea>
-        <CardMedia
-          className="movie-card-media"
-          image={pic}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-        <div className="title-div">
-          <Typography component="h2" variant="body2">
-           {props.title}
-           </Typography >
-            <div className="rating-div" >
-              <AverageRating rating={Math.round(props.voteAverage * 10)} />
-            </div>
-          </div>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+     
+          <CardActionArea onClick={()=>{setShowMore(!showMore)}}>
+          
+                <CardMedia
+                  className="movie-card-media"
+                  image={pic}
+                  title="Contemplative Reptile"
+                  onError={handleError}
+                />
+               
+           
+                <CardContent >
+                <div className="title-div">
+              
+                <Typography variant="h5" component="h2">
+              
+                {showMore ? props.title: shortTitle}
+                </Typography>
+                    <div className="rating-div" >
+                      <AverageRating rating={Math.round(props.voteAverage * 10)} />
+                    </div>
+                      <Badge 
+                        badgeContent={props.message ? props.message:''} 
+                        className='movie-badge'
+                        anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                        }}> 
+                        </Badge> 
+                  </div>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {showMore ? props.overview : shortDescription  }
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
       <CardActions className="card-actions">
         <Button  component={Link} to={link} size="small" color="primary">
           More Info
         </Button>
+       
         <TrailerModal type={trailerLink} id={props.id} movie={props.movie}/>
-
       </CardActions>
-    
     </Card>
+    
   );
 }

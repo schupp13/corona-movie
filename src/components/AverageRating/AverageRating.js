@@ -4,10 +4,10 @@ import './AverageRating.scss';
 
 
 export default function AverageRating(props) {
-    let goodColor = 'rgb(161, 206, 144, 1)';
-    let okayColor = 'rgb(1, 180, 228, 1)';
+    let goodColor = 'rgba(144, 206, 161, 1)';
+    let okayColor = 'rgba(1, 180, 228, 1)';
     let badColor =  'rgb(228, 1, 66, 1)';
-    let color = props.rating > 80 ? goodColor: props.rating < 79 && props.rating > 60 ? okayColor: badColor;
+    let color = props.rating >= 80 ? goodColor: props.rating <= 79 && props.rating >= 60 ? okayColor: badColor;
    let data = {
        
         datasets: [{

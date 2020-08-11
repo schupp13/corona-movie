@@ -14,7 +14,7 @@
                     width: 80%;
                     height: 100%;
                     display: flex;
-                    
+                    padding: 5%;
                     justify-content: flex-start;
                     .banner-content-poster-div{
                         height: 100%;
@@ -70,3 +70,9 @@
         }
        
     }
+    @media only screen and (max-width: 500px) {
+    
+        .banner-content{
+           flex-direction: column;
+        }
+          }

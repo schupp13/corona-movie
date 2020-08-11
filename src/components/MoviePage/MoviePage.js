@@ -178,21 +178,14 @@ export default class MoviePage extends Component {
     } = this.state;
     let movieID = this.props.match.params.id;
 
-    let directors = director.map((element, index) => {
-      return (
-        <span>
-          {index > 0 && ", "}
-          {element.name}
-        </span>
-      );
+ 
+
+    let moviePosters = movie_posters.map((element, index) =>{
+      return <div className="movie-posters" style={{margin:'15px'}} key={index}><img alt={element.name} src={`https://image.tmdb.org/t/p/w154/${element.file_path}`}></img></div>
     });
 
-    let moviePosters = movie_posters.map(element =>{
-      return <div className="movie-posters" style={{margin:'15px'}}><img alt={element.name} src={`https://image.tmdb.org/t/p/w154/${element.file_path}`}></img></div>
-    });
-
-    let movieBackdrops = movie_backdrops.map(element =>{
-      return <div className="movie-backdrops" style={{margin:'15px'}}><img alt={element.name} src={`https://image.tmdb.org/t/p/w300/${element.file_path}`}></img></div>
+    let movieBackdrops = movie_backdrops.map((element, index) =>{
+      return <div className="movie-backdrops" style={{margin:'15px'}} key={index}><img alt={element.name} src={`https://image.tmdb.org/t/p/w300/${element.file_path}`}></img></div>
     });
 
     let Background = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
@@ -206,28 +199,28 @@ export default class MoviePage extends Component {
       ) : (
         <HomeIcon />
       );
-    let chips = genres.map((genre) => {
-      return <Chip label={genre.name} />;
+    let chips = genres.map((genre, index) => {
+      return <Chip label={genre.name} key={index} />;
     });
 
-    let actorsJSX = actors.map((actor) => {
-      return <ActorCard actor={actor}  />;
+    let actorsJSX = actors.map((actor, index) => {
+      return <ActorCard actor={actor} key={index}  />;
     });
 
-    let crewJSX = crew.map((actor) => {
-      return <ActorCard actor={actor}  />;
+    let crewJSX = crew.map((actor, index) => {
+      return <ActorCard actor={actor}  key={index}/>;
     });
 
-    let reviewsJSX = reviews.map((review) => {
-      return <MovieReviewCard review={review} />;
+    let reviewsJSX = reviews.map((review, index) => {
+      return <MovieReviewCard review={review} key={index}/>;
     });
 
     let similarJSX = similar.map((movie,index) => {
-      return <MovieCard movie={movie} key={index} id={movie.id} title={movie.title} overview={movie.overview} voteAverage={movie.vote_average} backdropPath={movie.backdrop_path} type="movies"/>;
+      return <MovieCard message={`Similar to ${this.state.movie.title}`} movie={movie} key={index} id={movie.id} title={movie.title} overview={movie.overview} voteAverage={movie.vote_average} backdropPath={movie.backdrop_path} type="movies"/>;
     });
 
-    let videosJSX = videos.map((movie) => {
-      return <MovieVideo movie={movie} />;
+    let videosJSX = videos.map((movie, index) => {
+      return <MovieVideo movie={movie} key={index} />;
     });
     return (
       <div className="movie-page">
@@ -239,9 +232,7 @@ export default class MoviePage extends Component {
             <div className="banner-overlay">
               <div className="banner-content">
                 <h1>{movie.title}</h1>
-                <div className="directors">
-                  <p>Directed By: {directors}</p>
-                </div>
+                
                 <p>{movie.tagline}</p>
               </div>
             </div>

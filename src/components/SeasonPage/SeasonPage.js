@@ -7,8 +7,6 @@ import './SeasonPage.scss';
 export default function SeasonPage(props) {
 
     const [season, setSeason] = useState({});
-    const [seasonID] = useState(props.match.params.seasonid);
-    const [showID] = useState(props.match.params.id);
     const [episodes, setEpisodes] = useState([]);
     const [show, setShow] = useState({});
     const [otherSeasons, setOtherSeasons] = useState([]);
@@ -17,11 +15,13 @@ export default function SeasonPage(props) {
   useEffect(() => {
      getShow();
      getSeasons();
-  },[props.match.params.seasonid]);
+     console.log(props);
+     
+  },[props.match.params]);
 
   const getShow = () =>{
-
-      axios.get(`https://api.themoviedb.org/3/tv/${showID}?api_key=12aa3499b6032630961640574aa332a9&language=en-US`)
+      const {id} = props.match.params;
+      axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=12aa3499b6032630961640574aa332a9&language=en-US`)
       .then(results => {
           setShow(results.data)
           setOtherSeasons(results.data.seasons)
@@ -32,7 +32,9 @@ export default function SeasonPage(props) {
   }
 
 const getSeasons = () =>{
-    axios.get(`https://api.themoviedb.org/3/tv/${showID}/season/${seasonID}?api_key=12aa3499b6032630961640574aa332a9&language=en-US`)
+    const {seasonid} = props.match.params;
+      const {id} = props.match.params;
+    axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonid}?api_key=12aa3499b6032630961640574aa332a9&language=en-US`)
     .then(results =>{
         console.log(results);
         setSeason(results.data);
@@ -56,7 +58,7 @@ let episodesjsx = episodes.map((ep, i) =>{
 });
 
 let otherSeasonsjsx = otherSeasons.map(seasonx => {
-    return seasonx.season_number !== parseInt(seasonID )&&  <SeasonsCard season={seasonx} tvshowID={show.id} />
+    return seasonx.season_number !== parseInt(props.match.params.seasonid )&&  <SeasonsCard season={seasonx} tvshowID={show.id} />
 });
 
     return (

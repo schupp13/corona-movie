@@ -66,7 +66,7 @@ $navHeight: 65px;
 @mixin banner {
   min-height: 400px;
   height: calc(100vh / 2.5);
-  max-height: 360px;
+  min-height: 360px;
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;

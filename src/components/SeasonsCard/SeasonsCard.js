@@ -21,7 +21,11 @@ const useStyles = makeStyles({
     
   },
 });
+const handleError = (e) =>{
+  console.log(e);
+  e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
 
+}
 export default function SeasonCard(props) {
   const classes = useStyles();
   const description = props.overview ? props.overview.slice(0, 120) + "...": '';
@@ -37,6 +41,7 @@ export default function SeasonCard(props) {
           alt={props.season.name}
           image={pic}
           title={props.season.name}
+          onError={handleError}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

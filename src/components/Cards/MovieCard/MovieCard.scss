@@ -1,0 +1,62 @@
+@import '../../../App.scss';
+
+.movie-card{
+    max-width: 325px;
+    min-width: 325px;
+    margin: 15px;
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+
+    .movie-card-media{
+       height: 140px;
+        background-size: cover;
+        background-position: top;
+    }
+
+
+    .title-div{
+        display: flex;
+        position: relative;
+
+
+        .rating-div{
+          position: absolute;
+          top:-39px;
+          right: -40px;
+          width: 40%;   
+        }
+
+        
+        .movie-badge{
+            color: $AccentColor;
+            position: absolute;
+            top: -155px;
+            left: -15px;
+            height: 20px;
+            background-color: $primaryColor;
+        }
+  
+    }
+
+    .card-actions{
+        display: flex;
+        justify-self: flex-start;
+        align-items: center;
+        padding: 0 !important;
+        color: $primaryColor;
+        a{
+            width: 30%;
+            color: $AccentColor;
+           
+        }
+
+        * {
+            margin: 5px;
+        }
+        
+    }
+}
+

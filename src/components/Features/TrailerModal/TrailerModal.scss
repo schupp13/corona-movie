@@ -1,0 +1,41 @@
+@import "../../../App.scss";
+
+
+.trailer-div{
+    a{
+        color: $AccentColor;
+    }
+}
+.trailer-modal{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $AccentColor;
+
+    
+}
+
+iframe{
+    width: 70vw; 
+    height: 36.4vw;
+}
+iframe:hover{
+    cursor: pointer;
+    color: white;
+}
+
+
+.play-trailer{
+
+    width: 2em;
+}
+
+
+@media only screen and (max-width: 500px) {
+    
+iframe{
+    width: 90vw; 
+    height: 30vh;
+}
+  }

@@ -1,0 +1,149 @@
+@import '../../../App.scss';
+
+.search-page{
+    @include pageCenter(100%);
+
+    .search-page-container{
+        @include container();
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+
+        .search-input{
+            display:flex;
+            form{
+                width: 100%;
+            }
+        }
+
+        .search-page-main{
+            display:flex;
+            align-items:flex-start;
+            min-width:100%;
+        
+            .search-left{
+                min-width: 30%;
+                display: flex;
+                justify-content: center;
+            
+            .search-results-container{
+                min-width: 90%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                align-self: flex-start;
+                background-color: white;
+                border-radius: 5px;
+                margin-top: 15px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(var(--lightGrey), 1);
+                h2{
+                    background-color: $SecondaryColor;
+                    padding: 15px;
+                    width: 100%;
+                    text-align: center;
+                    border-radius: 5px 5px 0 0;
+                }
+                button{
+                    width:100%;
+                    height: 40px;
+                    background-color: white;
+                    border:none;
+                    font-size: 15px;
+                    padding: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                   
+                    div{
+                        margin-left: auto;
+                    }
+                    
+                }
+
+                
+                button:nth-last-child(){
+                    border-radius:0 0 5px 5px;
+
+                }
+
+                
+
+                button:hover{
+                    
+                    background-color: rgb(224, 221, 221);
+                    color: white;
+                    transition: ease-in-out .5s;
+                }
+
+                .search-button:active{
+                    background-color: $SecondaryColor;
+                    color: white;
+                    transition: ease-in-out .5s;
+                }
+
+                .search-button:focus{
+                    background-color: $SecondaryColor;
+                    color: white;
+                    transition: ease-in-out .5s;
+                }
+
+            }
+        }
+
+        .search-right{
+            max-height: 80vh;
+            min-width: 70%;
+            overflow: scroll;
+            overflow-x: hidden;
+            
+            .search-results{
+                min-width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 90%;
+                
+
+                .pagination-div{
+                    display: flex;
+                    justify-content: flex-start;
+                    width: 500px;
+                }
+            }
+           
+    }
+    .search-right::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    }}
+
+
+    @media only screen and (max-width: 900px) {
+       .search-page-container{
+           width: 100%;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-self: center;
+       }
+            .search-page-main{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .search-left{
+                    width: 90%;
+                    align-items: center;
+                }
+                .search-right{
+                    width: 90%;
+                }
+            }
+        
+      }

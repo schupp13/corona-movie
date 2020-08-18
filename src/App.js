@@ -8,9 +8,7 @@ function App() {
   return (
     <HashRouter>
      <div className="App">
-        <Navbar />
         {routes}
-        <Footer />
       </div>
     </HashRouter>
   );

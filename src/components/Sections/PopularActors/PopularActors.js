@@ -86,7 +86,6 @@ export default class PopularActors extends Component {
   }
 
   render() {
-    console.log(this.state)
     let {popActors, page , total_pages} = this.state;
     let actors = popActors.map((actor, index) => {
       return <ActorCard actor={actor} key={index}  />;

@@ -5,13 +5,11 @@
   justify-content: space-between;
   align-items: center;
   min-height: $navHeight;
+  min-width: 100%;
   background-color: $primaryColor;
   z-index: 5;
-  position: sticky;
+  position: fixed;
   top: 0;
-  position: -webkit-sticky;
-  //   box-shadow: 0 4px 2px -2px gray;
-
   .burger {
     display: none;
     cursor: pointer;
@@ -76,7 +74,7 @@
 @media screen and (max-width: 768px) {
   .nav-bar {
     .nav-links {
-      position: absolute;
+      position: fixed;
       right: 0px;
       height: calc(100vh - #{$navHeight});
       top: $navHeight;
@@ -94,6 +92,7 @@
         $primaryColor 0%,
         $SecondaryColor 100%
       );
+      opacity: .98;
     }
 
     .nav-active {
@@ -117,6 +116,20 @@
 
     .burger {
       display: block;
+      .line1 {
+        transform: rotate(90) translate(-5px, 5px);
+        transition: 1s ease-in-out;
+      }
+
+      .line2 {
+        display: block;
+        animation: burgerFade 1s linear;
+      }
+
+      .line3 {
+      
+        transition: 1s ease-in-out;
+      }
     }
 
     .burger-close {
@@ -129,7 +142,7 @@
 
       .line2 {
         display: none;
-        transition: 1s ease-in-out;
+        animation: burgerFade 1s ease-out;
       }
 
       .line3 {
@@ -152,55 +165,15 @@
   }
 }
 
-// .Navbar {
+@keyframes burgerFade {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 
-//  background: $primaryColor;
-//  height: $navHeight;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  font-size: 1.2rem;
-//  display: flex;
-//  justify-content: space-between;
-//  width: 100%;
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
 
-// }
-
-// .Navbar-logo {
-//  color: white;
-//  margin: 10px;
-//  display: flex;
-//  justify-content: space-between;
-//  align-items: center;
-// }
-
-// .tv-icon {
-//  margin: 10px;
-// }
-
-// .Navbar-links {
-//  display: flex;
-//  justify-content: space-between;
-//  margin: 20px;
-// }
-
-// a {
-//  text-decoration: none;
-// }
-
-// ul {
-//  list-style: none;
-//  display: flex;
-//  flex-direction: row;
-//  justify-content: space-between;
-// }
-
-// li {
-//  color: white;
-//  margin: 10px;
-// }
-
-// li:hover {
-//  color: $AccentColor;
-//  cursor: pointer;
-// }

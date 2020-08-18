@@ -6,51 +6,6 @@
  .container {
   @include container();
 
-  .tvshow-banner {
-   @include banner();
-
-   .banner-content {
-    width: 80%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    .banner-content-top{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        
-        .banner-content-top-2{
-            width: 10%;
-            * {
-                width: 170px !important;
-            }
-        }
-    }
-
-    .banner-content-middle{
-
-    }
-    .banner-content-bottom{
-        display:flex;
-        justify-content: space-evenly;
-    }
-
-    h1 {
-     font-size: 50px;
-    }
-
-
-    .directors {
-     font-size: 15px;
-     font-weight: bold;
-     margin: 15px 0;
-
-    }
-   }
-
-  }
 
   .tvshow-page-content {
     max-width: 1000px;

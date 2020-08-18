@@ -46,7 +46,7 @@ import SearchIcon from "@material-ui/icons/Search";
             
             endAdornment: (
               <InputAdornment>
-                <IconButton >
+                <IconButton onClick={this.submitForm} >
                  Search <SearchIcon className="search-icon"/>
                 </IconButton>
               </InputAdornment>

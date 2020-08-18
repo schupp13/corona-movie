@@ -5,6 +5,7 @@ import TrendingMovies from "../../Sections/TrendingMovies/TrendingMovies";
 import TopRatedTVShow from "../../Sections/TopRatedTVShow/TopRatedTVShow";
 import PopularActors from "../../Sections/PopularActors/PopularActors";
 import axios from "axios";
+import Banner from "../../Features/Banner/Banner";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -54,21 +55,8 @@ export default class HomePage extends Component {
     let Background = `https://image.tmdb.org/t/p/original/${this.state.poster}`;
 
     return (
-      <div className="homepage">
-        <div className="container">
-          {/* Make Banner */}
-          <div
-            className="banner"
-            style={{ backgroundImage: `url(${Background})` }}
-          >
-            <div className="banner-overlay">
-              <div className="banner-content">
-                <h1>Welcome to Keep it Reel...now keep it real</h1>
-                <MultiSearch />
-              </div>
-            </div>
-          </div>
-          {/* Search  */}
+      <>
+          <Banner background={`https://image.tmdb.org/t/p/original/${this.state.poster}`} title="Welcome to Keep It Reel" tagline={"... now keep it real."} search={true}> </Banner>
           <div className="search-results">
             <TrendingMovies />
           </div>
@@ -78,8 +66,7 @@ export default class HomePage extends Component {
           <div className="search-results">
             <PopularActors />
           </div>
-        </div>
-      </div>
+      </>
     );
   }
 }

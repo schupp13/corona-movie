@@ -13,6 +13,11 @@ import "./MovieCard.scss";
 import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 
 
+const handleError = (e) =>{
+  console.log(e);
+  e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
+}
+
 export default function MovieCard(props) {
   const shortTitle = props.title && props.title.length > 20 ? props.title.slice(0,20) + "...": props.title ? props.title: '';
   const shortDescription = props.overview && props.overview.length > 100 ? props.overview.slice(0, 100) + "...": props.overview ? props.overview: '';
@@ -20,11 +25,7 @@ export default function MovieCard(props) {
   const [showMore, setShowMore] = useState(false);
   let link = `/${props.type}/${props.id}`;
   let trailerLink = props.type === 'movies' ? 'movie':props.type === 'episode'? 'episode':  'tv';
-   const handleError = (e) =>{
-    console.log(e);
-    e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
-
-}
+  
   return (
    
     <Card className="movie-card">
@@ -35,8 +36,8 @@ export default function MovieCard(props) {
                   className="movie-card-media"
                   image={pic}
                   title="Contemplative Reptile"
-                  onError={(e)=>handleError(e)}
-                />
+                  onError={handleError}
+                  />
                
            
                 <CardContent >

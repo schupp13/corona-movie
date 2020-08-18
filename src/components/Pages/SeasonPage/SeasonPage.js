@@ -62,8 +62,8 @@ let otherSeasonsjsx = otherSeasons.map(seasonx => {
 });
 
     return (
-        <div className="season-page">
-            <div className="container">
+        <>
+           
                 <div className="banner" style={{backgroundImage:`url("https://image.tmdb.org/t/p/original/${show.backdrop_path}")`}}>
                     <div className="banner-overlay">
                         <div className="banner-content">
@@ -96,8 +96,8 @@ let otherSeasonsjsx = otherSeasons.map(seasonx => {
                     </div>
                 </div>
            
-            </div>
-        </div>
+        
+        </>
     )
 }
 

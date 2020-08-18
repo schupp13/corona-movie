@@ -11,7 +11,9 @@ import AppleIcon from "@material-ui/icons/Apple";
 import MovieVideo from "../../Features/MovieVideo/MovieVideo";
 import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 import SeasonsCard from "../../Cards/SeasonsCard/SeasonsCard";
+import Banner from "../../Features/Banner/Banner";
 import "./TVShowPage.scss";
+import OverviewSection from "../../Sections/OverviewSection/OverviewSection";
 
 class TVShowPage extends Component {
   constructor(props) {
@@ -155,7 +157,6 @@ class TVShowPage extends Component {
     let runtimejsx = runtime && runtime.join(', ') + 'min';
 
     let Background = `https://image.tmdb.org/t/p/original/${tvshow.backdrop_path}`;
-    let poster = `https://image.tmdb.org/t/p/original/${tvshow.poster_path}`;
 
     let actorsjsx = cast.map((actor) => {
       return <ActorCard actor={actor} />;
@@ -176,13 +177,7 @@ class TVShowPage extends Component {
       return <SeasonsCard season={season} tvshowID={tvshow.id} />
     });
 
-    let homepageOption = homepage.includes("netflix.com") ? (
-      <img src={netflixpic} alt="netflix link"></img>
-    ) : homepage.includes("apple.com") ? (
-      <AppleIcon />
-    ) : (
-      <HomeIcon />
-    );
+    
 
     let chips = genres.map((genre) => {
       return <Chip label={genre.name} />;
@@ -198,51 +193,9 @@ class TVShowPage extends Component {
 
     console.log(this.state);
     return (
-      <div className="tvshow-page">
-        <div className="container">
-          <div
-            className="tvshow-banner"
-            style={{ backgroundImage: `url(${Background})` }}
-          >
-            <div className="banner-overlay">
-              <div className="banner-content">
-                <h1>{tvshow.name}</h1>
-                <div className="directors">
-                  <p>Status: {status} </p>
-                  <p>Premiered: {firstAirDate}</p>
-                  <p>episode length: {runtimejsx}</p>
-                  <p>episodes: {episodes}</p>
-                  <div>{networksjsx}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="tvshow-page-content">
-            <div className="poster-div">
-              <img alt="tv poster" src={poster}></img>
-              <div className="tvshow-rating-chart">
-              <AverageRating rating={tvshow.vote_average * 10} />
-              </div>
-            </div>
-            <div className="tvshow-details">
-              <div className="tvshow-overview">
-                <h4>Overview</h4>
-                {tvshow.overview}
-              </div>
-              <div className="chips">{chips}</div>
-              <div className="tvshow-bottom">
-                
-                <div className="tvshow-homepage">
-                  <a href={homepage} target="__blank">
-                    {homepageOption}
-                  </a>
-                </div>
-                <div className="tvshow-trailer">
-                  <TrailerModal type="tv" id={tvshow.id} />
-                </div>
-              </div>
-            </div>
-          </div>
+      <>
+          <Banner background={Background} title={tvshow.name} tagline={tvshow.tagline} search={false} companies={networks}/>
+          <OverviewSection type="tv" title={tvshow.name} poster_path={tvshow.poster_path} vote_average={tvshow.vote_average} release_date={firstAirDate} homepage={homepage} genres={genres} id={tvshow.id} overview={tvshow.overview} ></OverviewSection>
           <div
             className="scroll-container-div parallax"
             style={{ backgroundImage: `url(${Background})` }}
@@ -275,8 +228,8 @@ class TVShowPage extends Component {
             <h2>Similar TV Shows</h2>
             <div className="scroll-div">{similarTvShowsjsx}</div>
           </div>
-        </div>
-      </div>
+        
+      </>
     );
   }
 }

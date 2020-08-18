@@ -34,7 +34,6 @@ class TopRatedTVShow extends Component {
         `https://api.themoviedb.org/3/tv/${type}?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1`
       )
       .then((res) => {
-        console.log(res)
         this.setState({ 
           results: res.data.results,
           page: res.data.page,
@@ -84,7 +83,6 @@ class TopRatedTVShow extends Component {
 
  
   render() {
-    console.log(this.state)
     let {page, total_pages, type} = this.state;
     let message = type === "top_rated" ? 'Top Rated': type === 'popular' ? 'Most Popular' : type === 'on_the_air' ?  'On Air' : 'Playing Today';
     let tvshows = this.state.results.map((tvshow, index) => {

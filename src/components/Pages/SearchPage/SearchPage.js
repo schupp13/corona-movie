@@ -222,9 +222,7 @@ Promise.all([multi, tv, movie, person, collection, company]).then((values) => {
     });
 
     return (
-      <div className="search-page">
-  
-          <div className="search-page-container">
+      <div className="search-page-container" >
           <div className="search-input"> 
           <form onSubmit={this.submitForm}>
           <TextField id="outlined-basic" label="Search here" variant="outlined" name="results" fullWidth onChange={this.searchInput} InputProps={{
@@ -237,10 +235,13 @@ Promise.all([multi, tv, movie, person, collection, company]).then((values) => {
             )
           }}/>    
           </form>
-        </div>
+          </div>
         <div className="search-page-main">
           <div className="search-left">
-        <div className="search-results-container">
+            <div className="mobile-results">
+
+            </div>
+        <div className="search-results-container mobile-results">
         <h2>Results</h2>
         {most_popular_count  ? 
           <button onClick={this.handleClick} name="multi" className="search-button" autoFocus>
@@ -281,15 +282,15 @@ Promise.all([multi, tv, movie, person, collection, company]).then((values) => {
         <div className="search-results">
           {results.length > 0 ? jsx : 'No Results'}
           {results.length && <div className="pagination-div">
-
           </div>}
           </div>
          
         </div>
         </div>
+        <div>
           <Pagination page={page} count={total_pages} setPage={this.paginate}/>
         </div>
-      </div>
+    </div>
     );
   }
 }

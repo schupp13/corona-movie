@@ -57,7 +57,6 @@ export default class TrendingMovies extends Component {
           page: page,
         }})
       .then((result) => {
-        console.log(result.data);
         this.setState({
           results: result.data.results,
           header: header,

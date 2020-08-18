@@ -6,10 +6,8 @@ import "./MoviePoster.scss";
 export default function MoviePoster(props) {
   return (
     <div className="movie-poster-container">
-      <div className="movie-poster-image">
-        <Link to={`/movies/${props.id}`}>
-          <img alt={props.title} src={`https://image.tmdb.org/t/p/w154/${props.poster}`} />
-        </Link>
+      <div className="movie-poster-image">     
+          <img alt={props.title} src={`https://image.tmdb.org/t/p/w185/${props.poster}`} />
         <div className="average-rating">
           <AverageRating rating={props.rating * 10} />
         </div>

@@ -1,11 +1,8 @@
 @import "../../../App.scss";
-.movie-page {
-  @include pageCenter(100%);
-  .container {
-    @include container();
 
-    .movie-banner {
-      @include banner();
+ 
+
+ 
 
       .banner-content {
         width: 80%;
@@ -23,7 +20,7 @@
           margin: 15px 0;
         }
       }
-    }
+    
 
     .movie-page-content {
       padding: 30px;
@@ -85,8 +82,7 @@
           }
         }
       }
-    }
-  }
+
 
   .actors-div {
     width: 100%;

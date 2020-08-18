@@ -6,8 +6,8 @@
   justify-content: flex-start;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  width: 160px;
   border: 0.5px solid lightgrey;
+  padding-bottom: 10px;
 
   .movie-poster-image {
     position: relative;
@@ -16,9 +16,9 @@
 
     .average-rating {
       position: absolute;
-      bottom: -30px;
+      bottom: -35px;
       right: -30px;
-      width: 70%;
+      width: 65%;
     }
 
     a {
@@ -27,7 +27,7 @@
 
       // width: 100%;
       img {
-        border-radius: 15px;
+        border-radius: 15px 15px 0 0;
         // width: 100%;
       }
     }
@@ -41,7 +41,7 @@
   }
 
   .title {
-    max-width: 70%;
+    max-width: 60%;
     align-self: flex-start;
     margin-left: 8px;
     font-size: 10px;

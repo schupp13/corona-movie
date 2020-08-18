@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./Landing.scss";
+import "./LandingPage.scss";
 import LoginForm from "../../Forms/LoginForm/LoginForm";
 import RegisterForm from "../../Forms/RegisterForm/RegisterForm";
 import ReactCardFlip from "react-card-flip";

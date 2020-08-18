@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import LiveTvIcon from "@material-ui/icons/LiveTv";
+import MultiSearch from '../../Forms/MultiSearch/MultiSearch';
 
 import "./NavBar.scss";
 

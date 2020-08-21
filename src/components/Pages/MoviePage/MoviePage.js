@@ -7,6 +7,7 @@ import MovieCard from "../../Cards/MovieCard/MovieCard";
 import MovieVideo from "../../Features/MovieVideo/MovieVideo";
 import Banner from "../../Features/Banner/Banner";
 import OverviewSection from "../../Sections/OverviewSection/OverviewSection";
+import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 export default class MoviePage extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +22,11 @@ export default class MoviePage extends Component {
       director: [],
       writer: [],
       reviews: [],
+      review_page: 0,
+      review_total_pages: 0, 
       similar: [],
+      similar_total_pages: 0,
+      similar_page: 0,
       videos: [],
       companies:[],
       movie_posters:[],
@@ -54,12 +59,62 @@ export default class MoviePage extends Component {
           movie_posters: results.data.images.posters,
           movie_backdrops: results.data.images.backdrops,
           reviews: results.data.reviews.results,
+          review_page: results.data.reviews.page,
+          review_total_pages: results.data.reviews.total_pages,
           videos: results.data.videos.results,
           similar: results.data.similar.results,
+          similar_total_pages: results.data.similar.total_pages,
+          similar_page: results.data.similar.page,
           genres: results.data.genres
         });
       })
-      .catch();
+      .catch(error =>{
+        console.log(error)
+      });
+  }
+
+  handleScroll = () =>{
+
+  }
+
+  /**
+   * this funciton will add more reviews to the list if they are available... going to be passed down to ScrollDIv
+   */
+  moreReviews = () =>{
+    let movieID = this.props.match.params.id;
+    let {review_page} = this.state;
+    axios.get(`https://api.themoviedb.org/3/movie/${movieID}/similar?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=${review_page}`)
+    .then(results =>{
+      this.setState({
+        similar: [... this.state.similar, ...results.data.results],
+        similar_page: results.data.page,
+      });
+    })
+    .catch(error =>{
+      console.log(error)
+    })
+  }
+
+  moreSimilar = () =>{
+    let movieID = this.props.match.params.id;
+    let {similar_page} = this.state;
+    axios.get(`https://api.themoviedb.org/3/movie/${movieID}/similar?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=${similar_page}`)
+    .then(results =>{
+      this.setState({
+        similar: [... this.state.similar, ...results.data.results],
+        similar_page: results.data.page,
+      });
+    })
+    .catch(error =>{
+      console.log(error)
+    })
+  }
+
+  addSimilarPage = () => {
+    this.setState({similar_page : this.state.similar_page + 1}, this.moreSimilar)
+  }
+  addReviewPage = () => {
+    this.setState({review_page : this.state.review_page + 1}, this.moreReviews)
   }
 
   
@@ -69,20 +124,20 @@ export default class MoviePage extends Component {
       movie,
       genres,
       homepage,
-      director,
-      companies,
+      similar_page,
+      similar_total_pages,
       actors,
       reviews,
+      review_page,
+      review_total_pages,
       similar,
       videos,
       movie_posters,
       movie_backdrops,
       crew
     } = this.state;
-    let movieID = this.props.match.params.id;
 
-    
-    
+    let Background = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
 
     let moviePosters = movie_posters.map((element, index) =>{
       return <div className="movie-posters" style={{margin:'15px'}} key={index}><img alt={element.name} src={`https://image.tmdb.org/t/p/w154/${element.file_path}`}></img></div>
@@ -91,10 +146,6 @@ export default class MoviePage extends Component {
     let movieBackdrops = movie_backdrops.map((element, index) =>{
       return <div className="movie-backdrops" style={{margin:'15px'}} key={index}><img alt={element.name} src={`https://image.tmdb.org/t/p/w300/${element.file_path}`}></img></div>
     });
-
-    let Background = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
-    
-  
 
     let actorsJSX = actors.map((actor, index) => {
       return <ActorCard actor={actor} key={index}  />;
@@ -115,49 +166,26 @@ export default class MoviePage extends Component {
     let videosJSX = videos.map((movie, index) => {
       return <MovieVideo movie={movie} key={index} />;
     });
+
     return (
       <>
-          <Banner background={Background} title={movie.title} tagline={movie.tagline} search={false} />
-          <OverviewSection type="movie" title={movie.title} poster_path={movie.poster_path} vote_average={movie.vote_average} release_date={movie.release_date} homepage={homepage} genres={genres} id={movie.id} overview={movie.overview}></OverviewSection>
-          
-          <div
-            className="scroll-container-div parallax"
-            style={{ backgroundImage: `url(${Background})` }}
-          >
-            <h2>Cast</h2>
-            <div className="scroll-div">{actorsJSX}</div>
-          </div>
-          
-           <div className="scroll-container-div">
-            <h2>Reviews</h2>
-            <div className="scroll-div">{reviewsJSX}</div>
-          </div>
-          <div className="scroll-container-div">
-            <h2>Posters</h2>
-            <div className="scroll-div">{moviePosters}</div>
-          </div>
-          <div className="scroll-container-div">
-            <h2>Backdrops</h2>
-            <div className="scroll-div">{movieBackdrops}</div>
-          </div>
-          <div
-            className="scroll-container-div parallax"
-            style={{ backgroundImage: `url(${Background})` }}
-          >
-            <h2>Videos</h2>
-            <div className="scroll-div">{videosJSX}</div>
-          </div>         
-          <div className="scroll-container-div">
-            <h2>Similar Films</h2>
-            <div className="scroll-div">{similarJSX}</div>
-          </div>
-          <div
-            className="scroll-container-div"
-          >
-            <h2>Crew</h2>
-            <div className="scroll-div">{crewJSX}</div>
-          </div>
-       
+        <Banner background={Background} title={movie.title} tagline={movie.tagline} search={false} />
+        <OverviewSection type="movie" title={movie.title} poster_path={movie.poster_path} vote_average={movie.vote_average} release_date={movie.release_date} homepage={homepage} genres={genres} id={movie.id} overview={movie.overview}></OverviewSection>
+
+        <div className="scroll-container-div parallax" style={{ backgroundImage: `url(${Background})` }}>
+          <ScrollDiv title="Cast" cards={actorsJSX} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
+        </div> 
+
+        <ScrollDiv title="Reviews" cards={reviewsJSX} handleScroll={this.handleScroll} page={review_page} total_pages={review_total_pages} addPage={this.addReviewPage}></ScrollDiv>
+        <ScrollDiv title="Crew" cards={crewJSX} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
+        <ScrollDiv title="Posters" cards={moviePosters} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
+        <ScrollDiv title="Backdrops" cards={movieBackdrops} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
+
+        <div className="scroll-container-div parallax" style={{ backgroundImage: `url(${Background})` }}>
+          <ScrollDiv title="Videos" cards={videosJSX} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
+        </div>
+
+        <ScrollDiv title="Similar" cards={similarJSX} handleScroll={this.handleScroll} page={similar_page} total_pages={similar_total_pages} addPage={this.addSimilarPage}></ScrollDiv>
       </>
     );
   }

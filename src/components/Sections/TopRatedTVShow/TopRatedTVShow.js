@@ -91,7 +91,6 @@ class TopRatedTVShow extends Component {
 
     return (
       <div className="trending">
-        <h2>{message} </h2>
         <ButtonGroup size="small" aria-label="small outlined button group">
           <Button
             onClick={() => {
@@ -133,7 +132,7 @@ class TopRatedTVShow extends Component {
             On Air Today
           </Button>
         </ButtonGroup>
-        <ScrollDiv cards={tvshows} handleScroll={this.handleScroll} page={page} total_pages={total_pages} addPage={this.addPage}></ScrollDiv>
+        <ScrollDiv title={`TV - ${message}`}cards={tvshows} handleScroll={this.handleScroll} page={page} total_pages={total_pages} addPage={this.addPage}></ScrollDiv>
       </div>
     );
   }

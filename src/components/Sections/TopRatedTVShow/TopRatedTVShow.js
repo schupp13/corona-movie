@@ -13,7 +13,7 @@ class TopRatedTVShow extends Component {
       results: [],
       page: 0,
       total_pages: 0,
-      type: 'top_rated'
+      type: "top_rated",
     };
   }
 
@@ -21,23 +21,26 @@ class TopRatedTVShow extends Component {
     this.getTVShows();
   };
 
-  changeType = (type) =>{
-    this.setState({
-      type
-    }, this.getTVShows);
-  }
+  changeType = (type) => {
+    this.setState(
+      {
+        type,
+      },
+      this.getTVShows
+    );
+  };
 
-  getTVShows = () => { 
-    const {type} = this.state;
+  getTVShows = () => {
+    const { type } = this.state;
     axios
       .get(
         `https://api.themoviedb.org/3/tv/${type}?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1`
       )
       .then((res) => {
-        this.setState({ 
+        this.setState({
           results: res.data.results,
           page: res.data.page,
-          total_pages: res.data.total_pages
+          total_pages: res.data.total_pages,
         });
       })
       .catch((err) => {
@@ -52,46 +55,70 @@ class TopRatedTVShow extends Component {
     //   this.addPage();
     // }
     // console.log(document.getElementById('scroll-div').scrollLeft)
-}
+  };
 
   addPage = () => {
-    this.setState({page : this.state.page + 1}, this.tagOnMore)
+    this.setState({ page: this.state.page + 1 }, this.tagOnMore);
+  };
+
+  tagOnMore = () => {
+    const { page, type } = this.state;
+    axios
+      .get(`https://api.themoviedb.org/3/tv/${type}`, {
+        params: {
+          api_key: "12aa3499b6032630961640574aa332a9",
+          page: page,
+        },
+      })
+      .then((result) => {
+        this.setState({
+          results: [...this.state.results, ...result.data.results],
+          page: result.data.page,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  createMessage(type) {
+    return type === "top_rated"
+      ? "Top Rated"
+      : type === "popular"
+      ? "Most Popular"
+      : type === "on_the_air"
+      ? "On Air"
+      : "Playing Today";
   }
 
- tagOnMore = () => {
-   const {page, type} = this.state;
-   axios
-   .get(
-     `https://api.themoviedb.org/3/tv/${type}`
-     ,{
-       params: {
-         api_key: '12aa3499b6032630961640574aa332a9',
-         page: page,
-       }
-     })
-   .then((result) => {
-     this.setState({
-       results: [... this.state.results, ...result.data.results],
-       page: result.data.page,
-
-     });
-   })
-   .catch((error) => {
-     console.log(error);
-   });
- }
-
- 
   render() {
-    let {page, total_pages, type} = this.state;
-    let message = type === "top_rated" ? 'Top Rated': type === 'popular' ? 'Most Popular' : type === 'on_the_air' ?  'On Air' : 'Playing Today';
+    let buttons = [
+      { name: "Top Rated", function: () => this.changeType("top_rated") },
+      { name: "Most Popular", function: () => this.changeType("popular") },
+      { name: "On Air", function: () => this.changeType("on_the_air") },
+      { name: "On Air Today", function: () => this.changeType("airing_today") },
+    ];
+    let { page, total_pages, type } = this.state;
+    let message = this.createMessage(type);
     let tvshows = this.state.results.map((tvshow, index) => {
-      return <MovieCard message={`#${index + 1} ${message}`} tvshow={tvshow} key={index} id={tvshow.id} title={tvshow.name} overview={tvshow.overview} voteAverage={tvshow.vote_average} backdropPath={tvshow.backdrop_path} type="tvshows"/>;
+      return (
+        <MovieCard
+          message={`#${index + 1} ${message}`}
+          tvshow={tvshow}
+          key={index}
+          id={tvshow.id}
+          title={tvshow.name}
+          overview={tvshow.overview}
+          voteAverage={tvshow.vote_average}
+          backdropPath={tvshow.backdrop_path}
+          type="tvshows"
+        />
+      );
     });
 
     return (
       <div className="trending">
-        <ButtonGroup size="small" aria-label="small outlined button group">
+        {/* <ButtonGroup size="small" aria-label="small outlined button group">
           <Button
             onClick={() => {
               this.changeType("top_rated");
@@ -131,8 +158,16 @@ class TopRatedTVShow extends Component {
           >
             On Air Today
           </Button>
-        </ButtonGroup>
-        <ScrollDiv title={`TV - ${message}`}cards={tvshows} handleScroll={this.handleScroll} page={page} total_pages={total_pages} addPage={this.addPage}></ScrollDiv>
+        </ButtonGroup> */}
+        <ScrollDiv
+          buttons={buttons}
+          title={`TV - ${message}`}
+          cards={tvshows}
+          handleScroll={this.handleScroll}
+          page={page}
+          total_pages={total_pages}
+          addPage={this.addPage}
+        ></ScrollDiv>
       </div>
     );
   }

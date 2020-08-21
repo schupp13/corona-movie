@@ -1,0 +1,10 @@
+@import "../../../App.scss";
+
+.button-group {
+
+ .active {
+ color: $AccentColor;
+ background-color: $primaryColor;
+ transition: .7s ease-in-out;
+}
+}

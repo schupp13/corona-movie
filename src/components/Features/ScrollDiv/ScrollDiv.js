@@ -4,13 +4,15 @@ import Button from "@material-ui/core/Button";
 import './ScrollDiv.scss';
 export default function ScrollDiv(props) {
     return (
+    props.cards.length > 0 && <div className="scroll-container-div">
+        <h2 className="scroll-title">{props.title}</h2>
         <div 
         className="scroll-div"
-        onScroll={()=> props.handleScroll()}>
-            {props.cards}
-            {props.page <= props.total_pages && <Button onClick={()=>props.addPage()}><ArrowForwardIosIcon></ArrowForwardIosIcon></Button>}
+        onScroll={(e)=> props.handleScroll(e)}>
+            {props.cards ? props.cards : "No Results"}
+            {props.page < props.total_pages && <Button onClick={()=>props.addPage()}><ArrowForwardIosIcon></ArrowForwardIosIcon></Button>}
         </div>
-
+    </div>
     )
 }
 

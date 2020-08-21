@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import ActorCard from "../../Cards/ActorCard/ActorCard";
-import AverageRating from "../../Features/AverageRating/AverageRating";
 import MovieReviewCard from "../../Cards/MovieReviewCard/MovieReviewCard";
 import MovieCard from "../../Cards/MovieCard/MovieCard";
 import Chip from "@material-ui/core/Chip";
-import HomeIcon from "@material-ui/icons/Home";
-import netflixpic from "../../../img/netflix.png";
-import AppleIcon from "@material-ui/icons/Apple";
 import MovieVideo from "../../Features/MovieVideo/MovieVideo";
-import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 import SeasonsCard from "../../Cards/SeasonsCard/SeasonsCard";
 import Banner from "../../Features/Banner/Banner";
-import "./TVShowPage.scss";
 import OverviewSection from "../../Sections/OverviewSection/OverviewSection";
+import "./TVShowPage.scss";
 
 class TVShowPage extends Component {
   constructor(props) {
@@ -38,30 +34,33 @@ class TVShowPage extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getTVShow();
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.componentDidMount();
+      this.getTVShow();
     }
   }
 
-  componentDidMount() {
-    this.getTVShow();
-    this.getCredits();
-    this.getReviews();
-    this.getSimilarTvShows();
-    this.getVideos();
+  handleScroll = () =>{
+
   }
 
   getTVShow = () => {
     let tvshowID = this.props.match.params.id;
     axios
       .get(
-        `https://api.themoviedb.org/3/tv/${tvshowID}?api_key=12aa3499b6032630961640574aa332a9`
+        `https://api.themoviedb.org/3/tv/${tvshowID}?api_key=12aa3499b6032630961640574aa332a9&append_to_response=credits,images,videos,reviews,similar`
+
       )
       .then((results) => {
         console.log(results);
         this.setState({
           tvshow: results.data,
+          cast: results.data.credits.cast,
+          crew: results.data.credits.crew,
           homepage: results.data.homepage,
           genres: results.data.genres,
           runtime: results.data.episode_run_time,
@@ -69,72 +68,36 @@ class TVShowPage extends Component {
           seasons: results.data.seasons,
           status: results.data.status,
           episodes: results.data.number_of_episodes,
-          networks: results.data.networks
+          networks: results.data.networks,
+          similarTvShows: results.data.similar.results,
+          similar_page: results.data.similar.page,
+          similar_total_pages: results.data.similar.total_pages,
+          reviews: results.data.reviews.results,
+          videos: results.data.videos.results
+
         });
       })
-      .catch();
+      .catch(error=>console.log(error));
   };
 
-  getCredits = () => {
-    let tvshowID = this.props.match.params.id;
-    axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${tvshowID}/credits?api_key=12aa3499b6032630961640574aa332a9`
-      )
-      .then((results) => {
-        console.log(results);
-        this.setState({
-          cast: results.data.cast,
-          crew: results.data.crew,
-        });
-      })
-      .catch();
-  };
+  moreSimilar = () =>{
+    let movieID = this.props.match.params.id;
+    let {similar_page} = this.state;
+    axios.get(`https://api.themoviedb.org/3/tv/${movieID}/similar?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=${similar_page}`)
+    .then(results =>{
+      this.setState({
+        similarTvShows: [... this.state.similarTvShows, ...results.data.results],
+        similar_page: results.data.page,
+      });
+    })
+    .catch(error =>{
+      console.log(error)
+    })
+  }
 
-  getReviews = () => {
-    let tvshowID = this.props.match.params.id;
-    axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${tvshowID}/reviews?api_key=12aa3499b6032630961640574aa332a9`
-      )
-      .then((results) => {
-        console.log(results);
-        this.setState({
-          reviews: results.data.results,
-        });
-      })
-      .catch();
-  };
-
-  getSimilarTvShows = () => {
-    let tvshowID = this.props.match.params.id;
-    axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${tvshowID}/similar?api_key=12aa3499b6032630961640574aa332a9`
-      )
-      .then((results) => {
-        console.log(results);
-        this.setState({
-          similarTvShows: results.data.results,
-        });
-      })
-      .catch();
-  };
-
-  getVideos = () => {
-    let tvshowID = this.props.match.params.id;
-    axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${tvshowID}/videos?api_key=12aa3499b6032630961640574aa332a9`
-      )
-      .then((results) => {
-        console.log(results);
-        this.setState({
-          videos: results.data.results,
-        });
-      })
-      .catch();
-  };
+  addSimilarPage = () => {
+    this.setState({similar_page : this.state.similar_page + 1}, this.moreSimilar)
+  }
 
   render() {
     const {
@@ -151,7 +114,9 @@ class TVShowPage extends Component {
       firstAirDate,
       runtime,
       episodes,
-      networks
+      networks,
+      similar_page,
+      similar_total_pages
     } = this.state;
 
     let runtimejsx = runtime && runtime.join(', ') + 'min';
@@ -170,7 +135,7 @@ class TVShowPage extends Component {
     });
 
     let similarTvShowsjsx = similarTvShows.map((tvshow, index) => {
-      return <MovieCard tvshow={tvshow} key={index} id={tvshow.id} title={tvshow.name} overview={tvshow.overview} voteAverage={tvshow.vote_average} backdropPath={tvshow.backdrop_path} type="tvshows"/>;
+      return <MovieCard message={`Similar ${index + 1}`} tvshow={tvshow} key={index} id={tvshow.id} title={tvshow.name} overview={tvshow.overview} voteAverage={tvshow.vote_average} backdropPath={tvshow.backdrop_path} type="tvshows"/>;
     });
 
     let seasonsjsx =  seasons.map(season =>{
@@ -191,44 +156,24 @@ class TVShowPage extends Component {
       return <img alt={network.name + " logo"} src={`https://image.tmdb.org/t/p/w92/${network.logo_path}`} />;
     });
 
-    console.log(this.state);
     return (
       <>
           <Banner background={Background} title={tvshow.name} tagline={tvshow.tagline} search={false} companies={networks}/>
           <OverviewSection type="tv" title={tvshow.name} poster_path={tvshow.poster_path} vote_average={tvshow.vote_average} release_date={firstAirDate} homepage={homepage} genres={genres} id={tvshow.id} overview={tvshow.overview} ></OverviewSection>
+          <div className="parallax" style={{ backgroundImage: `url(${Background})` }}>
+            <ScrollDiv title="Cast" cards={actorsjsx} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
+          </div> 
+          <ScrollDiv title="Season" cards={seasonsjsx} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>  
+          <ScrollDiv title="Reviews" cards={reviewsjsx} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
           <div
-            className="scroll-container-div parallax"
-            style={{ backgroundImage: `url(${Background})` }}
-          >
-            <h2>Cast</h2>
-
-            <div className="scroll-div">{actorsjsx}</div>
-          </div>
-          <div className="scroll-container-div">
-            <h2>Seasons</h2>
-            <div className="scroll-div">{seasonsjsx}</div>
-          </div>
-          <div className="scroll-container-div">
-            <h2>Reviews</h2>
-            <div className="scroll-div">{reviewsjsx}</div>
-          </div>
-          <div
-            className="scroll-container-div parallax"
+            className="parallax"
            style={{ backgroundImage: `url(${Background})` }}
           >
-            <h2>Crew</h2>
-
-            <div className="scroll-div">{crewjsx}</div>
+            <ScrollDiv title="Crew" cards={crewjsx} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
           </div>
-          <div className="scroll-container-div">
-            <h2>TV Show Trailers</h2>
-            <div className="scroll-div">{videosjsx}</div>
-          </div>
-          <div className="scroll-container-div">
-            <h2>Similar TV Shows</h2>
-            <div className="scroll-div">{similarTvShowsjsx}</div>
-          </div>
-        
+          
+          <ScrollDiv title="TV Show Trailers" cards={videosjsx} handleScroll={this.handleScroll} page={0} total_pages={0} addPage={this.addSimilarPage}></ScrollDiv>
+          <ScrollDiv title="Similar TV Shows" cards={similarTvShowsjsx} handleScroll={this.handleScroll} page={similar_page} total_pages={similar_total_pages} addPage={this.addSimilarPage}></ScrollDiv>
       </>
     );
   }

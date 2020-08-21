@@ -93,8 +93,8 @@ export default class PopularActors extends Component {
 
     return (
       <div className="trending">
-        <h2>Popular Actors</h2>
-        <ScrollDiv cards={actors} handleScroll={this.handleScroll} page={page} total_pages={total_pages} addPage={this.addPage}></ScrollDiv>
+       
+        <ScrollDiv title="Popular Actors" cards={actors} handleScroll={this.handleScroll} page={page} total_pages={total_pages} addPage={this.addPage}></ScrollDiv>
       </div>
     );
   }

@@ -109,7 +109,6 @@ export default class TrendingMovies extends Component {
 
     return (
       <div className="trending">
-        <h2>Trending Movies ({this.state.header})</h2>
         <ButtonGroup size="small" aria-label="small outlined button group">
           <Button
             onClick={() => {
@@ -141,7 +140,7 @@ export default class TrendingMovies extends Component {
             In Theaters
           </Button>
         </ButtonGroup>
-        <ScrollDiv cards={movies} handleScroll={this.handleScroll} page={page} total_pages={total_pages} addPage={this.addPage}></ScrollDiv>
+        <ScrollDiv title={`Movies - Trending ${this.state.header}`} cards={movies} handleScroll={this.handleScroll} page={page} total_pages={total_pages} addPage={this.addPage}></ScrollDiv>
       </div>
     );
   }

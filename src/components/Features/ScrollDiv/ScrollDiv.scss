@@ -1,19 +1,21 @@
 @import '../../../App.scss';
 
 
-.scroll-container-div{
-    
-    .scroll-title{
+.scroll-container-div {
+
+    .scroll-title {
         font-size: 1.3rem;
         padding: 15px;
     }
+
     .scroll-div {
         padding: 15px;
-        min-width:100%;
+        min-width: 100%;
         overflow: auto;
-        display: flex;   
+        display: flex;
+    }
+
+    .scroll-div>* {
+        margin-right: 10px;
     }
 }
-
-
-  

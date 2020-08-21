@@ -6,6 +6,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import ProfileCard from "../../Cards/ProfileCard/ProfileCard";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import Banner from "../../Features/Banner/Banner";
+import ButtonToggle from "../../Features/ButtonToggle/ButtonToggle";
 import "./ActorsPage.scss";
 
 class ActorsPage extends Component {
@@ -105,6 +106,7 @@ class ActorsPage extends Component {
   };
 
   sortAction = (sort) => {
+    console.log(sort);
     this.setState(
       {
         sortBy: sort,
@@ -132,8 +134,15 @@ class ActorsPage extends Component {
   render() {
     const { actor, known_for, total_pages, page, actor_images } = this.state;
 
+    let buttons = [
+      { name: "Popular", function: () => this.sortAction("popularity.desc") },
+      {
+        name: "Filmography",
+        function: () => this.sortAction("release_date.desc"),
+      },
+    ];
+
     let actorImages = actor_images.map((element, index) => {
-      console.log(element);
       let actorImage = `https://image.tmdb.org/t/p/w185/${element.file_path}`;
 
       return (
@@ -156,65 +165,58 @@ class ActorsPage extends Component {
     });
     const Background = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
     return (
-      <div className="actor-page">
-        <div className="container">
-          <div className="top-of-page">
-            <Banner background={Background} title={actor.name} search={false} />
-          </div>
+      <>
+        {/* <ButtonGroup>
+          <Button
+            onClick={() => this.sortAction("popularity.desc")}
+            className={
+              this.state.header === "Popular"
+                ? "active trending-button"
+                : "trending-button"
+            }
+          >
+            Popular
+          </Button>
+          <Button
+            onClick={() => this.sortAction("release_date.desc")}
+            className={
+              this.state.header === "Filmography"
+                ? "active trending-button"
+                : "trending-button"
+            }
+          >
+            Filmography
+          </Button>
+        </ButtonGroup> */}
 
-          <div className="movie-options-container">
-            <ButtonGroup>
-              <Button
-                onClick={() => this.sortAction("popularity.desc")}
-                className={
-                  this.state.header === "Popular"
-                    ? "active trending-button"
-                    : "trending-button"
-                }
-              >
-                Popular
-              </Button>
-              <Button
-                onClick={() => this.sortAction("release_date.desc")}
-                className={
-                  this.state.header === "Filmography"
-                    ? "active trending-button"
-                    : "trending-button"
-                }
-              >
-                Filmography
-              </Button>
-            </ButtonGroup>
+        <ScrollDiv
+          buttons={buttons}
+          title=""
+          cards={DiscoverActor}
+          handleScroll={this.handleScroll}
+          page={page}
+          total_pages={total_pages}
+          addPage={this.addPage}
+        ></ScrollDiv>
 
-            <ScrollDiv
-              title=""
-              cards={DiscoverActor}
-              handleScroll={this.handleScroll}
-              page={page}
-              total_pages={total_pages}
-              addPage={this.addPage}
-            ></ScrollDiv>
+        <ScrollDiv
+          title=""
+          cards={actorImages}
+          handleScroll={this.handleScroll}
+          page={0}
+          total_pages={0}
+          addPage={this.addPage}
+        ></ScrollDiv>
 
-            <ScrollDiv
-              title=""
-              cards={actorImages}
-              handleScroll={this.handleScroll}
-              page={0}
-              total_pages={0}
-              addPage={this.addPage}
-            ></ScrollDiv>
-
-            {/* <div className="movie-options">{DiscoverActor} </div> */}
-            {/* <div className="pagination">
+        {/* <div className="movie-options">{DiscoverActor} </div> */}
+        {/* <div className="pagination">
             <Pagination
               page={page}
               count={total_pages}
               setPage={this.paginate}
             />
           </div> */}
-          </div>
-        </div>
-      </div>
+      </>
     );
   }
 }

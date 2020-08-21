@@ -1,63 +1,28 @@
 @import "../../../App.scss";
 
-.actor-page {
-  @include pageCenter(100%);
 
-  .container {
-    @include container();
-    display: flex;
-    flex-direction: column;
+.movie-options {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 50vh;
+  overflow: scroll;
+  justify-content: space-evenly;
+}
 
-    .top-of-page {
-      min-height: 500px;
-
-      .left-container {
-        min-width: 33%;
-
-        .actor-profile {
-          width: 100%;
-          height: 100%;
-          // img {
-          //   max-width: 100%;
-          // }
-        }
-      }
-
-      .right-container {
-        min-width: 66%;
-
-      }
-    }
-
-    .movie-options-container {
-      width: 100%;
-
-      .movie-options {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        max-height: 50vh;
-        overflow: scroll;
-        justify-content: space-evenly;
-      }
-
-      a {
-        color: $AccentColor;
-      }
+a {
+  color: $AccentColor;
+}
 
 
-      .active {
-        color: $AccentColor;
-        background-color: $primaryColor;
-        transition: .7s ease-in-out;
-      }
+.active {
+  color: $AccentColor;
+  background-color: $primaryColor;
+  transition: .7s ease-in-out;
+}
 
-      .trending-button {
-        color: $AccentColor;
-        border: none;
-        border-radius: 15px 15px 15px 15px !important;
-      }
-
-    }
-  }
+.trending-button {
+  color: $AccentColor;
+  border: none;
+  border-radius: 15px 15px 15px 15px !important;
 }

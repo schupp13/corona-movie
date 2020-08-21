@@ -56,16 +56,23 @@ export default class HomePage extends Component {
 
     return (
       <>
-          <Banner background={`https://image.tmdb.org/t/p/original/${this.state.poster}`} title="Welcome to Keep It Reel" tagline={"... now keep it real."} search={true}> </Banner>
-          <div className="search-results">
-            <TrendingMovies />
-          </div>
-          <div className="search-results">
-            <TopRatedTVShow />
-          </div>
-          <div className="search-results">
-            <PopularActors />
-          </div>
+        <Banner
+          background={`https://image.tmdb.org/t/p/original/${this.state.poster}`}
+          title="Welcome to Keep It Reel"
+          tagline={"... now keep it real."}
+          search={true}
+        >
+          {" "}
+        </Banner>
+        <div className="search-results">
+          <TrendingMovies />
+        </div>
+        <div className="search-results">
+          <TopRatedTVShow />
+        </div>
+        <div className="search-results">
+          <PopularActors />
+        </div>
       </>
     );
   }

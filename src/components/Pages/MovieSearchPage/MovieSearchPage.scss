@@ -1,0 +1,16 @@
+.movie-page {
+  width: 100%;
+  display: flex;
+  .search-options {
+    width: 30%;
+  }
+
+  .movie-results {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .movie-results > div {
+    margin: 15px;
+  }
+}

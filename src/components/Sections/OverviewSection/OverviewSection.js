@@ -21,6 +21,7 @@ export default function OverviewSection(props) {
     id,
     type,
   } = props;
+
   let homepageOption =
     homepage !== undefined && homepage.includes("netflix.com") ? (
       <img src={netflixpic} alt="netflix logo"></img>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import axios from "axios";
 import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import Button from "@material-ui/core/Button";
@@ -134,6 +134,7 @@ class ActorsPage extends Component {
     this.setState({ page: this.state.page + 1 }, this.discoverActorByIDAddMore);
   };
 
+
   render() {
     const { actor, known_for, total_pages, page, actor_images } = this.state;
 
@@ -167,35 +168,22 @@ class ActorsPage extends Component {
       );
     });
     const ProfilePic = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
+
+
+
     return (
       <>
+
+
       <ActorProfile 
       profilePic={ProfilePic}
       name={actor.name}
       bio={actor.biography}
+      place_of_birth={actor.place_of_birth}
+      birthday={actor.birthday}
+      deathday={actor.deathday}
       />
-        {/* <ButtonGroup>
-          <Button
-            onClick={() => this.sortAction("popularity.desc")}
-            className={
-              this.state.header === "Popular"
-                ? "active trending-button"
-                : "trending-button"
-            }
-          >
-            Popular
-          </Button>
-          <Button
-            onClick={() => this.sortAction("release_date.desc")}
-            className={
-              this.state.header === "Filmography"
-                ? "active trending-button"
-                : "trending-button"
-            }
-          >
-            Filmography
-          </Button>
-        </ButtonGroup> */}
+        
 
         <ScrollDiv
           buttons={buttons}
@@ -216,14 +204,6 @@ class ActorsPage extends Component {
           addPage={this.addPage}
         ></ScrollDiv>
 
-        {/* <div className="movie-options">{DiscoverActor} </div> */}
-        {/* <div className="pagination">
-            <Pagination
-              page={page}
-              count={total_pages}
-              setPage={this.paginate}
-            />
-          </div> */}
       </>
     );
   }

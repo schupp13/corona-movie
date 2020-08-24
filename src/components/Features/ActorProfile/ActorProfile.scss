@@ -1,0 +1,54 @@
+ @import '../../../App.scss';
+
+ .actor-container {
+  border: 8px solid black;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+
+  .actor-profile {
+   border: 4px solid red;
+   height: 100%;
+   width: 100%;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: contain;
+
+  }
+
+  .actor-name {
+   text-align: center;
+  }
+
+  .actor-bio {
+
+  }
+ }
+ 
+ 
+ // .actor-container {
+ //  height: 100vh;
+ //  display: flex;
+ //  flex-direction: row;
+
+ // .actor-profile {
+ //   height: 100vh;
+ //   // background-size: cover;
+ //   background-repeat: no-repeat;
+ // }
+
+ // .actor-text {
+
+ // .actor-name {
+ //   padding: 1rem;
+ //   color: $textColorWhite;
+ // }
+
+ // .actor-bio {
+ //   padding: 1rem;
+ //   color: $textColorWhite;
+ // }
+ // }
+ // }
+

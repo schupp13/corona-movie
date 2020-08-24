@@ -7,7 +7,9 @@ import ProfileCard from "../../Cards/ProfileCard/ProfileCard";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import Banner from "../../Features/Banner/Banner";
 import ButtonToggle from "../../Features/ButtonToggle/ButtonToggle";
+import ActorProfile from "../../Features/ActorProfile/ActorProfile";
 import "./ActorsPage.scss";
+
 
 class ActorsPage extends Component {
   constructor(props) {
@@ -40,6 +42,7 @@ class ActorsPage extends Component {
         `https://api.themoviedb.org/3/person/${actorsID}?api_key=12aa3499b6032630961640574aa332a9`
       )
       .then((results) => {
+        console.log(results.data);
         this.setState({
           actor: results.data,
         });
@@ -163,9 +166,14 @@ class ActorsPage extends Component {
         />
       );
     });
-    const Background = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
+    const ProfilePic = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
     return (
       <>
+      <ActorProfile 
+      profilePic={ProfilePic}
+      name={actor.name}
+      bio={actor.biography}
+      />
         {/* <ButtonGroup>
           <Button
             onClick={() => this.sortAction("popularity.desc")}

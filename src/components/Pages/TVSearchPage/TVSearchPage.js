@@ -89,4 +89,12 @@ export default function TVSearchPage() {
       <Pagination page={page} count={totalPages} setPage={paginate} />
     </div>
   );
+=======
+
+import Pagination from "../../Features/Pagination/Pagination";
+import "./TVSearchPage.scss";
+
+export default function TVSearchPage() {
+ 
+>>>>>>> Stashed changes
 }

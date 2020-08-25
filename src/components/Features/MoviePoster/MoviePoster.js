@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import "./MoviePoster.scss";
 
 export default function MoviePoster(props) {
+  const handleError = (e) => {
+    console.log(e);
+    e.target.src =
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
+  };
   return (
     <div className="movie-poster-container">
       <div className="movie-poster-image">
@@ -11,6 +16,8 @@ export default function MoviePoster(props) {
           <img
             alt={props.title}
             src={`https://image.tmdb.org/t/p/w185/${props.poster}`}
+            onError={handleError}
+            width="100%"
           />
         </Link>
         <div className="average-rating">

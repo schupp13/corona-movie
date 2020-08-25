@@ -10,7 +10,6 @@ import ButtonToggle from "../../Features/ButtonToggle/ButtonToggle";
 import ActorProfile from "../../Features/ActorProfile/ActorProfile";
 import "./ActorsPage.scss";
 
-
 class ActorsPage extends Component {
   constructor(props) {
     super(props);
@@ -134,7 +133,6 @@ class ActorsPage extends Component {
     this.setState({ page: this.state.page + 1 }, this.discoverActorByIDAddMore);
   };
 
-
   render() {
     const { actor, known_for, total_pages, page, actor_images } = this.state;
 
@@ -142,7 +140,7 @@ class ActorsPage extends Component {
       { name: "Popular", function: () => this.sortAction("popularity.desc") },
       {
         name: "Filmography",
-        function: () => this.sortAction("release_date.desc"),
+        function: () => this.sortAction("primary_release_date.desc"),
       },
     ];
 
@@ -169,21 +167,16 @@ class ActorsPage extends Component {
     });
     const ProfilePic = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
 
-
-
     return (
       <>
-
-
-      <ActorProfile 
-      profilePic={ProfilePic}
-      name={actor.name}
-      bio={actor.biography}
-      place_of_birth={actor.place_of_birth}
-      birthday={actor.birthday}
-      deathday={actor.deathday}
-      />
-        
+        <ActorProfile
+          profilePic={ProfilePic}
+          name={actor.name}
+          bio={actor.biography}
+          place_of_birth={actor.place_of_birth}
+          birthday={actor.birthday}
+          deathday={actor.deathday}
+        />
 
         <ScrollDiv
           buttons={buttons}
@@ -203,7 +196,6 @@ class ActorsPage extends Component {
           total_pages={0}
           addPage={this.addPage}
         ></ScrollDiv>
-
       </>
     );
   }

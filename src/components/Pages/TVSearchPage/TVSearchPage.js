@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import Pagination from "../../Features/Pagination/Pagination";
+import SelectMultipleGenre from "../../Features/SelectMultipleGenre/SelectMultipleGenre";
 import "./TVSearchPage.scss";
-// import SelectTVMultipleGenre from "../../Features/SelectTVMultipleGenre/SelectTVMultipleGenre";
 
 export default function TVSearchPage() {
   let [results, setResults] = useState([]);
@@ -17,7 +17,7 @@ export default function TVSearchPage() {
   let [sortby, setSortby] = useState("popularity.desc");
 
   useEffect(() => {
-   getPopular();
+    getPopular();
   }, [sortby, selectedGenres, selectedCertifications, keywords, page]);
 
   const getPopular = () => {
@@ -79,11 +79,12 @@ export default function TVSearchPage() {
   return (
     <div className="movie-page">
       <div className="search-options">
-        {/* <SelectTVMultipleGenre
+        <SelectMultipleGenre
           selectedOptions={selectedGenres}
           handleChange={handleGenreChange}
           title="Genre"
-        ></SelectTVMultipleGenre> */}
+          type="tv"
+        ></SelectMultipleGenre>
       </div>
       <div className="movie-results">{tvResults}</div>
       <Pagination page={page} count={totalPages} setPage={paginate} />

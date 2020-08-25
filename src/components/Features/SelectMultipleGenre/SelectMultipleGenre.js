@@ -34,7 +34,7 @@ export default function SelectMultipleGenre(props) {
   const getGenres = () => {
     axios
       .get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=12aa3499b6032630961640574aa332a9&language=en-US`
+        `https://api.themoviedb.org/3/genre/${props.type}/list?api_key=12aa3499b6032630961640574aa332a9&language=en-US`
       )
       .then((results) => {
         setGenres(results.data.genres);

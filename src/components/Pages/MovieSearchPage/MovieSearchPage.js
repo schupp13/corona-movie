@@ -102,6 +102,7 @@ export default function MovieSearchPage() {
           selectedOptions={selectedGenres}
           handleChange={handleGenreChange}
           title="Genre"
+          type="movie"
         ></SelectMultipleGenre>
         <SelectMultipleCertifications
           selectedOptions={selectedCertifications}

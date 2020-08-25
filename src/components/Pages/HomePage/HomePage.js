@@ -52,12 +52,14 @@ export default class HomePage extends Component {
   };
 
   render() {
-    let Background = `https://image.tmdb.org/t/p/original/${this.state.poster}`;
+    let Background =
+      this.state.poster &&
+      `https://image.tmdb.org/t/p/original/${this.state.poster}`;
 
     return (
       <>
         <Banner
-          background={`https://image.tmdb.org/t/p/original/${this.state.poster}`}
+          background={Background}
           title="Welcome to Keep It Reel"
           tagline={"... now keep it real."}
           search={true}

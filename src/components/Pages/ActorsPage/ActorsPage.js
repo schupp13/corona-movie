@@ -154,13 +154,16 @@ class ActorsPage extends Component {
       );
     });
 
-    let DiscoverActor = known_for.map((element) => {
+    let DiscoverActor = known_for.map((element, index) => {
+      console.log(element);
       return (
         <MoviePoster
+          key={index}
           title={element.title}
           poster={element.poster_path}
           rating={element.vote_average}
           releaseDate={element.release_date}
+          type={"movies"}
           id={element.id}
         />
       );

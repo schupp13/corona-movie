@@ -80,6 +80,7 @@ export default function MovieSearchPage() {
   const paginate = (e, value) => {
     setPage(value);
   };
+
   let movieResults = results.map((element, index) => {
     return (
       <MoviePoster
@@ -114,7 +115,11 @@ export default function MovieSearchPage() {
         ></SelectMultipleSortBy>
       </div>
       <div className="movie-results">{movieResults}</div>
-      <Pagination page={page} count={totalPages} setPage={paginate} />
+      <Pagination
+        page={parseInt(page)}
+        count={parseInt(totalPages)}
+        setPage={paginate}
+      />
     </div>
   );
 }

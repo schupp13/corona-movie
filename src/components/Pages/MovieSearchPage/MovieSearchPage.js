@@ -89,6 +89,7 @@ export default function MovieSearchPage() {
         poster={element.poster_path}
         rating={element.vote_average}
         releaseDate={element.release_date}
+        type={"movies"}
         id={element.id}
       />
     );

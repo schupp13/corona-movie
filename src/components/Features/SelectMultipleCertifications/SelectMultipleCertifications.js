@@ -55,8 +55,7 @@ export default function SelectMultipleCertifications(props) {
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
-      minWidth: "90%",
-      maxWidth: "90%",
+      width: 250,
     },
     chips: {
       display: "flex",

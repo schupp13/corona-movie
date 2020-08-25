@@ -7,9 +7,24 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Chip from "@material-ui/core/Chip";
-import "./SelectMultipleGenre.scss";
 
-export default function SelectMultipleGenre(props) {
+export default function SelectMultipleSortBy(props) {
+  const options = [
+    { name: "Popularity Asc", type: "popularity.acs" },
+    { name: "Popularity Desc", type: "popularity.desc" },
+    { name: "Release Date Asc", type: "release_date.acs" },
+    { name: "Release Date Desc", type: "release_date.desc" },
+    { name: "Revenue Asc", type: "revenue.asc" },
+    { name: "Revenue Desc", type: "revenue.desc" },
+    { name: "Primary Release Date Asc", type: "primary_release_date.acs" },
+    { name: "Primary Release Date Desc", type: "primary_release_date.desc" },
+    { name: "Original Title Asc", type: "original_title.acs" },
+    { name: "Original Title Desc", type: "original_title.desc" },
+    { name: "Vote Avg Asc", type: "vote_average.acs" },
+    { name: "Vote Avg Desc", type: "vote_average.desc" },
+    { name: "Vote Count Asc", type: "vote_count.acs" },
+    { name: "Vote Count Desc", type: "vote_count.desc" },
+  ];
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -26,23 +41,6 @@ export default function SelectMultipleGenre(props) {
       marginTop: theme.spacing(3),
     },
   }));
-  const [genres, setGenres] = useState([]);
-  useEffect(() => {
-    getGenres();
-  }, []);
-
-  const getGenres = () => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=12aa3499b6032630961640574aa332a9&language=en-US`
-      )
-      .then((results) => {
-        setGenres(results.data.genres);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -71,41 +69,22 @@ export default function SelectMultipleGenre(props) {
 
   return (
     <>
-      <FormControl className={classes.formControl}>
-        <InputLabel>{props.title}</InputLabel>
+      <FormControl className={classes.margin}>
+        <InputLabel id="demo-customized-select-label">Sort By</InputLabel>
         <Select
-          labelId="demo-mutiple-chip-label"
-          id="demo-mutiple-chip"
-          multiple
+          labelId="demo-customized-select-label"
+          id="demo-customized-select"
           value={props.selectedOptions}
           onChange={handleChange}
           input={<Input id="select-multiple-chip" />}
-          renderValue={(selectedOptions) => (
-            <div className={classes.chips}>
-              {selectedOptions.map((value) =>
-                genres.map((value2) => {
-                  return (
-                    value === value2.id && (
-                      <Chip
-                        key={value}
-                        label={value2.name}
-                        className={classes.chip}
-                      />
-                    )
-                  );
-                })
-              )}
-            </div>
-          )}
-          MenuProps={MenuProps}
         >
-          {genres.map((genre) => (
+          {options.map((option) => (
             <MenuItem
-              key={genre.name}
-              value={genre.id}
-              style={getStyles(genre, props.selectedOptions, theme)}
+              key={option.name}
+              value={option.type}
+              style={getStyles(option, props.selectedOptions, theme)}
             >
-              {genre.name}
+              {option.name}
             </MenuItem>
           ))}
         </Select>

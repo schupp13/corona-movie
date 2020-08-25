@@ -8,7 +8,7 @@ import axios from "axios";
 export default function SearchKeywords(props) {
   const useStyles = makeStyles((theme) => ({
     root: {
-      width: "90%",
+      width: 250,
       "& > * + *": {
         marginTop: theme.spacing(3),
       },

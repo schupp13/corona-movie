@@ -6,6 +6,7 @@ import SelectMultipleGenre from "../../Features/SelectMultipleGenre/SelectMultip
 import SelectMultipleCertifications from "../../Features/SelectMultipleCertifications/SelectMultipleCertifications";
 import Pagination from "../../Features/Pagination/Pagination";
 import "./MovieSearchPage.scss";
+import SelectMultipleSortBy from "../../Features/SelectMultipleSortBy/SelectMultipleSortBy";
 
 export default function MovieSearchPage() {
   let [results, setResults] = useState([]);
@@ -14,12 +15,12 @@ export default function MovieSearchPage() {
   let [page, setPage] = useState([]);
   let [totalPages, setTotalPages] = useState([]);
   let [keywords, setKeywords] = useState([]);
-
   let [selectedCertifications, setSelectedCertifications] = useState([]);
+  let [sortby, setSortby] = useState("popularity.desc");
 
   useEffect(() => {
     getPopular();
-  }, [selectedGenres, selectedCertifications, keywords, page]);
+  }, [sortby, selectedGenres, selectedCertifications, keywords, page]);
 
   const getPopular = () => {
     let genresReady = selectedGenres ? selectedGenres.join("|") : "";
@@ -36,10 +37,10 @@ export default function MovieSearchPage() {
           language: "en",
           certification_country: "US",
           certification: certsReady,
-          sort_by: "popularity.desc",
-          page: 1,
+          page: page,
           with_genres: genresReady,
           with_keywords: keywordsReady,
+          sort_by: sortby,
         },
       })
       .then((results) => {
@@ -47,7 +48,6 @@ export default function MovieSearchPage() {
         setResults(results.data.results);
         setPage(results.data.page);
         setTotalPages(results.data.total_pages);
-        console.log(page + totalPages);
       })
       .catch((error) => {
         console.log(error);
@@ -57,23 +57,28 @@ export default function MovieSearchPage() {
   const handleGenreChange = (value) => {
     console.log(value);
     setSelectedGenres(value);
-    console.log(selectedGenres);
+    setPage(1);
+  };
+
+  const handleSortby = (value) => {
+    console.log(value);
+    setSortby(value);
+    setPage(1);
   };
   const handleCertificationChange = (value) => {
-    console.log(value);
+    setPage(1);
     setSelectedCertifications(value);
   };
   const handleKeywords = (event, values) => {
-    console.log(values);
-    console.log(keywords);
     let keywordsReady = values.map((element) => {
       return element.id;
     });
     setKeywords(keywordsReady);
+    setPage(1);
   };
 
-  const paginate = () => {
-    setPage(page + 1);
+  const paginate = (e, value) => {
+    setPage(value);
   };
   let movieResults = results.map((element, index) => {
     return (
@@ -99,19 +104,17 @@ export default function MovieSearchPage() {
         <SelectMultipleCertifications
           selectedOptions={selectedCertifications}
           handleChange={handleCertificationChange}
-          title="Certification"
+          title="Certifications"
         ></SelectMultipleCertifications>
         <SearchKeywords handleClick={handleKeywords}></SearchKeywords>
+        <SelectMultipleSortBy
+          selectedOptions={sortby}
+          handleChange={handleSortby}
+          title="Sort By"
+        ></SelectMultipleSortBy>
       </div>
-      <div className="movie-results">
-        {movieResults}
-
-        <Pagination
-          page={page}
-          count={totalPages}
-          setPage={() => setPage(page + 1)}
-        />
-      </div>
+      <div className="movie-results">{movieResults}</div>
+      <Pagination page={page} count={totalPages} setPage={paginate} />
     </div>
   );
 }

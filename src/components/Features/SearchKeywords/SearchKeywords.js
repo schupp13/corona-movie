@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Chip from "@material-ui/core/Chip";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,8 +17,15 @@ export default function SearchKeywords(props) {
 
   const [keywords, setKeywords] = useState([]);
   const [search, setSearch] = useState("");
+  const mounted = useRef(false);
+
   useEffect(() => {
-    getSearch();
+    if (search) {
+      console.log(mounted);
+      mounted.current = true;
+      getSearch();
+    } else {
+    }
   }, [search]);
   const getSearch = () => {
     axios

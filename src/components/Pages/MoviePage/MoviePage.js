@@ -127,6 +127,11 @@ export default class MoviePage extends Component {
       this.moreReviews
     );
   };
+  handleError = (e) => {
+    console.log(e);
+    e.target.src =
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
+  };
 
   render() {
     let {
@@ -146,12 +151,15 @@ export default class MoviePage extends Component {
       crew,
     } = this.state;
 
-    let Background = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
+    let Background =
+      movie.backdrop_path &&
+      `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
 
     let moviePosters = movie_posters.map((element, index) => {
       return (
         <div className="movie-posters" key={index}>
           <img
+            onError={this.handleError}
             alt={element.name}
             src={`https://image.tmdb.org/t/p/w154/${element.file_path}`}
           ></img>
@@ -163,6 +171,7 @@ export default class MoviePage extends Component {
       return (
         <div className="movie-backdrops" key={index}>
           <img
+            onError={this.handleError}
             alt={element.name}
             src={`https://image.tmdb.org/t/p/w300/${element.file_path}`}
           ></img>
@@ -201,12 +210,6 @@ export default class MoviePage extends Component {
     let videosJSX = videos.map((movie, index) => {
       console.log(movie);
       return <MovieVideo movie={movie} key={index} />;
-    });
-
-    let trailers = videos.filter((video, index) => {
-      if (video.type === "Trailer") {
-        return video;
-      }
     });
 
     return (

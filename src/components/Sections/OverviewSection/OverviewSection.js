@@ -23,21 +23,24 @@ export default function OverviewSection(props) {
   } = props;
 
   let homepageOption =
-    homepage !== undefined && homepage.includes("netflix.com") ? (
+    homepage == null || undefined || "" ? (
+      ""
+    ) : homepage.includes("netflix") ? (
       <img src={netflixpic} alt="netflix logo"></img>
-    ) : homepage !== undefined && homepage.includes("apple.com") ? (
+    ) : homepage.includes("apple.com") ? (
       <AppleIcon />
     ) : (
       <HomeIcon />
     );
+
   let chips = genres.map((genre, index) => {
     return <Chip label={genre.name} key={index} />;
   });
 
   let companiesjsx = companies
-    ? companies.map((company) => {
+    ? companies.map((company, index) => {
         return (
-          <div className="company">
+          <div className="company" key={index}>
             {company.logo_path ? (
               <img
                 src={`https://image.tmdb.org/t/p/w45/${company.logo_path}`}
@@ -59,6 +62,7 @@ export default function OverviewSection(props) {
           poster={poster_path}
           rating={vote_average}
           releaseDate={release_date}
+          type={type + "s"}
           id={id}
         />
       </div>

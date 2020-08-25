@@ -38,8 +38,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ActorCard(props) {
   const classes = useStyles();
-  let profile = `https://image.tmdb.org/t/p/original/${props.actor.profile_path}`;
-  let link = `/actors/${props.actor.id}`;
+  let profile =
+    props.actor.profile_path &&
+    `https://image.tmdb.org/t/p/w185/${props.actor.profile_path}`;
+  let link = props.actor.id && `/actors/${props.actor.id}`;
 
   let description = props.actor.job ? (
     props.actor.job

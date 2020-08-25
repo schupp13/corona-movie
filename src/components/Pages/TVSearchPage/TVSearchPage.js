@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+<<<<<<< Updated upstream
 import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import Pagination from "../../Features/Pagination/Pagination";
 import "./TVSearchPage.scss";

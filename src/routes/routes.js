@@ -8,6 +8,7 @@ import SearchPage from "../components/Pages/SearchPage/SearchPage";
 import ActorPage from "../components/Pages/ActorsPage/ActorsPage";
 import SeasonPage from "../components/Pages/SeasonPage/SeasonPage";
 import MovieSearchPage from "../components/Pages/MovieSearchPage/MovieSearchPage";
+import TVSearchPage from "../components/Pages/TVSearchPage/TVSearchPage";
 import Navbar from "../components/Sections/NavBar/NavBar";
 import Footer from "../components/Sections/Footer/Footer";
 
@@ -27,6 +28,7 @@ const DefaultContainer = () => (
       <Route path="/search/:search" component={SearchPage}></Route>
       <Route path="/actors/:id" component={ActorPage}></Route>
       <Route path="/moviesearch" component={MovieSearchPage}></Route>
+      <Route path="/tvsearch" component={TVSearchPage}></Route>
     </div>
     <Footer />
   </>

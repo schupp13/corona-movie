@@ -5,6 +5,7 @@ import Pagination from "../../Features/Pagination/Pagination";
 import SelectMultipleGenre from "../../Features/SelectMultipleGenre/SelectMultipleGenre";
 import "./TVSearchPage.scss";
 
+
 export default function TVSearchPage() {
   let [results, setResults] = useState([]);
   let [genres, setGenres] = useState([]);
@@ -85,9 +86,10 @@ export default function TVSearchPage() {
           title="Genre"
           type="tv"
         ></SelectMultipleGenre>
+
       </div>
       <div className="movie-results">{tvResults}</div>
       <Pagination page={page} count={totalPages} setPage={paginate} />
     </div>
-  )
+  );
 }

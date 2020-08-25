@@ -3,7 +3,7 @@ import axios from "axios";
 import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import Pagination from "../../Features/Pagination/Pagination";
 import "./TVSearchPage.scss";
-// import SelectTVMultipleGenre from "../../Features/SelectTVMultipleGenre/SelectTVMultipleGenre";
+import SelectTVMultipleGenre from "../../Features/SelectTVMultipleGenre/SelectTVMultipleGenre";
 
 export default function TVSearchPage() {
   let [results, setResults] = useState([]);
@@ -17,7 +17,7 @@ export default function TVSearchPage() {
   let [sortby, setSortby] = useState("popularity.desc");
 
   useEffect(() => {
-   getPopular();
+    getPopular();
   }, [sortby, selectedGenres, selectedCertifications, keywords, page]);
 
   const getPopular = () => {
@@ -79,14 +79,14 @@ export default function TVSearchPage() {
   return (
     <div className="movie-page">
       <div className="search-options">
-        {/* <SelectTVMultipleGenre
+        <SelectTVMultipleGenre
           selectedOptions={selectedGenres}
           handleChange={handleGenreChange}
           title="Genre"
-        ></SelectTVMultipleGenre> */}
+        ></SelectTVMultipleGenre>
       </div>
       <div className="movie-results">{tvResults}</div>
       <Pagination page={page} count={totalPages} setPage={paginate} />
     </div>
-  )
+  );
 }

@@ -30,7 +30,7 @@ export default function SearchKeywords(props) {
   const getSearch = () => {
     axios
       .get(
-        `https://api.themoviedb.org/3/search/keyword?api_key=12aa3499b6032630961640574aa332a9&query=batman&page=1`,
+        `https://api.themoviedb.org/3/search/keyword?api_key=12aa3499b6032630961640574aa332a9&page=1`,
         {
           params: {
             api_key: "12aa3499b6032630961640574aa332a9",

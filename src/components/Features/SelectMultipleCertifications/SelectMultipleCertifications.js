@@ -18,7 +18,7 @@ export default function SelectMultipleCertifications(props) {
   const getCertifications = () => {
     axios
       .get(
-        `https://api.themoviedb.org/3/certification/movie/list?api_key=12aa3499b6032630961640574aa332a9
+        `https://api.themoviedb.org/3/certification/${props.type}/list?api_key=12aa3499b6032630961640574aa332a9
           `
       )
       .then((results) => {

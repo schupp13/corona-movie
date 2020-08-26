@@ -9,7 +9,8 @@ import Select from "@material-ui/core/Select";
 import Chip from "@material-ui/core/Chip";
 
 export default function SelectMultipleSortBy(props) {
-  const options = [
+  //create ternary to determine movie or tv
+  const movieOptions = [
     { name: "Popularity Asc", type: "popularity.acs" },
     { name: "Popularity Desc", type: "popularity.desc" },
     { name: "Release Date Asc", type: "release_date.acs" },
@@ -25,6 +26,18 @@ export default function SelectMultipleSortBy(props) {
     { name: "Vote Count Asc", type: "vote_count.acs" },
     { name: "Vote Count Desc", type: "vote_count.desc" },
   ];
+
+  const tvOptions = [
+    { name: "Popularity Asc", type: "popularity.acs" },
+    { name: "Popularity Desc", type: "popularity.desc" },
+    { name: "Vote Avg Asc", type: "vote_average.acs" },
+    { name: "Vote Avg Desc", type: "vote_average.desc" },
+    { name: "First Air Date Desc", type: "first_air_date.desc" },
+    { name: "First Air Date Asc", type: "first_air_date.asc" }
+  ];
+
+  const options = props.type === "tv" ? tvOptions : movieOptions;
+
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),

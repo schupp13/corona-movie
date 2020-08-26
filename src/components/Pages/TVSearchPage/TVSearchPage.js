@@ -8,7 +8,6 @@ import "./TVSearchPage.scss";
 // import SelectMultipleCertifications from "../../Features/SelectMultipleCertifications/SelectMultipleCertifications";
 import SelectMultipleSortBy from "../../Features/SelectMultipleSortBy/SelectMultipleSortBy";
 
-
 export default function TVSearchPage() {
   let [results, setResults] = useState([]);
   let [genres, setGenres] = useState([]);
@@ -123,12 +122,13 @@ export default function TVSearchPage() {
       </div>
       <div className="movie-results">{tvResults}</div>
       <Pagination
-        // page={page} 
-        // count={totalPages} 
-        // setPage={paginate} 
+        // page={page}
+        // count={totalPages}
+        // setPage={paginate}
         page={parseInt(page)}
         count={parseInt(totalPages)}
-        setPage={paginate} />
+        setPage={paginate}
+      />
     </div>
-  )
+  );
 }

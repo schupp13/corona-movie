@@ -1,21 +1,32 @@
-@import '../../../App.scss';
-
-
+@import "../../../App.scss";
 .scroll-container-div {
+  padding: 10px;
 
-    .scroll-title {
-        font-size: 1.3rem;
-        padding: 15px;
-    }
+  .buttons {
+    margin: 15px;
+  }
+}
 
-    .scroll-div {
-        padding: 15px;
-        min-width: 100%;
-        overflow: auto;
-        display: flex;
-    }
+.scroll-menu-arrow {
+  padding: 20px;
+  cursor: pointer;
+}
 
-    .scroll-div>* {
-        margin-right: 10px;
-    }
+.menu-item {
+  padding: 0 40px;
+  margin: 5px 10px;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+  background-color: red;
+}
+
+.scroll-menu-arrow {
+  padding: 20px;
+  cursor: pointer;
+}
+
+.arrow-next,
+.arrow-prev {
+  color: rgb(224, 224, 224) !important;
 }

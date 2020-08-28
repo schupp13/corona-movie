@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import LiveTvIcon from "@material-ui/icons/LiveTv";
 import MultiSearch from "../../Forms/MultiSearch/MultiSearch";
+import { Redirect } from "react-router-dom";
 
 import "./NavBar.scss";
+import axios from "axios";
 
 class Navbar extends Component {
   constructor(props) {
@@ -12,8 +14,31 @@ class Navbar extends Component {
       active: "",
       liTransform: "",
       burger: "",
+      loggedIn: false,
     };
   }
+  componentDidMount() {
+    this.getSession();
+  }
+
+  logout = () => {
+    axios
+      .get("api/logout")
+      .then((result) => {
+        console.log(result);
+        this.setState({ loggedIn: false });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  getSession = () => {
+    axios
+      .get("api/session")
+      .then((data) => this.setState({ loggedIn: true }))
+      .catch((error) => this.logout());
+  };
 
   navSlide = () => {
     this.setState({
@@ -21,11 +46,13 @@ class Navbar extends Component {
       burger: this.state.burger === "" ? "burger-close" : "",
     });
   };
+
   render() {
+    // if(this.state.loggedIn && <Redirect to={"/"} />;
     return (
       <nav className="nav-bar">
         <div className="logo-div">
-          <Link to="/">
+          <Link to="/welcome">
             <h3>KeepItReel</h3>
             <LiveTvIcon className="tv-icon" />
           </Link>
@@ -46,6 +73,16 @@ class Navbar extends Component {
               Actors
             </Link>
           </li>
+          {/* <li>
+            <Link to="/api/logout" onClick={this.navSlide}>
+              MyAccount
+            </Link>
+          </li>
+          <li>
+            <Link to="/api/logout" onClick={this.logout}>
+              Logout
+            </Link>
+          </li> */}
         </ul>
 
         <div className={`${this.state.burger} burger`} onClick={this.navSlide}>

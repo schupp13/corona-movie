@@ -28,7 +28,6 @@ export default class Landing extends Component {
         "https://api.themoviedb.org/3/trending/movie/week?api_key=12aa3499b6032630961640574aa332a9"
       )
       .then((result) => {
-       
         this.setState({
           movies: result.data.results.slice(0, 10),
         });
@@ -44,10 +43,9 @@ export default class Landing extends Component {
         "https://api.themoviedb.org/3/configuration?api_key=12aa3499b6032630961640574aa332a9"
       )
       .then((res) => {
-          this.setState({
-              config: res.data.images
-          });
-    
+        this.setState({
+          config: res.data.images,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -62,10 +60,11 @@ export default class Landing extends Component {
   }
 
   render() {
-    let moviesMapped = this.state.movies.map((movie) => {
+    let moviesMapped = this.state.movies.map((movie, index) => {
       let Background = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
       return (
         <div
+          key={index}
           className="movie-div"
           style={{ backgroundImage: `url(${Background})` }}
         ></div>
@@ -75,24 +74,19 @@ export default class Landing extends Component {
       <div className="landing-page-container">
         <div className="overlay"></div>
 
-        <div className="landing-page page">
-
-          
-          {moviesMapped}
-        
-        </div>
+        <div className="landing-page page">{moviesMapped}</div>
         <div className="login-div">
           <ReactCardFlip
             isFlipped={this.state.isFlipped}
             flipDirection="horizontal"
             infinite="true"
           >
-              {/* front of card */}
+            {/* front of card */}
             <LoginForm onClick={this.handleClick}></LoginForm>
             {/* back of card */}
             <RegisterForm onClick={this.handleClick}></RegisterForm>
           </ReactCardFlip>
-          </div>
+        </div>
       </div>
     );
   }

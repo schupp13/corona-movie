@@ -13,24 +13,26 @@ export default function MoviePoster(props) {
   const imageSource =
     props.poster && `https://image.tmdb.org/t/p/w185/${props.poster}`;
   return (
-    <div className="movie-poster-container">
-      <div className="movie-poster-image">
-        <Link to={`/${props.type}/${props.id}`}>
-          <img
-            alt={props.title}
-            src={imageSource}
-            onError={handleError}
-            width="100%"
-          />
-        </Link>
-        <div className="average-rating">
-          <AverageRating rating={props.rating * 10} />
+    <div style={{ padding: 10 }}>
+      <div className="movie-poster-container">
+        <div className="movie-poster-image">
+          <Link to={`/${props.type}/${props.id}`}>
+            <img
+              alt={props.title}
+              src={imageSource}
+              onError={handleError}
+              width="100%"
+            />
+          </Link>
+          <div className="average-rating">
+            <AverageRating rating={props.rating * 10} />
+          </div>
         </div>
+        <p className="title">{props.title}</p>
+        <p className="date">
+          {props.releaseDate ? props.releaseDate.substring(0, 4) : ""}
+        </p>
       </div>
-      <p className="title">{props.title}</p>
-      <p className="date">
-        {props.releaseDate ? props.releaseDate.substring(0, 4) : ""}
-      </p>
     </div>
   );
 }

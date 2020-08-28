@@ -43,42 +43,44 @@ export default function MovieCard(props) {
       : "tv";
 
   return (
-    <Card className="movie-card">
-      <CardActionArea
-        onClick={() => {
-          setShowMore(!showMore);
-        }}
-      >
-        <CardMedia
-          component="img"
-          className="movie-card-media"
-          image={pic}
-          onError={handleError}
-        />
+    <div style={{ padding: 10 }}>
+      <Card className="movie-card">
+        <CardActionArea
+          onClick={() => {
+            setShowMore(!showMore);
+          }}
+        >
+          <CardMedia
+            component="img"
+            className="movie-card-media"
+            image={pic}
+            onError={handleError}
+          />
 
-        <CardContent>
-          <div className="title-div">
-            <Typography variant="h5" component="h2">
-              {showMore ? props.title : shortTitle}
-            </Typography>
-            <div className="rating-div">
-              <AverageRating rating={Math.round(props.voteAverage * 10)} />
+          <CardContent>
+            <div className="title-div">
+              <Typography variant="h5" component="h2">
+                {showMore ? props.title : shortTitle}
+              </Typography>
+              <div className="rating-div">
+                <AverageRating rating={Math.round(props.voteAverage * 10)} />
+              </div>
+
+              <Chip className="movie-badge" label={props.message} />
             </div>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {showMore ? props.overview : shortDescription}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions className="card-actions">
+          <Button component={Link} to={link} size="small" color="primary">
+            More Info
+          </Button>
 
-            <Chip className="movie-badge" label={props.message} />
-          </div>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {showMore ? props.overview : shortDescription}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions className="card-actions">
-        <Button component={Link} to={link} size="small" color="primary">
-          More Info
-        </Button>
-
-        <TrailerModal type={trailerLink} id={props.id} movie={props.movie} />
-      </CardActions>
-    </Card>
+          <TrailerModal type={trailerLink} id={props.id} movie={props.movie} />
+        </CardActions>
+      </Card>
+    </div>
   );
 }

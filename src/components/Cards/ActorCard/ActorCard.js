@@ -52,33 +52,35 @@ export default function ActorCard(props) {
   );
 
   return (
-    <Card className={classes.rootActor}>
-      <CardContent style={{ margin: "0px", paddingBottom: "0px" }}>
-        <Avatar
-          alt={props.actor.name}
-          src={profile}
-          className={classes.large}
-        />
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
-          {props.actor.name}
-        </Typography>
-        <Typography
-          variant="body2"
-          component="p"
-          style={{ margin: "auto", fontSize: "12px", textAlign: "center" }}
-        >
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button to={link} component={Link} size="small" color="primary">
-          Bio
-        </Button>
-      </CardActions>
-    </Card>
+    <div style={{ padding: 10 }}>
+      <Card className={classes.rootActor}>
+        <CardContent style={{ margin: "0px", paddingBottom: "0px" }}>
+          <Avatar
+            alt={props.actor.name}
+            src={profile}
+            className={classes.large}
+          />
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            {props.actor.name}
+          </Typography>
+          <Typography
+            variant="body2"
+            component="p"
+            style={{ margin: "auto", fontSize: "12px", textAlign: "center" }}
+          >
+            {description}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button to={link} component={Link} size="small" color="primary">
+            Bio
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
   );
 }

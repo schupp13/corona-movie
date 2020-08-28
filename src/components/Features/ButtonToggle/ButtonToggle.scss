@@ -1,10 +1,9 @@
 @import "../../../App.scss";
 
 .button-group {
-
- .active {
- color: $AccentColor;
- background-color: $primaryColor;
- transition: .7s ease-in-out;
-}
+  .active-buttons {
+    color: $AccentColor;
+    background-color: $primaryColor;
+    transition: 0.7s ease-in-out;
+  }
 }

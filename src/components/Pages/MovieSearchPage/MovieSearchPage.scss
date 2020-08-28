@@ -1,15 +1,5 @@
 .movie-page {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .search-options {
-    width: 100%;
-    display: flex;
-
-    align-items: center;
-    overflow: scroll;
-  }
 
   .movie-results {
     width: 100%;
@@ -21,7 +11,10 @@
     overflow: scroll;
   }
   .movie-results > div {
-    margin: 15px;
+    margin: 8px;
     // align-self: center;
+  }
+  .movie-results::-webkit-scrollbar {
+    display: none;
   }
 }

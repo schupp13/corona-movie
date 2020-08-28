@@ -7,6 +7,7 @@ import SelectMultipleCertifications from "../../Features/SelectMultipleCertifica
 import Pagination from "../../Features/Pagination/Pagination";
 import "./MovieSearchPage.scss";
 import SelectMultipleSortBy from "../../Features/SelectMultipleSortBy/SelectMultipleSortBy";
+import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 
 export default function MovieSearchPage() {
   let [results, setResults] = useState([]);
@@ -95,10 +96,39 @@ export default function MovieSearchPage() {
     );
   });
 
+  const optionsjsx = [
+    <SelectMultipleGenre
+      selectedOptions={selectedGenres}
+      handleChange={handleGenreChange}
+      title="Genre"
+      key="1"
+    />,
+    <SelectMultipleCertifications
+      selectedOptions={selectedCertifications}
+      handleChange={handleCertificationChange}
+      title="Certifications"
+      key="2"
+    />,
+    <SearchKeywords handleClick={handleKeywords} key="3" />,
+    <SelectMultipleSortBy
+      selectedOptions={sortby}
+      handleChange={handleSortby}
+      title="Sort By"
+      key="5"
+    />,
+  ];
+
   return (
     <div className="movie-page">
-      <div className="search-options">
-        <SelectMultipleGenre
+      <ScrollDiv
+        title=""
+        cards={optionsjsx}
+        handleScroll={() => {}}
+        page={0}
+        total_pages={0}
+        addPage={0}
+      ></ScrollDiv>
+      {/* <SelectMultipleGenre
           selectedOptions={selectedGenres}
           handleChange={handleGenreChange}
           title="Genre"
@@ -114,8 +144,7 @@ export default function MovieSearchPage() {
           selectedOptions={sortby}
           handleChange={handleSortby}
           title="Sort By"
-        ></SelectMultipleSortBy>
-      </div>
+        ></SelectMultipleSortBy> */}
       <div className="movie-results">{movieResults}</div>
       <Pagination
         page={parseInt(page)}

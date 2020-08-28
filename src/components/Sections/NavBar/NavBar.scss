@@ -92,15 +92,17 @@
         $primaryColor 0%,
         $SecondaryColor 100%
       );
-      opacity: .98;
+      opacity: 0.98;
     }
 
     .nav-active {
       transform: translateX(0%);
       $list: (
-        "1": 1,
-        "2": 1.5,
-        "3": 2,
+        "1": 0.2,
+        "2": 0.4,
+        "3": 0.6,
+        "4": 0.8,
+        "5": 1,
       );
 
       @each $property, $value in $list {
@@ -127,7 +129,6 @@
       }
 
       .line3 {
-      
         transition: 1s ease-in-out;
       }
     }
@@ -176,4 +177,3 @@
     transform: translateX(0px);
   }
 }
-

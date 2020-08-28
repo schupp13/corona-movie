@@ -69,7 +69,7 @@ export default function SelectMultipleSortBy(props) {
 
   return (
     <>
-      <FormControl className={classes.margin}>
+      <FormControl className={classes.formControl}>
         <InputLabel id="demo-customized-select-label">Sort By</InputLabel>
         <Select
           labelId="demo-customized-select-label"

@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,700&display=swap");
 $RegularFont: "Roboto", sans-serif;
 
-
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +8,7 @@ $RegularFont: "Roboto", sans-serif;
   font-family: $RegularFont;
 }
 
-body{
-  
+body {
   overflow-x: hidden;
 }
 
@@ -36,21 +34,17 @@ $navHeight: 65px;
   justify-content: center;
   align-items: center;
   background-color: $textColorWhite;
-
 }
-
 
 .rating-div {
   width: 150px;
 }
 
-
-@mixin container (){
+@mixin container() {
   width: 100%;
   max-width: 1300px;
   z-index: 1;
   background-color: white;
-
 }
 .container {
   margin-top: $navHeight;
@@ -59,8 +53,6 @@ $navHeight: 65px;
   max-width: 1300px;
   min-height: 100vh;
   background-color: white;
-
-
 }
 
 /// mixin
@@ -68,21 +60,19 @@ $navHeight: 65px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  
+
   align-items: center;
   min-height: calc(100vh - $navHeight);
   width: $pagewidth;
   background-color: rgb(200, 200, 200);
   position: relative;
-
-
 }
 
-.page-center{
+.page-center {
   width: 100vw;
   background-color: rgb(200, 200, 200);
   position: relative;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -93,4 +83,3 @@ $navHeight: 65px;
   font-size: 50px;
   margin: 30px;
 }
-

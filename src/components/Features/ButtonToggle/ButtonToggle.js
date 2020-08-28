@@ -17,7 +17,7 @@ class ButtonToggle extends Component {
       return (
         <Button
           key={index}
-          className={index === this.state.activeIndex && "active"}
+          className={index === this.state.activeIndex && "active-buttons"}
           onClick={() => this.setState({ activeIndex: index }, button.function)}
         >
           {button.name}

@@ -157,7 +157,7 @@ export default class MoviePage extends Component {
 
     let moviePosters = movie_posters.map((element, index) => {
       return (
-        <div className="movie-posters" key={index}>
+        <div style={{ padding: 10 }} className="movie-posters" key={index}>
           <img
             onError={this.handleError}
             alt={element.name}
@@ -169,7 +169,7 @@ export default class MoviePage extends Component {
 
     let movieBackdrops = movie_backdrops.map((element, index) => {
       return (
-        <div className="movie-backdrops" key={index}>
+        <div style={{ padding: 10 }} className="movie-backdrops" key={index}>
           <img
             onError={this.handleError}
             alt={element.name}

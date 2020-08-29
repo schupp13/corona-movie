@@ -18,8 +18,16 @@ app.use(
   })
 );
 
+// massive(CONNECTION_STRING).then((db) => {
+//   app.set("db", db);
+//   console.log("db is connected");
+// });
+massive(CONNECTION_STRING).then((db) => {
+  app.set("db", db);
+});
+
 app.post("/api/login", AC.login);
-// app.get("/api/session", AC.getSession);
+app.get("/api/session", AC.getSession);
 // app.get("/api/logout", AC.logout);
 
 app.listen(SERVER_PORT, () => console.log(`Listening on Port ${SERVER_PORT}`));

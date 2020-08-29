@@ -11,9 +11,9 @@ import MovieSearchPage from "../components/Pages/MovieSearchPage/MovieSearchPage
 import TVSearchPage from "../components/Pages/TVSearchPage/TVSearchPage";
 import Navbar from "../components/Sections/NavBar/NavBar";
 import Footer from "../components/Sections/Footer/Footer";
-
+import { SessionProvider } from "../components/SessionContext/SessionContext";
 const DefaultContainer = () => (
-  <>
+  <SessionProvider>
     <Navbar />
     <div className="container">
       <Route exact path="/" component={LandingPage}></Route>
@@ -31,7 +31,7 @@ const DefaultContainer = () => (
       <Route path="/tvsearch" component={TVSearchPage}></Route>
     </div>
     <Footer />
-  </>
+  </SessionProvider>
 );
 
 export default (

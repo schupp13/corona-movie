@@ -9,14 +9,11 @@ module.exports = {
         error: "Please fill in all information",
       });
     } else {
-      if (username === "Parker" && password === "Password") {
-        let user = {
-          username: "Parker",
-          firstname: "Parker",
-          lastname: "Schultz",
-        };
+      const user = await req.app.get("db").auth_check();
+
+      if (user[0]) {
         req.session.user = {
-          ...user,
+          ...user[0],
         };
         res.status(200).send(req.session.user);
       } else {
@@ -26,9 +23,9 @@ module.exports = {
       }
     }
   },
-  //   getSession: (req, res) => {
-  //     req.session.user ? res.json(req.session.user) : res.sendStatus(403);
-  //   },
+  getSession: (req, res) => {
+    req.session.user ? res.json(req.session.user) : res.sendStatus(403);
+  },
   //   logout: (req, res) => {
   //     console.log(req.session);
   //     req.session.destroy();

@@ -1,9 +1,9 @@
 @import "../../../App.scss";
 
-.landing-page-container{
+.landing-page-container {
   @include pageCenter(100%);
   min-height: 100vh;
-  max-height: 100vh ;
+  max-height: 100vh;
   position: fixed;
   z-index: 0;
 
@@ -17,32 +17,31 @@
     position: relative;
     z-index: 0;
 
-    div{
+    div {
       background-size: cover;
-      background-position:  top center;
+      background-position: top center;
     }
-    
+
     div:nth-of-type(1) {
       grid-column: 1/3;
     }
-    
-   div:nth-of-type(5) {
+
+    div:nth-of-type(5) {
       grid-column: 2/4;
     }
-    
+
     div:nth-of-type(7) {
       grid-column: 1/5;
     }
     div:nth-of-type(10) {
       grid-column: 3/5;
     }
-    
   }
   .overlay {
     position: absolute;
     width: 100%;
     z-index: 1;
-    min-height:100vh;
+    min-height: 100vh;
     background: rgb(2, 0, 36);
     background: linear-gradient(
       90deg,
@@ -51,28 +50,35 @@
       rgba(144, 206, 161, 0.4) 100%
     );
   }
+  .error-overlay {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    min-height: 100vh;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 49, 49, 0.4) 0%,
+      rgba(87, 32, 32, 0.4) 35%,
+      rgba(55, 58, 11, 0.4) 100%
+    );
+  }
 
-.login-div {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - #{$navHeight});
-  z-index: 3;
-  width: 500px;
-
+  .login-div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - #{$navHeight});
+    z-index: 3;
+    width: 500px;
+  }
 }
-
-}
-
-
 
 @media only screen and (max-width: 1000px) {
   .landing-page {
-   
-
-    .login-div{
+    .login-div {
       justify-content: center;
       align-items: center;
       width: 70%;

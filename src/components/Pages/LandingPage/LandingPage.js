@@ -13,6 +13,7 @@ export default class Landing extends Component {
       movies: [],
       config: {},
       isFlipped: false,
+      errorLogin: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -21,6 +22,10 @@ export default class Landing extends Component {
     this.getTrendingMovies();
     this.getMovieDBconfig();
   }
+
+  errorLoginFlip = () => {
+    this.setState({ errorLogin: true });
+  };
 
   getTrendingMovies = () => {
     axios
@@ -65,14 +70,16 @@ export default class Landing extends Component {
       return (
         <div
           key={index}
-          className="movie-div"
+          className={`movie-div`}
           style={{ backgroundImage: `url(${Background})` }}
         ></div>
       );
     });
     return (
       <div className="landing-page-container">
-        <div className="overlay"></div>
+        <div
+          className={this.state.errorLogin ? "error-overlay" : "overlay"}
+        ></div>
 
         <div className="landing-page page">{moviesMapped}</div>
         <div className="login-div">
@@ -82,7 +89,10 @@ export default class Landing extends Component {
             infinite="true"
           >
             {/* front of card */}
-            <LoginForm onClick={this.handleClick}></LoginForm>
+            <LoginForm
+              onClick={this.handleClick}
+              errorLogin={this.errorLoginFlip}
+            ></LoginForm>
             {/* back of card */}
             <RegisterForm onClick={this.handleClick}></RegisterForm>
           </ReactCardFlip>

@@ -31,7 +31,8 @@ export default function LoginForm(props) {
 
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
-  let [errors, setErrors] = useState({});
+  let [errors, setErrors] = useState("");
+  let [errorObejct, setErrorObject] = useState("");
   const handleChangeUsername = (e) => {
     setUsername(e.currentTarget.value);
   };
@@ -41,7 +42,6 @@ export default function LoginForm(props) {
 
   const submitLogin = (e) => {
     e.preventDefault();
-
     axios
       .post("/api/login", { username, password })
       .then((result) => {
@@ -51,10 +51,16 @@ export default function LoginForm(props) {
       })
       .catch((error) => {
         console.log(error);
+        setErrors("Username or Email is not correct");
+        setErrorObject(error.response);
+        console.log(errorObejct);
+        props.errorLogin();
       });
   };
+
+  let errorsjsx = errors ? <p style={{ color: "red" }}>{errors}</p> : "";
   return (
-    <Card>
+    <Card className={errors && "alert"}>
       <CardContent>
         <form
           onSubmit={submitLogin}
@@ -63,6 +69,7 @@ export default function LoginForm(props) {
           autoComplete="off"
         >
           <h2 className="login-heading">Login</h2>
+          {errorsjsx}
           {/* <TextField
             autoFocus
             value={username}
@@ -90,7 +97,6 @@ export default function LoginForm(props) {
           <Button
             className={classes.button}
             variant="contained"
-            color="primary"
             size="medium"
             type="submit"
           >

@@ -1,12 +1,17 @@
-.login-heading{
-    text-align: center;
+.login-heading {
+  text-align: center;
 }
-form{
-    width: 90%;
+form {
+  width: 90%;
+}
+
+.alert {
+  border: 2px solid red;
+  background-color: red;
 }
 
 @media only screen and (max-width: 600px) {
-    form{
-        width: 90%;
-    }
+  form {
+    width: 90%;
   }
+}

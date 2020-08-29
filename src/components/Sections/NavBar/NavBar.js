@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import LiveTvIcon from "@material-ui/icons/LiveTv";
 import MultiSearch from "../../Forms/MultiSearch/MultiSearch";
 import { Redirect } from "react-router-dom";
-
+import { SessionContext } from "../../SessionContext/SessionContext";
 import "./NavBar.scss";
 import axios from "axios";
 
 class Navbar extends Component {
+  static contextType = SessionContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +19,8 @@ class Navbar extends Component {
     };
   }
   componentDidMount() {
-    this.getSession();
+    // this.getSession();
+    console.log(localStorage);
   }
 
   logout = () => {

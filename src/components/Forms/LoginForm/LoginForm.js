@@ -45,7 +45,8 @@ export default function LoginForm(props) {
     axios
       .post("/api/login", { username, password })
       .then((result) => {
-        console.log(result);
+        console.log(result.data);
+        localStorage.setItem("user", result.data);
         history.push("/welcome");
       })
       .catch((error) => {

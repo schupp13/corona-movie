@@ -27,6 +27,7 @@ massive(CONNECTION_STRING).then((db) => {
 });
 
 app.post("/api/login", AC.login);
+app.post("/api/register", AC.register);
 app.get("/api/session", AC.getSession);
 // app.get("/api/logout", AC.logout);
 

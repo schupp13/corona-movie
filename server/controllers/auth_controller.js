@@ -19,7 +19,6 @@ module.exports = {
         } else {
           req.session.user = {
             ...getUser[0],
-            ad: [],
           };
           delete req.session.user.user_password;
           res.status(200).send(req.session.user);
@@ -36,17 +35,20 @@ module.exports = {
   },
   register: async (req, res) => {
     let { password, email, username } = req.body;
-    console.log(req.body);
-    const hash = await bcrypt
-      .hash(password, 10)
-      .catch((err) => console.log(err));
-    console.log(hash);
-    const user = await req.app.get("db").registration_check(email, username);
     if (!username || !password || !email) {
       res.status(406).json({
         error: "Please fill in all information",
       });
-    } else if (user[0]) {
+    }
+
+    const hash = await bcrypt
+      .hash(password, 10)
+      .catch((err) => console.log(err));
+    const userEmailOrUsername = await req.app
+      .get("db")
+      .registration_check(email, username);
+
+    if (userEmailOrUsername[0]) {
       res.status(406).json({
         error: "Username or Email already exist",
       });
@@ -60,9 +62,8 @@ module.exports = {
       }
     }
   },
-  //   logout: (req, res) => {
-  //     console.log(req.session);
-  //     req.session.destroy();
-  //     res.sendStatus(200);
-  //   },
+  logout: (req, res) => {
+    req.session.destroy();
+    res.sendStatus(200);
+  },
 };

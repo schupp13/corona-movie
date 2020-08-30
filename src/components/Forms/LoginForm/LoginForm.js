@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -29,9 +28,9 @@ export default function LoginForm(props) {
   const classes = useStyles();
   const history = useHistory();
 
-  let [username, setUsername] = useState("");
-  let [password, setPassword] = useState("");
-  let [errors, setErrors] = useState("");
+  let [username, setUsername] = useState("guest");
+  let [password, setPassword] = useState("password");
+  let [errors, setErrors] = useState(``);
   let [errorObejct, setErrorObject] = useState("");
   const handleChangeUsername = (e) => {
     setUsername(e.currentTarget.value);
@@ -46,7 +45,8 @@ export default function LoginForm(props) {
       .post("/api/login", { username, password })
       .then((result) => {
         console.log(result.data);
-        localStorage.setItem("user", result.data);
+        localStorage.setItem("user", JSON.stringify(result.data));
+
         history.push("/welcome");
       })
       .catch((error) => {

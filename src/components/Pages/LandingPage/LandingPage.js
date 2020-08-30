@@ -94,7 +94,10 @@ export default class Landing extends Component {
               errorLogin={this.errorLoginFlip}
             ></LoginForm>
             {/* back of card */}
-            <RegisterForm onClick={this.handleClick}></RegisterForm>
+            <RegisterForm
+              onClick={this.handleClick}
+              errorLogin={this.errorLoginFlip}
+            ></RegisterForm>
           </ReactCardFlip>
         </div>
       </div>

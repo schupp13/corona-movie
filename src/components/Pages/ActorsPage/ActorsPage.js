@@ -8,6 +8,7 @@ import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import Banner from "../../Features/Banner/Banner";
 import ButtonToggle from "../../Features/ButtonToggle/ButtonToggle";
 import ActorProfile from "../../Features/ActorProfile/ActorProfile";
+import PictureModal from "../../Features/PictureModal/PictureModal";
 import "./ActorsPage.scss";
 
 class ActorsPage extends Component {
@@ -145,13 +146,21 @@ class ActorsPage extends Component {
     ];
 
     let actorImages = actor_images.map((element, index) => {
-      let actorImage = `https://image.tmdb.org/t/p/w185/${element.file_path}`;
-
+      let actorImageOriginal = `https://image.tmdb.org/t/p/original/${element.file_path}`;
+      let actorImageDisplay = `https://image.tmdb.org/t/p/w185/${element.file_path}`;
       return (
-        <div className="actor-image">
-          <img src={actorImage} alt={actor.name + " profile" + index} />{" "}
-        </div>
+        <PictureModal
+          key={index}
+          imageOriginal={actorImageOriginal}
+          imageDisplay={actorImageDisplay}
+          portrait={true}
+        />
       );
+      // return (
+      //   <div className="actor-image">
+      //     <img src={actorImage} alt={actor.name + " profile" + index} />{" "}
+      //   </div>
+      // );
     });
 
     let DiscoverActor = known_for.map((element, index) => {

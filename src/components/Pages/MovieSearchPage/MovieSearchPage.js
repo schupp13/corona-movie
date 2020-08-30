@@ -96,55 +96,43 @@ export default function MovieSearchPage() {
     );
   });
 
-  const optionsjsx = [
-    <SelectMultipleGenre
-      selectedOptions={selectedGenres}
-      handleChange={handleGenreChange}
-      title="Genre"
-      key="1"
-    />,
-    <SelectMultipleCertifications
-      selectedOptions={selectedCertifications}
-      handleChange={handleCertificationChange}
-      title="Certifications"
-      key="2"
-    />,
-    <SearchKeywords handleClick={handleKeywords} key="3" />,
-    <SelectMultipleSortBy
-      selectedOptions={sortby}
-      handleChange={handleSortby}
-      title="Sort By"
-      key="5"
-    />,
-  ];
+  const filters = () => {
+    return [
+      <SelectMultipleGenre
+        selectedOptions={selectedGenres}
+        handleChange={handleGenreChange}
+        title="Genre"
+        key="1"
+        type="movie"
+      />,
+      <SelectMultipleCertifications
+        selectedOptions={selectedCertifications}
+        handleChange={handleCertificationChange}
+        title="Certifications"
+        key="2"
+        type="movie"
+      />,
+      <SearchKeywords handleClick={handleKeywords} key="3" type="movie" />,
+      <SelectMultipleSortBy
+        selectedOptions={sortby}
+        handleChange={handleSortby}
+        title="Sort By"
+        key="5"
+        type="movie"
+      />,
+    ];
+  };
 
   return (
     <div className="movie-page">
       <ScrollDiv
         title=""
-        cards={optionsjsx}
+        cards={filters()}
         handleScroll={() => {}}
         page={0}
         total_pages={0}
         addPage={0}
       ></ScrollDiv>
-      {/* <SelectMultipleGenre
-          selectedOptions={selectedGenres}
-          handleChange={handleGenreChange}
-          title="Genre"
-          type="movie"
-        ></SelectMultipleGenre>
-        <SelectMultipleCertifications
-          selectedOptions={selectedCertifications}
-          handleChange={handleCertificationChange}
-          title="Certifications"
-        ></SelectMultipleCertifications>
-        <SearchKeywords handleClick={handleKeywords}></SearchKeywords>
-        <SelectMultipleSortBy
-          selectedOptions={sortby}
-          handleChange={handleSortby}
-          title="Sort By"
-        ></SelectMultipleSortBy> */}
       <div className="movie-results">{movieResults}</div>
       <Pagination
         page={parseInt(page)}

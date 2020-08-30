@@ -8,6 +8,7 @@ import MovieVideo from "../../Features/MovieVideo/MovieVideo";
 import Banner from "../../Features/Banner/Banner";
 import OverviewSection from "../../Sections/OverviewSection/OverviewSection";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
+import PictureModal from "../../Features/PictureModal/PictureModal";
 export default class MoviePage extends Component {
   constructor(props) {
     super(props);
@@ -156,26 +157,28 @@ export default class MoviePage extends Component {
       `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
 
     let moviePosters = movie_posters.map((element, index) => {
+      let imageDisplay = `https://image.tmdb.org/t/p/w185/${element.file_path}`;
+      let imageOriginal = `https://image.tmdb.org/t/p/original/${element.file_path}`;
       return (
-        <div style={{ padding: 10 }} className="movie-posters" key={index}>
-          <img
-            onError={this.handleError}
-            alt={element.name}
-            src={`https://image.tmdb.org/t/p/w154/${element.file_path}`}
-          ></img>
-        </div>
+        <PictureModal
+          key={index}
+          imageDisplay={imageDisplay}
+          imageOriginal={imageOriginal}
+          portrait={true}
+        />
       );
     });
 
     let movieBackdrops = movie_backdrops.map((element, index) => {
+      let imageDisplay = `https://image.tmdb.org/t/p/w300/${element.file_path}`;
+      let imageOriginal = `https://image.tmdb.org/t/p/original/${element.file_path}`;
       return (
-        <div style={{ padding: 10 }} className="movie-backdrops" key={index}>
-          <img
-            onError={this.handleError}
-            alt={element.name}
-            src={`https://image.tmdb.org/t/p/w300/${element.file_path}`}
-          ></img>
-        </div>
+        <PictureModal
+          key={index}
+          imageDisplay={imageDisplay}
+          imageOriginal={imageOriginal}
+          portrait={false}
+        />
       );
     });
 

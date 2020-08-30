@@ -66,7 +66,7 @@ class Navbar extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/tvshows" onClick={this.navSlide}>
+            <Link to="/tvsearch" onClick={this.navSlide}>
               TV Shows
             </Link>
           </li>

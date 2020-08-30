@@ -15,19 +15,22 @@ class Navbar extends Component {
       active: "",
       liTransform: "",
       burger: "",
-      loggedIn: false,
+      loggedIn: true,
     };
   }
   componentDidMount() {
     // this.getSession();
     console.log(localStorage);
+    this.setState({
+      loggedIn: localStorage.getItem("user"),
+    });
   }
 
   logout = () => {
     axios
       .get("api/logout")
       .then((result) => {
-        console.log(result);
+        localStorage.removeItem("user");
         this.setState({ loggedIn: false });
       })
       .catch((error) => {
@@ -51,6 +54,9 @@ class Navbar extends Component {
 
   render() {
     // if(this.state.loggedIn && <Redirect to={"/"} />;
+    if (!this.state.loggedIn) {
+      return <Redirect to="/" />;
+    }
     return (
       <nav className="nav-bar">
         <div className="logo-div">
@@ -75,16 +81,16 @@ class Navbar extends Component {
               Actors
             </Link>
           </li>
-          {/* <li>
-            <Link to="/api/logout" onClick={this.navSlide}>
-              MyAccount
+          {localStorage.getItem("user") && (
+            <li onClick={(this.navSlide, this.logout)}>
+              <a onClick={(this.navSlide, this.logout)}>Logout</a>
+            </li>
+          )}
+          <li>
+            <Link to="/" onClick={this.logout}>
+              {localStorage.getItem("user").username}
             </Link>
           </li>
-          <li>
-            <Link to="/api/logout" onClick={this.logout}>
-              Logout
-            </Link>
-          </li> */}
         </ul>
 
         <div className={`${this.state.burger} burger`} onClick={this.navSlide}>

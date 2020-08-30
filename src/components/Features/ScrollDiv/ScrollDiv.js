@@ -76,6 +76,7 @@ export default function ScrollDiv(props) {
           alignOnResize
           hideArrows={true}
           hideSingleArrow={true}
+          onUpdate
           menuStyle={{
             display: "flex",
             alignItems: "center",

@@ -140,6 +140,7 @@ class TVShowPage extends Component {
           imageDisplay={imageDisplay}
           imageOriginal={imageOriginal}
           portrait={true}
+          width={"185px"}
         />
       );
     });
@@ -153,6 +154,7 @@ class TVShowPage extends Component {
           imageDisplay={imageDisplay}
           imageOriginal={imageOriginal}
           portrait={false}
+          width={"300px"}
         />
       );
     });
@@ -299,7 +301,7 @@ class TVShowPage extends Component {
           style={{ backgroundImage: `url(${Background})` }}
         >
           <ScrollDiv
-            title="Crew"
+            title="Backdrops"
             cards={tvBackdrops}
             handleScroll={this.handleScroll}
             page={0}

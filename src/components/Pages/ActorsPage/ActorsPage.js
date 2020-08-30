@@ -154,13 +154,9 @@ class ActorsPage extends Component {
           imageOriginal={actorImageOriginal}
           imageDisplay={actorImageDisplay}
           portrait={true}
+          width="185px"
         />
       );
-      // return (
-      //   <div className="actor-image">
-      //     <img src={actorImage} alt={actor.name + " profile" + index} />{" "}
-      //   </div>
-      // );
     });
 
     let DiscoverActor = known_for.map((element, index) => {

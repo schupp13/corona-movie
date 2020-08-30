@@ -165,6 +165,7 @@ export default class MoviePage extends Component {
           imageDisplay={imageDisplay}
           imageOriginal={imageOriginal}
           portrait={true}
+          width={"185px"}
         />
       );
     });
@@ -178,6 +179,7 @@ export default class MoviePage extends Component {
           imageDisplay={imageDisplay}
           imageOriginal={imageOriginal}
           portrait={false}
+          width={"300px"}
         />
       );
     });

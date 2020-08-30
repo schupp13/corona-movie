@@ -19,7 +19,7 @@
 .env.production.local
 ./env
 ./server/.env
-
+*.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

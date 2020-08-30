@@ -79,12 +79,14 @@ export default function PictureModal(props) {
   const classes = useStyles();
   return (
     <div className={classes.padding}>
-      <img
-        src={props.imageDisplay}
-        onError={handleError}
-        onClick={handleOpen}
-        alt={props.name}
-      />
+      <div style={{ minWidth: props.width }}>
+        <img
+          src={props.imageDisplay}
+          onError={handleError}
+          onClick={handleOpen}
+          alt={props.name}
+        />
+      </div>
 
       <Modal
         style={{

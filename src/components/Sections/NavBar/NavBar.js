@@ -8,7 +8,6 @@ import "./NavBar.scss";
 import axios from "axios";
 
 class Navbar extends Component {
-  static contextType = SessionContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -32,6 +31,7 @@ class Navbar extends Component {
       .then((result) => {
         localStorage.removeItem("user");
         this.setState({ loggedIn: false });
+        this.navSlide();
       })
       .catch((error) => {
         console.log(error);
@@ -52,13 +52,37 @@ class Navbar extends Component {
     });
   };
 
+  userLink = () => (
+    <SessionContext.Consumer>
+      {(context) => {
+        return (
+          <>
+            <li>
+              <Link to={`profile/${context[0].id}`}>{context[0].username}</Link>
+            </li>
+            <li onClick={this.logout}>
+              <a>Logout</a>
+            </li>
+          </>
+        );
+      }}
+    </SessionContext.Consumer>
+  );
+
+  redirect = () => {
+    return (
+      <SessionContext.Consumer>
+        {(context) => {
+          return !context[0].username ? <Redirect to={"/"} /> : "";
+        }}
+      </SessionContext.Consumer>
+    );
+  };
+
   render() {
-    // if(this.state.loggedIn && <Redirect to={"/"} />;
-    if (!this.state.loggedIn) {
-      return <Redirect to="/" />;
-    }
     return (
       <nav className="nav-bar">
+        {this.redirect()}
         <div className="logo-div">
           <Link to="/welcome">
             <h3>KeepItReel</h3>
@@ -81,18 +105,8 @@ class Navbar extends Component {
               Actors
             </Link>
           </li>
-          {localStorage.getItem("user") && (
-            <li onClick={(this.navSlide, this.logout)}>
-              <a onClick={(this.navSlide, this.logout)}>Logout</a>
-            </li>
-          )}
-          <li>
-            <Link to="/" onClick={this.logout}>
-              {localStorage.getItem("user").username}
-            </Link>
-          </li>
+          {this.userLink()}
         </ul>
-
         <div className={`${this.state.burger} burger`} onClick={this.navSlide}>
           <div className="line1"></div>
           <div className="line2"></div>

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
+import { SessionContext } from "../../SessionContext/SessionContext";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+
 import InputField from "../InputField/InputField";
 import "./LoginForm.scss";
 
@@ -25,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginForm(props) {
+  let [session, setSession] = useContext(SessionContext);
   const classes = useStyles();
   const history = useHistory();
-
   let [username, setUsername] = useState("guest");
   let [password, setPassword] = useState("password");
   let [errors, setErrors] = useState(``);
@@ -43,10 +45,16 @@ export default function LoginForm(props) {
     e.preventDefault();
     axios
       .post("/api/login", { username, password })
-      .then((result) => {
-        console.log(result.data);
-        localStorage.setItem("user", JSON.stringify(result.data));
-
+      .then((results) => {
+        console.log(results);
+        setSession(results.data);
+        // setSession((previousSession) => [
+        //   ...previousSession,
+        //   { ...result.data },
+        // ]);
+        // console.log(result.data);
+        // localStorage.setItem("user", JSON.stringify(result.data));
+        // console.log(value);
         history.push("/welcome");
       })
       .catch((error) => {

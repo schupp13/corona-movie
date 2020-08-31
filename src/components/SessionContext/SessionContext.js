@@ -1,27 +1,17 @@
-import React, { useEffect, createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-
 export const SessionContext = createContext();
-export const SessionProvider = (props) => {
-  const [session, setSession] = useState({});
-  useEffect(() => {
-    wait();
-  }, []);
 
-  const wait = async () => {
-    const newText = await getSession();
-    setSession(newText);
-  };
+export const SessionProvider = (props) => {
+  useEffect(() => {
+    getSession();
+  }, []);
+  const [session, setSession] = useState({});
   const getSession = () => {
     axios
-      .get("/api/session")
-      .then((data) => {
-        console.log(data.data);
-        return data.data;
-      })
-      .catch((error) => {
-        return error;
-      });
+      .get("api/session")
+      .then((data) => setSession(data.data))
+      .catch((error) => console.log(error));
   };
   return (
     <SessionContext.Provider value={[session, setSession]}>

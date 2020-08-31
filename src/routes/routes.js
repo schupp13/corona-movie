@@ -11,10 +11,11 @@ import MovieSearchPage from "../components/Pages/MovieSearchPage/MovieSearchPage
 import TVSearchPage from "../components/Pages/TVSearchPage/TVSearchPage";
 import Navbar from "../components/Sections/NavBar/NavBar";
 import Footer from "../components/Sections/Footer/Footer";
+import SomethingElse from "../components/Sections/NavBar/SomethingElse";
 
 const DefaultContainer = () => (
   <>
-    <Navbar />
+    <SomethingElse />
     <div className="container">
       <Route exact path="/" component={LandingPage}></Route>
       <Route path="/welcome" component={HomePage}></Route>

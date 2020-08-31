@@ -47,7 +47,7 @@ export default function LoginForm(props) {
       .post("/api/login", { username, password })
       .then((results) => {
         console.log(results);
-        setSession(results.data);
+        localStorage.setItem("user", JSON.stringify(results.data));
         // setSession((previousSession) => [
         //   ...previousSession,
         //   { ...result.data },

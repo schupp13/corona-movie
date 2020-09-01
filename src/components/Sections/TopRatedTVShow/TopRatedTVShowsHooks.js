@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import MovieCard from "../../Cards/MovieCard/MovieCard";
 import axios from "axios";
 
 export default function TopRatedTVShowsHooks(props) {
-  // let [results, setResults] = useState([]);
-  // let [page, setPage] = useState(1);
-  // let [totalPages, setTotalPages] = useState(0);
-  // let [type, setType] = useState("top_rated");
+  const mountedRef = useRef(true);
+
   let [results, setResults] = useState({
     tvshows: [],
     page: 1,
@@ -17,6 +15,9 @@ export default function TopRatedTVShowsHooks(props) {
 
   useEffect(() => {
     getTVShows(results.type, results.page);
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
   const changeType = (type) => {
@@ -33,6 +34,8 @@ export default function TopRatedTVShowsHooks(props) {
         },
       })
       .then((result) => {
+        if (!mountedRef.current) return null;
+
         let data =
           page > 1
             ? [...results.tvshows, ...result.data.results]

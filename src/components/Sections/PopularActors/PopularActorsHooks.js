@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import ActorCard from "../../Cards/ActorCard/ActorCard";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 
 export default function PopularActorsHooks(props) {
+  const mountedRef = useRef(true);
+
   let [results, setResults] = useState({
     popActors: [],
     page: 1,
@@ -12,6 +14,9 @@ export default function PopularActorsHooks(props) {
 
   useEffect(() => {
     getPopularActors(results.page);
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
   const handleScroll = () => {};
@@ -30,6 +35,8 @@ export default function PopularActorsHooks(props) {
         },
       })
       .then((result) => {
+        if (!mountedRef.current) return null;
+
         let data =
           page > 1
             ? [...results.popActors, ...result.data.results]

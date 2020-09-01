@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function TopRatedTVShowsHooks(props) {
   let [results, setResults] = useState([]);
-  let [page, setPage] = useState(0);
+  let [page, setPage] = useState(1);
   let [totalPages, setTotalPages] = useState(0);
   let [type, setType] = useState("top_rated");
 
@@ -20,17 +20,27 @@ export default function TopRatedTVShowsHooks(props) {
 
   const getTVShows = (type, page = 1) => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/tv/${type}?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1`
-      )
-      .then((res) => {
+      .get(`https://api.themoviedb.org/3/tv/${type}`, {
+        params: {
+          api_key: "12aa3499b6032630961640574aa332a9",
+          language: "en-US",
+          page: page,
+        },
+      })
+      .then((result) => {
         let data =
           page > 1
-            ? [...results, ...results.data.results]
-            : [...results.data.results];
+            ? [...results, ...result.data.results]
+            : [...result.data.results];
+        // let data =
+        //   page > 1
+        //     ? [...results, ...result.data.results]
+        //     : [...result.data.results];
+        console.log(data);
+        console.log(results);
         setResults(data);
-        setPage({ page: res.data.page });
-        setTotalPages({ totalPages: res.data.total_pages });
+        setPage(result.data.page);
+        setTotalPages(result.data.total_pages);
       })
       .catch((err) => {
         console.log(err);
@@ -38,7 +48,7 @@ export default function TopRatedTVShowsHooks(props) {
   };
 
   const addPage = () => {
-    getTVShows(page + 1);
+    getTVShows(type, page + 1);
   };
 
   const createMessage = (type) => {
@@ -86,7 +96,7 @@ export default function TopRatedTVShowsHooks(props) {
         cards={tvshows}
         handleScroll={handleScroll}
         page={page}
-        totalPages={totalPages}
+        total_pages={totalPages}
         addPage={addPage}
       ></ScrollDiv>
     </div>

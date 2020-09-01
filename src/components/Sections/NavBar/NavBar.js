@@ -37,7 +37,6 @@ export default function SomethingElse() {
 
   return (
     <nav className="nav-bar">
-      {redirect()}
       <div className="logo-div">
         <Link to="/welcome">
           <h3>KeepItReel</h3>

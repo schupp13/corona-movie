@@ -11,7 +11,7 @@ export const SessionProvider = (props) => {
   const [session, setSession] = useState(
     JSON.parse(localStorage.getItem("user"))
   );
-  let [loggedIn, setLoggedIn] = useState(false);
+  let [loggedIn, setLoggedIn] = useState(true);
 
   const getSession = () => {
     axios
@@ -19,8 +19,9 @@ export const SessionProvider = (props) => {
       .then((data) => {
         setSession(data.data);
         setLoggedIn(true);
+        console.log(history);
         localStorage.setItem("user", JSON.stringify(data.data));
-        history.push("/welcome");
+        history.location.pathname === "/" && history.push("/welcome");
       })
       .catch((error) => {
         setLoggedIn(false);
@@ -38,6 +39,7 @@ export const SessionProvider = (props) => {
         localStorage.removeItem("user");
         setSession({});
         setLoggedIn(false);
+        history.push("/");
       })
       .catch((error) => {
         console.log(error);

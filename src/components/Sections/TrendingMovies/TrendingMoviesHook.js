@@ -5,7 +5,6 @@ import axios from "axios";
 
 export default function TrendingMoviesHook(props) {
   const mountedRef = useRef(true);
-
   let [results, setResults] = useState({
     movies: [],
     page: 1,

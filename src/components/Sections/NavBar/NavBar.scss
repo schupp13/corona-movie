@@ -40,13 +40,15 @@
     width: 30%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin-right: 10px;
     z-index: 5;
 
     li {
       list-style: none;
 
-      a {
+      a,
+      p {
         color: rgb(212, 212, 212);
         text-decoration: none;
         letter-spacing: 3px;
@@ -54,9 +56,11 @@
         font-size: 14px;
         width: 100%;
         padding: 10px;
+        margin: 15px;
       }
 
-      a:hover {
+      a:hover,
+      p:hover {
         color: $AccentColor;
       }
     }
@@ -109,7 +113,8 @@
         li:nth-child(#{$property}) {
           animation: navLinkFade #{$value}s linear;
 
-          a {
+          a,
+          p {
             font-size: 20px;
           }
         }

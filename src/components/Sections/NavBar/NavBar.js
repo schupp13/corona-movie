@@ -1,120 +1,83 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import LiveTvIcon from "@material-ui/icons/LiveTv";
-import MultiSearch from "../../Forms/MultiSearch/MultiSearch";
-import { Redirect } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../../SessionContext/SessionContext";
+import { Redirect, Link } from "react-router-dom";
+import LiveTvIcon from "@material-ui/icons/LiveTv";
 import "./NavBar.scss";
 import axios from "axios";
 
-class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: "",
-      liTransform: "",
-      burger: "",
-      loggedIn: true,
-    };
-  }
-  componentDidMount() {
-    // this.getSession();
-    console.log(localStorage);
-    this.setState({
-      loggedIn: localStorage.getItem("user"),
-    });
-  }
-
-  logout = () => {
-    axios
-      .get("api/logout")
-      .then((result) => {
-        localStorage.removeItem("user");
-        this.setState({ loggedIn: false });
-        this.navSlide();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  getSession = () => {
-    axios
-      .get("api/session")
-      .then((data) => this.setState({ loggedIn: true }))
-      .catch((error) => this.logout());
-  };
-
-  navSlide = () => {
-    this.setState({
-      active: this.state.active === "" ? "nav-active" : "",
-      burger: this.state.burger === "" ? "burger-close" : "",
-    });
-  };
-
-  userLink = () => (
-    <SessionContext.Consumer>
-      {(context) => {
-        return (
-          <>
-            <li>
-              <Link to={`profile/${context[0].id}`}>{context[0].username}</Link>
-            </li>
-            <li onClick={this.logout}>
-              <a>Logout</a>
-            </li>
-          </>
-        );
-      }}
-    </SessionContext.Consumer>
+export default function SomethingElse() {
+  let [active, setActive] = useState("");
+  let [liTransform, setLiTransform] = useState("");
+  let [burger, setBurger] = useState("");
+  let [session, setSession, logoutSession, getSession, loggedIn] = useContext(
+    SessionContext
   );
 
-  redirect = () => {
-    return (
-      <SessionContext.Consumer>
-        {(context) => {
-          return !context[0].username ? <Redirect to={"/"} /> : "";
-        }}
-      </SessionContext.Consumer>
-    );
+  useEffect(() => {
+    checkSession();
+  }, []);
+
+  const checkSession = () => {
+    getSession();
   };
 
-  render() {
-    return (
-      <nav className="nav-bar">
-        {this.redirect()}
-        <div className="logo-div">
-          <Link to="/welcome">
-            <h3>KeepItReel</h3>
-            <LiveTvIcon className="tv-icon" />
-          </Link>
-        </div>
-        <ul className={`${this.state.active} nav-links`}>
-          <li>
-            <Link to="/moviesearch" onClick={this.navSlide}>
-              Movies
-            </Link>
-          </li>
-          <li>
-            <Link to="/tvsearch" onClick={this.navSlide}>
-              TV Shows
-            </Link>
-          </li>
-          <li>
-            <Link to="/actors" onClick={this.navSlide}>
-              Actors
-            </Link>
-          </li>
-          {this.userLink()}
-        </ul>
-        <div className={`${this.state.burger} burger`} onClick={this.navSlide}>
-          <div className="line1"></div>
-          <div className="line2"></div>
-          <div className="line3"></div>
-        </div>
-      </nav>
-    );
-  }
-}
+  const redirect = () => {
+    return loggedIn ? "" : <Redirect to="/" />;
+  };
 
-export default Navbar;
+  const navSlide = () => {
+    setActive(active === "" ? "nav-active" : "");
+    setBurger(burger === "" ? "burger-close" : "");
+  };
+
+  const logout = () => {
+    logoutSession();
+    navSlide();
+  };
+
+  return (
+    <nav className="nav-bar">
+      {redirect()}
+      <div className="logo-div">
+        <Link to="/welcome">
+          <h3>KeepItReel</h3>
+          <LiveTvIcon className="tv-icon" />
+        </Link>
+      </div>
+      <ul className={`${active} nav-links`}>
+        <li>
+          <Link to="/moviesearch" onClick={navSlide}>
+            Movies
+          </Link>
+        </li>
+        <li>
+          <Link to="/tvsearch" onClick={navSlide}>
+            TV
+          </Link>
+        </li>
+        <li>
+          <Link to="/actors" onClick={navSlide}>
+            Actors
+          </Link>
+        </li>
+        {session && (
+          <>
+            <li>
+              <Link to={`profile/${session.id}`}>{session.username}</Link>
+            </li>
+            <li onClick={logout}>
+              <p className="logout" onClick={logout}>
+                Logout
+              </p>
+            </li>
+          </>
+        )}
+      </ul>
+      <div className={`${burger} burger`} onClick={navSlide}>
+        <div className="line1"></div>
+        <div className="line2"></div>
+        <div className="line3"></div>
+      </div>
+    </nav>
+  );
+}

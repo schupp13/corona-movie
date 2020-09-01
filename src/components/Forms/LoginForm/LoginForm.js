@@ -48,7 +48,6 @@ export default function LoginForm(props) {
     axios
       .post("/api/login", { username, password })
       .then((results) => {
-        console.log(results);
         getSession();
       })
       .catch((error) => {

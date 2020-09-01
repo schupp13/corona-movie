@@ -24,9 +24,9 @@ export default class TrendingMovies extends Component {
     document.addEventListener("scroll", this.handleScroll);
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("scroll", this.handleScroll);
-  }
+  // componentWillUnmount() {
+  //   document.removeEventListener("scroll", this.handleScroll);
+  // }
 
   handleClick = (e) => {
     console.log(e.target);

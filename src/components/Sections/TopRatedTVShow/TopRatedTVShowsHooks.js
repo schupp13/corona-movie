@@ -37,12 +37,7 @@ export default function TopRatedTVShowsHooks(props) {
           page > 1
             ? [...results.tvshows, ...result.data.results]
             : [...result.data.results];
-        // let data =
-        //   page > 1
-        //     ? [...results, ...result.data.results]
-        //     : [...result.data.results];
-        console.log(data);
-        console.log(results);
+
         setResults({
           tvshows: data,
           page: result.data.page,

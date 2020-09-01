@@ -3,9 +3,10 @@ import "./HomePage.scss";
 import MultiSearch from "../../Forms/MultiSearch/MultiSearch";
 import TrendingMoviesHook from "../../Sections/TrendingMovies/TrendingMoviesHook";
 import TopRatedTVShowsHooks from "../../Sections/TopRatedTVShow/TopRatedTVShowsHooks";
-import PopularActors from "../../Sections/PopularActors/PopularActors";
+
 import axios from "axios";
 import Banner from "../../Features/Banner/Banner";
+import PopularActorsHooks from "../../Sections/PopularActors/PopularActorsHooks";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ export default class HomePage extends Component {
           <TopRatedTVShowsHooks />
         </div>
         <div className="search-results">
-          <PopularActors />
+          <PopularActorsHooks />
         </div>
       </>
     );

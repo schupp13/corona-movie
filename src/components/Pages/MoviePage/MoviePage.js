@@ -42,6 +42,10 @@ export default class MoviePage extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getMovie();
+      window.scroll({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   }
 

@@ -44,6 +44,10 @@ class TVShowPage extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getTVShow();
+      window.scroll({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   }
 
@@ -258,12 +262,12 @@ class TVShowPage extends Component {
           style={{ backgroundImage: `url(${Background})` }}
         >
           <ScrollDiv
-            title="Cast"
+            title="Posters"
             cards={tvPosters}
-            handleScroll={this.handleScroll}
+            handleScroll={() => {}}
             page={0}
             total_pages={0}
-            addPage={this.addSimilarPage}
+            addPage={() => {}}
           ></ScrollDiv>
         </div>
         <ScrollDiv
@@ -296,19 +300,15 @@ class TVShowPage extends Component {
           total_pages={0}
           addPage={this.addSimilarPage}
         ></ScrollDiv>
-        <div
-          className="parallax"
-          style={{ backgroundImage: `url(${Background})` }}
-        >
-          <ScrollDiv
-            title="Backdrops"
-            cards={tvBackdrops}
-            handleScroll={this.handleScroll}
-            page={0}
-            total_pages={0}
-            addPage={() => {}}
-          ></ScrollDiv>
-        </div>
+        <ScrollDiv
+          title="Backdrops"
+          cards={tvBackdrops}
+          handleScroll={this.handleScroll}
+          page={0}
+          total_pages={0}
+          addPage={() => {}}
+        ></ScrollDiv>
+
         <ScrollDiv
           title="Similar TV Shows"
           cards={similarTvShowsjsx}

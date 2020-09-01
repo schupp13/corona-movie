@@ -73,7 +73,6 @@ export default function ScrollDiv(props) {
           arrowLeft={ArrowLeft}
           arrowRight={ArrowRight}
           wheel={false}
-          alignOnResize
           hideArrows={true}
           hideSingleArrow={true}
           menuStyle={{

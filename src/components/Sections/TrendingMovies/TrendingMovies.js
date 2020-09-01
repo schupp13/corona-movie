@@ -132,37 +132,6 @@ export default class TrendingMovies extends Component {
 
     return (
       <div className="trending">
-        {/* <ButtonGroup size="small" aria-label="small outlined button group">
-          <Button
-            onClick={() => {
-              this.getTrendingMovies("day");
-            }}
-            name="day"
-            className={this.state.header === 'Today' ? 'active trending-button': 'trending-button'}
-          >
-            Today
-          </Button>
-          <Button
-            onClick={() => {
-              this.getTrendingMovies("week");
-            }}
-            name="week"
-            className={this.state.header === 'This Week' ? 'active trending-button': 'trending-button'}
-
-          >
-            Week
-          </Button>
-          <Button
-            onClick={() => {
-              this.getTrendingMovies("now_playing");
-            }}
-            name="week"
-            className={this.state.header === 'In Theaters' ? 'active trending-button': 'trending-button'}
-
-          >
-            In Theaters
-          </Button>
-        </ButtonGroup> */}
         <ScrollDiv
           buttons={buttons}
           title={`Movies - Trending ${this.state.header}`}

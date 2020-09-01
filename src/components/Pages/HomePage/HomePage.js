@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./HomePage.scss";
 import MultiSearch from "../../Forms/MultiSearch/MultiSearch";
-import TrendingMovies from "../../Sections/TrendingMovies/TrendingMovies";
+import TrendingMoviesHook from "../../Sections/TrendingMovies/TrendingMoviesHook";
 import TopRatedTVShow from "../../Sections/TopRatedTVShow/TopRatedTVShow";
 import PopularActors from "../../Sections/PopularActors/PopularActors";
 import axios from "axios";
@@ -67,7 +67,7 @@ export default class HomePage extends Component {
           {" "}
         </Banner>
         <div className="search-results">
-          <TrendingMovies />
+          <TrendingMoviesHook />
         </div>
         <div className="search-results">
           <TopRatedTVShow />

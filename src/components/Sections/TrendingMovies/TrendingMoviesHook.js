@@ -1,24 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import MovieCard from "../../Cards/MovieCard/MovieCard";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import axios from "axios";
 
 export default function TrendingMoviesHook(props) {
-  let [results, setResults] = useState([]);
-  let [header, setHeader] = useState("Today");
-  let [page, setPage] = useState(1);
-  let [totalPages, setTotalPages] = useState(0);
-  let [when, setWhen] = useState("day");
+  const mountedRef = useRef(true);
+
+  let [results, setResults] = useState({
+    movies: [],
+    page: 1,
+    totalPages: 0,
+    when: "day",
+    header: "Today",
+  });
 
   useEffect(() => {
-    getTrendingMovies(when, page);
+    getTrendingMovies(results.when, results.page);
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
   const addPage = () => {
-    getTrendingMovies(when, page + 1);
+    getTrendingMovies(results.when, results.page + 1);
   };
 
   const getTrendingMovies = (when = "day", page = "1") => {
+    console.log(when);
     let header =
       when === "day"
         ? "Today"
@@ -37,24 +45,26 @@ export default function TrendingMoviesHook(props) {
         },
       })
       .then((result) => {
-        let data =
+        if (!mountedRef.current) return null;
+        let resultData =
           page > 1
-            ? [...results, ...result.data.results]
+            ? [...results.movies, ...result.data.results]
             : [...result.data.results];
 
-        console.log(data);
-        setResults(data);
-
-        setWhen(when);
-        setHeader(header);
-        setTotalPages(result.data.total_pages);
+        setResults({
+          movies: resultData,
+          page: result.data.page,
+          totalPages: result.data.total_pages,
+          when,
+          header,
+        });
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  let movies = results.map((movie, index) => {
+  let movies = results.movies.map((movie, index) => {
     return (
       <MovieCard
         movie={movie}
@@ -83,11 +93,11 @@ export default function TrendingMoviesHook(props) {
     <div className="trending">
       <ScrollDiv
         buttons={buttons}
-        title={`Movies - Trending ${header}`}
+        title={`Movies - Trending ${results.header}`}
         cards={movies}
         handleScroll={() => {}}
-        page={page}
-        total_pages={totalPages}
+        page={results.page}
+        total_pages={results.totalPages}
         addPage={addPage}
       ></ScrollDiv>
     </div>

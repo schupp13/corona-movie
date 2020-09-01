@@ -17,7 +17,6 @@ export default class HomePage extends Component {
   }
 
   componentDidMount() {
-    console.log(localStorage.getItem("user"));
     this.getTrendingMovies();
     this.getMovieDBconfig();
   }

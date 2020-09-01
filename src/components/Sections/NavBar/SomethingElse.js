@@ -9,17 +9,20 @@ export default function SomethingElse() {
   let [active, setActive] = useState("");
   let [liTransform, setLiTransform] = useState("");
   let [burger, setBurger] = useState("");
-  let [loggedIn, setLoggedIn] = useState(true);
-  let [session, setSession, logoutSession] = useContext(SessionContext);
+  let [session, setSession, logoutSession, getSession, loggedIn] = useContext(
+    SessionContext
+  );
 
   useEffect(() => {
-    console.log(session);
-    // session.id ? setLoggedIn(true) : setLoggedIn(false);
-    // console.log(loggedIn);
-  }, [loggedIn]);
+    checkSession();
+  }, []);
+
+  const checkSession = () => {
+    getSession();
+  };
 
   const redirect = () => {
-    return session === null ? <Redirect to="/" /> : "";
+    return loggedIn ? "" : <Redirect to="/" />;
   };
 
   const navSlide = () => {
@@ -28,7 +31,6 @@ export default function SomethingElse() {
   };
 
   const logout = () => {
-    setLoggedIn(false);
     logoutSession();
     navSlide();
   };
@@ -58,12 +60,16 @@ export default function SomethingElse() {
             Actors
           </Link>
         </li>
-        {/* <li>
-          <Link to={`profile/${session.id}`}>{session.username}</Link>
-        </li> */}
-        <li onClick={logout}>
-          <a>Logout</a>
-        </li>{" "}
+        {session && (
+          <>
+            <li>
+              <Link to={`profile/${session.id}`}>{session.username}</Link>
+            </li>
+            <li onClick={logout}>
+              <Link onClick={logout}>Logout</Link>
+            </li>
+          </>
+        )}
       </ul>
       <div className={`${burger} burger`} onClick={navSlide}>
         <div className="line1"></div>

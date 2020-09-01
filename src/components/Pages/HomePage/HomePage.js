@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./HomePage.scss";
 import MultiSearch from "../../Forms/MultiSearch/MultiSearch";
 import TrendingMoviesHook from "../../Sections/TrendingMovies/TrendingMoviesHook";
-import TopRatedTVShow from "../../Sections/TopRatedTVShow/TopRatedTVShow";
+import TopRatedTVShowsHooks from "../../Sections/TopRatedTVShow/TopRatedTVShowsHooks";
 import PopularActors from "../../Sections/PopularActors/PopularActors";
 import axios from "axios";
 import Banner from "../../Features/Banner/Banner";
@@ -70,7 +70,7 @@ export default class HomePage extends Component {
           <TrendingMoviesHook />
         </div>
         <div className="search-results">
-          <TopRatedTVShow />
+          <TopRatedTVShowsHooks />
         </div>
         <div className="search-results">
           <PopularActors />

@@ -27,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginForm(props) {
-  let [session, setSession] = useContext(SessionContext);
+  let [session, setSession, setLoggedIn, getSession] = useContext(
+    SessionContext
+  );
   const classes = useStyles();
   const history = useHistory();
   let [username, setUsername] = useState("guest");
@@ -47,15 +49,7 @@ export default function LoginForm(props) {
       .post("/api/login", { username, password })
       .then((results) => {
         console.log(results);
-        localStorage.setItem("user", JSON.stringify(results.data));
-        // setSession((previousSession) => [
-        //   ...previousSession,
-        //   { ...result.data },
-        // ]);
-        // console.log(result.data);
-        // localStorage.setItem("user", JSON.stringify(result.data));
-        // console.log(value);
-        history.push("/welcome");
+        getSession();
       })
       .catch((error) => {
         console.log(error);

@@ -4,17 +4,22 @@ import MovieCard from "../../Cards/MovieCard/MovieCard";
 import axios from "axios";
 
 export default function TopRatedTVShowsHooks(props) {
-  let [results, setResults] = useState([]);
-  let [page, setPage] = useState(1);
-  let [totalPages, setTotalPages] = useState(0);
-  let [type, setType] = useState("top_rated");
+  // let [results, setResults] = useState([]);
+  // let [page, setPage] = useState(1);
+  // let [totalPages, setTotalPages] = useState(0);
+  // let [type, setType] = useState("top_rated");
+  let [results, setResults] = useState({
+    tvshows: [],
+    page: 1,
+    totalPages: 0,
+    type: "top_rated",
+  });
 
   useEffect(() => {
-    getTVShows(type, page);
+    getTVShows(results.type, results.page);
   }, []);
 
   const changeType = (type) => {
-    setType(type);
     getTVShows(type);
   };
 
@@ -30,15 +35,15 @@ export default function TopRatedTVShowsHooks(props) {
       .then((result) => {
         let data =
           page > 1
-            ? [...results, ...result.data.results]
+            ? [...results.tvshows, ...result.data.results]
             : [...result.data.results];
-        // let data =
-        //   page > 1
-        //     ? [...results, ...result.data.results]
-        //     : [...result.data.results];
-        setResults(data);
-        setPage(result.data.page);
-        setTotalPages(result.data.total_pages);
+
+        setResults({
+          tvshows: data,
+          page: result.data.page,
+          totalPages: result.data.total_pages,
+          type,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -46,7 +51,7 @@ export default function TopRatedTVShowsHooks(props) {
   };
 
   const addPage = () => {
-    getTVShows(type, page + 1);
+    getTVShows(results.type, results.page + 1);
   };
 
   const createMessage = (type) => {
@@ -67,10 +72,10 @@ export default function TopRatedTVShowsHooks(props) {
     { name: "On Air", function: () => changeType("on_the_air") },
     { name: "On Air Today", function: () => changeType("airing_today") },
   ];
-  let message = createMessage(type);
+  let message = createMessage(results.type);
 
   // let { page, total_pages, type } = state;
-  let tvshows = results.map((tvshow, index) => {
+  let tvshows = results.tvshows.map((tvshow, index) => {
     return (
       <MovieCard
         message={`#${index + 1} ${message}`}
@@ -93,8 +98,8 @@ export default function TopRatedTVShowsHooks(props) {
         title={`TV - ${message}`}
         cards={tvshows}
         handleScroll={handleScroll}
-        page={page}
-        total_pages={totalPages}
+        page={results.page}
+        total_pages={results.totalPages}
         addPage={addPage}
       ></ScrollDiv>
     </div>

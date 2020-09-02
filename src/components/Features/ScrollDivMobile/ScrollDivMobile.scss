@@ -1,0 +1,14 @@
+.scroll-mobile {
+  display: flex;
+  flex-direction: column;
+
+  .buttons {
+    padding: 15px;
+  }
+
+  .cards-div {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+}

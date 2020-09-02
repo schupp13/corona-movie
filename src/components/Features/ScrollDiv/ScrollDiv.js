@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Button from "@material-ui/core/Button";
 import ButtonToggle from "../../Features/ButtonToggle/ButtonToggle";
 import "./ScrollDiv.scss";
+import ScrollDivMobile from "../../Features/ScrollDivMobile/ScrollDivMobile";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import { findByLabelText } from "@testing-library/react";
 
@@ -14,21 +15,6 @@ export default function ScrollDiv(props) {
     ""
   );
 
-  // const MenuItem = ({ text, selected }) => {
-  //   return (
-  //     <div className={`menu-item ${selected ? "active" : ""}`}>{text}</div>
-  //   );
-  // };
-  // const selected = 0;
-
-  // // All items component
-  // // Important! add unique key
-  // const Menu = (list, selected) =>
-  //   props.cards.map(el, (index) => {
-  //     const { name } = el;
-
-  //     return <MenuItem text={index} key={index} selected={index} />;
-  //   });
   const Arrow = ({ text, className }) => {
     return <div className={className}>{text}</div>;
   };
@@ -61,13 +47,11 @@ export default function ScrollDiv(props) {
 
     return cards;
   };
-
   return (
     props.cards.length > 0 && (
       <div className="scroll-container-div">
         <h2 className="scroll-title">{props.title}</h2>
         <div className="buttons">{buttons}</div>
-
         <ScrollMenu
           data={makeCards()}
           arrowLeft={ArrowLeft}
@@ -79,15 +63,14 @@ export default function ScrollDiv(props) {
             display: "flex",
             alignItems: "center",
             userSelect: "none",
-
             justifyContent: "flex-start",
           }}
           innerWrapperStyle={{
             display: "flex",
             alignItems: "center",
             userSelect: "none",
-            minWidth: "1300px",
             width: "100%",
+            cursor: "pointer",
           }}
           wrapperStyle={{
             overflow: "hidden",
@@ -96,12 +79,6 @@ export default function ScrollDiv(props) {
             display: "flex",
           }}
           alignCenter={false}
-          menuStyle={{
-            display: "flex",
-            alignItems: "center",
-            userSelect: "none",
-            margin: "4px",
-          }}
         />
       </div>
     )

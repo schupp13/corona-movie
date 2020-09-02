@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import MovieCard from "../../Cards/MovieCard/MovieCard";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
+import { useWindowDimensions } from "../../Features/WindowHook/getWindowDimensions";
+import ScrollDivMobile from "../../Features/ScrollDivMobile/ScrollDivMobile";
 import axios from "axios";
 
 export default function TrendingMoviesHook(props) {
+  const { height, width } = useWindowDimensions();
   const mountedRef = useRef(true);
   let [results, setResults] = useState({
     movies: [],
@@ -90,15 +93,27 @@ export default function TrendingMoviesHook(props) {
 
   return (
     <div className="trending">
-      <ScrollDiv
-        buttons={buttons}
-        title={`Movies - Trending ${results.header}`}
-        cards={movies}
-        handleScroll={() => {}}
-        page={results.page}
-        total_pages={results.totalPages}
-        addPage={addPage}
-      ></ScrollDiv>
+      {width > 500 ? (
+        <ScrollDiv
+          buttons={buttons}
+          title={`Movies - Trending ${results.header}`}
+          cards={movies}
+          handleScroll={() => {}}
+          page={results.page}
+          total_pages={results.totalPages}
+          addPage={addPage}
+        ></ScrollDiv>
+      ) : (
+        <ScrollDivMobile
+          title={`Movies - Trending ${results.header}`}
+          buttons={buttons}
+          cards={movies}
+          handleScroll={() => {}}
+          page={results.page}
+          total_pages={results.totalPages}
+          addPage={addPage}
+        ></ScrollDivMobile>
+      )}
     </div>
   );
 }

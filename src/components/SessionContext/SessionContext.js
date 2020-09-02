@@ -4,14 +4,15 @@ import { useHistory } from "react-router";
 export const SessionContext = createContext();
 
 export const SessionProvider = (props) => {
-  useEffect(() => {
-    getSession();
-  }, []);
-
+  const history = useHistory();
   const [session, setSession] = useState(
     JSON.parse(localStorage.getItem("user"))
   );
   let [loggedIn, setLoggedIn] = useState(true);
+
+  useEffect(() => {
+    getSession();
+  }, []);
 
   const getSession = () => {
     axios
@@ -29,8 +30,6 @@ export const SessionProvider = (props) => {
         console.log(error);
       });
   };
-
-  const history = useHistory();
 
   const logoutSession = () => {
     axios

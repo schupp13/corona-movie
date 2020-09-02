@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import MovieCard from "../../Cards/MovieCard/MovieCard";
+
 import axios from "axios";
 
 export default function TopRatedTVShowsHooks(props) {
   const mountedRef = useRef(true);
+  const { height, width } = useWindowDimensions();
 
   let [results, setResults] = useState({
     tvshows: [],

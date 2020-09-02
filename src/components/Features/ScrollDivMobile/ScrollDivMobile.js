@@ -31,8 +31,6 @@ export default function ScrollDivMobile(props) {
   };
   return (
     <div className="scroll-mobile">
-      <h2 className="scroll-title">{props.title}</h2>
-      <div className="buttons">{buttons}</div>
       <div className="cards-div">{makeCards()}</div>
     </div>
   );

@@ -10,7 +10,13 @@ import { findByLabelText } from "@testing-library/react";
 import { useWindowDimensions } from "../WindowHook/getWindowDimensions";
 
 export default function ScrollDiv(props) {
-  const { height, width, mobileSize } = useWindowDimensions();
+  const {
+    height,
+    width,
+    mobileSize,
+    tabletSize,
+    desktopSize,
+  } = useWindowDimensions();
   let buttons = props.buttons ? (
     <ButtonToggle buttons={props.buttons}></ButtonToggle>
   ) : (
@@ -51,17 +57,17 @@ export default function ScrollDiv(props) {
     ) {
       cards.push(button);
     }
-    console.log(cards[cards.length - 1].key == "taco");
     return cards;
   };
+  const cards = makeCards();
   return (
-    props.cards.length > 0 && (
+    cards.length > 0 && (
       <div className="scroll-container-div">
         <h2 className="scroll-title">{props.title}</h2>
         <div className="buttons">{buttons}</div>
-        {mobileSize ? (
+        {desktopSize || tabletSize ? (
           <ScrollMenu
-            data={makeCards()}
+            data={cards}
             arrowLeft={ArrowLeft}
             arrowRight={ArrowRight}
             wheel={false}
@@ -89,7 +95,7 @@ export default function ScrollDiv(props) {
             alignCenter={false}
           />
         ) : (
-          <ScrollDivMobile cards={makeCards()}></ScrollDivMobile>
+          <ScrollDivMobile cards={cards}></ScrollDivMobile>
         )}
       </div>
     )

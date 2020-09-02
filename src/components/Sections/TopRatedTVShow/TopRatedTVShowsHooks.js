@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import MovieCard from "../../Cards/MovieCard/MovieCard";
+import { useWindowDimensions } from "../../Features/WindowHook/getWindowDimensions";
 
 import axios from "axios";
+import ScrollDivMobile from "../../Features/ScrollDivMobile/ScrollDivMobile";
 
 export default function TopRatedTVShowsHooks(props) {
   const mountedRef = useRef(true);
-  const { height, width } = useWindowDimensions();
+  const { height, width, mobileSize } = useWindowDimensions();
 
   let [results, setResults] = useState({
     tvshows: [],

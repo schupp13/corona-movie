@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MovieCard from "../../Cards/MovieCard/MovieCard";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 
 import "./TrendingMovies.scss";

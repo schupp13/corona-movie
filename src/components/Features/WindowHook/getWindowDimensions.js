@@ -5,7 +5,7 @@ function getWindowDimensions() {
   return {
     width,
     height,
-    mobileSize: 451,
+    mobileSize: width < 451,
     tabletSize: 769,
   };
 }

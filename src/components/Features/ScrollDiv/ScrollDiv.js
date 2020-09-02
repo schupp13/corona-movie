@@ -59,7 +59,7 @@ export default function ScrollDiv(props) {
       <div className="scroll-container-div">
         <h2 className="scroll-title">{props.title}</h2>
         <div className="buttons">{buttons}</div>
-        {width > mobileSize ? (
+        {mobileSize ? (
           <ScrollMenu
             data={makeCards()}
             arrowLeft={ArrowLeft}

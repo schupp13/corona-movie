@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import SelectMultipleSortBy from "../../Features/SelectMultipleSortBy/SelectMultipleSortBy";
+import SearchKeywords from "../../Features/SearchKeywords/SearchKeywords";
+import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import Pagination from "../../Features/Pagination/Pagination";
 import SelectMultipleGenre from "../../Features/SelectMultipleGenre/SelectMultipleGenre";
 import "./TVSearchPage.scss";
 
-
 export default function TVSearchPage() {
   let [results, setResults] = useState([]);
-  let [genres, setGenres] = useState([]);
   let [selectedGenres, setSelectedGenres] = useState([]);
-  let [selectedCertifications, setSelectedCertifications] = useState([]);
   let [page, setPage] = useState([]);
   let [totalPages, setTotalPages] = useState([]);
   let [keywords, setKeywords] = useState([]);
@@ -19,13 +19,10 @@ export default function TVSearchPage() {
 
   useEffect(() => {
     getPopular();
-  }, [sortby, selectedGenres, selectedCertifications, keywords, page]);
+  }, [sortby, selectedGenres, keywords, page]);
 
   const getPopular = () => {
     let genresReady = selectedGenres ? selectedGenres.join("|") : "";
-    let certsReady = selectedCertifications
-      ? selectedCertifications.join("|")
-      : "";
 
     let keywordsReady = keywords ? keywords.join("|") : "";
 
@@ -35,7 +32,7 @@ export default function TVSearchPage() {
           api_key: "12aa3499b6032630961640574aa332a9",
           language: "en",
           certification_country: "US",
-          certification: certsReady,
+
           page: page,
           with_genres: genresReady,
           with_keywords: keywordsReady,
@@ -53,6 +50,19 @@ export default function TVSearchPage() {
       });
   };
 
+  const handleKeywords = (event, values) => {
+    let keywordsReady = values.map((element) => {
+      return element.id;
+    });
+    setKeywords(keywordsReady);
+    setPage(1);
+  };
+
+  const handleSortby = (value) => {
+    console.log(value);
+    setSortby(value);
+    setPage(1);
+  };
   const paginate = (e, value) => {
     setPage(value);
   };
@@ -77,17 +87,33 @@ export default function TVSearchPage() {
     );
   });
 
+  let options = [
+    <SelectMultipleGenre
+      selectedOptions={selectedGenres}
+      handleChange={handleGenreChange}
+      title="Genre"
+      type="tv"
+    ></SelectMultipleGenre>,
+    <SearchKeywords handleClick={handleKeywords} key="3" type="tv" />,
+    <SelectMultipleSortBy
+      selectedOptions={sortby}
+      handleChange={handleSortby}
+      title="Sort By"
+      key="5"
+      type="tv"
+    />,
+  ];
+
   return (
     <div className="movie-page">
-      <div className="search-options">
-        <SelectMultipleGenre
-          selectedOptions={selectedGenres}
-          handleChange={handleGenreChange}
-          title="Genre"
-          type="tv"
-        ></SelectMultipleGenre>
-
-      </div>
+      <ScrollDiv
+        title=""
+        cards={options}
+        handleScroll={() => {}}
+        page={0}
+        total_pages={0}
+        addPage={0}
+      ></ScrollDiv>
       <div className="movie-results">{tvResults}</div>
       <Pagination page={page} count={totalPages} setPage={paginate} />
     </div>

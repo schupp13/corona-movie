@@ -18,6 +18,7 @@ export default function SomethingElse() {
   }, []);
 
   const checkSession = () => {
+    // get session is context from sessionContext
     getSession();
   };
 

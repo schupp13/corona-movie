@@ -106,6 +106,7 @@ export default function PictureModal(props) {
         >
           <img
             onError={handleError}
+            alt={props.name}
             src={props.imageOriginal}
             className={
               props.portrait

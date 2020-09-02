@@ -7,8 +7,10 @@ import "./ScrollDiv.scss";
 import ScrollDivMobile from "../../Features/ScrollDivMobile/ScrollDivMobile";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import { findByLabelText } from "@testing-library/react";
+import { useWindowDimensions } from "../WindowHook/getWindowDimensions";
 
 export default function ScrollDiv(props) {
+  const { height, width, mobileSize } = useWindowDimensions();
   let buttons = props.buttons ? (
     <ButtonToggle buttons={props.buttons}></ButtonToggle>
   ) : (
@@ -28,23 +30,28 @@ export default function ScrollDiv(props) {
   });
 
   const makeCards = () => {
-    const cards = props.cards;
-    if (props.page < props.total_pages) {
-      cards.push(
-        <Button
-          style={{
-            color: "rgb(224, 224, 224) ",
-            height: "100%",
-            width: 100,
-            height: 350,
-          }}
-          onClick={() => props.addPage()}
-        >
-          LOAD MORE
-        </Button>
-      );
-    }
+    const button = (
+      <Button
+        key="taco"
+        style={{
+          color: "rgb(224, 224, 224) ",
 
+          width: 200,
+          height: 200,
+        }}
+        onClick={() => props.addPage()}
+      >
+        LOAD MORE
+      </Button>
+    );
+    const cards = props.cards;
+    if (
+      props.page < props.total_pages &&
+      cards[cards.length - 1].key !== "taco"
+    ) {
+      cards.push(button);
+    }
+    console.log(cards[cards.length - 1].key == "taco");
     return cards;
   };
   return (
@@ -52,34 +59,38 @@ export default function ScrollDiv(props) {
       <div className="scroll-container-div">
         <h2 className="scroll-title">{props.title}</h2>
         <div className="buttons">{buttons}</div>
-        <ScrollMenu
-          data={makeCards()}
-          arrowLeft={ArrowLeft}
-          arrowRight={ArrowRight}
-          wheel={false}
-          hideArrows={true}
-          hideSingleArrow={true}
-          menuStyle={{
-            display: "flex",
-            alignItems: "center",
-            userSelect: "none",
-            justifyContent: "flex-start",
-          }}
-          innerWrapperStyle={{
-            display: "flex",
-            alignItems: "center",
-            userSelect: "none",
-            width: "100%",
-            cursor: "pointer",
-          }}
-          wrapperStyle={{
-            overflow: "hidden",
-            userSelect: "none",
-            padding: "0",
-            display: "flex",
-          }}
-          alignCenter={false}
-        />
+        {width > mobileSize ? (
+          <ScrollMenu
+            data={makeCards()}
+            arrowLeft={ArrowLeft}
+            arrowRight={ArrowRight}
+            wheel={false}
+            hideArrows={true}
+            hideSingleArrow={true}
+            menuStyle={{
+              display: "flex",
+              alignItems: "center",
+              userSelect: "none",
+              justifyContent: "flex-start",
+            }}
+            innerWrapperStyle={{
+              display: "flex",
+              alignItems: "center",
+              userSelect: "none",
+              width: "100%",
+              cursor: "pointer",
+            }}
+            wrapperStyle={{
+              overflow: "hidden",
+              userSelect: "none",
+              padding: "0",
+              display: "flex",
+            }}
+            alignCenter={false}
+          />
+        ) : (
+          <ScrollDivMobile cards={makeCards()}></ScrollDivMobile>
+        )}
       </div>
     )
   );

@@ -73,6 +73,7 @@ export default class MoviePage extends Component {
           genres: results.data.genres,
           companies: results.data.production_companies,
         });
+        console.log(this.state);
       })
       .catch((error) => {
         console.log(error);
@@ -252,7 +253,7 @@ export default class MoviePage extends Component {
             handleScroll={this.handleScroll}
             page={0}
             total_pages={0}
-            addPage={this.addSimilarPage}
+            addPage={() => {}}
           ></ScrollDiv>
         </div>
 
@@ -270,7 +271,7 @@ export default class MoviePage extends Component {
           handleScroll={this.handleScroll}
           page={0}
           total_pages={0}
-          addPage={this.addSimilarPage}
+          addPage={() => {}}
         ></ScrollDiv>
         <ScrollDiv
           title="Posters"
@@ -278,7 +279,7 @@ export default class MoviePage extends Component {
           handleScroll={this.handleScroll}
           page={0}
           total_pages={0}
-          addPage={this.addSimilarPage}
+          addPage={() => {}}
         ></ScrollDiv>
         <ScrollDiv
           title="Backdrops"
@@ -286,7 +287,7 @@ export default class MoviePage extends Component {
           handleScroll={this.handleScroll}
           page={0}
           total_pages={0}
-          addPage={this.addSimilarPage}
+          addPage={() => {}}
         ></ScrollDiv>
 
         <div
@@ -299,7 +300,7 @@ export default class MoviePage extends Component {
             handleScroll={this.handleScroll}
             page={0}
             total_pages={0}
-            addPage={this.addSimilarPage}
+            addPage={() => {}}
           ></ScrollDiv>
         </div>
 
@@ -307,8 +308,8 @@ export default class MoviePage extends Component {
           title="Similar"
           cards={similarJSX}
           handleScroll={this.handleScroll}
-          page={similar_page}
-          total_pages={similar_total_pages}
+          page={parseInt(similar_page)}
+          total_pages={parseInt(similar_total_pages)}
           addPage={this.addSimilarPage}
         ></ScrollDiv>
       </>

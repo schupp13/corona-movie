@@ -6,6 +6,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 import netflixpic from "../../../img/netflix.png";
+import Typography from "@material-ui/core/Typography";
 
 export default function OverviewSection(props) {
   console.log(props);
@@ -47,7 +48,9 @@ export default function OverviewSection(props) {
                 src={`https://image.tmdb.org/t/p/w45/${company.logo_path}`}
               ></img>
             ) : (
-              <h6>{company.name}</h6>
+              <Typography variant="h6" component="p" color="primary">
+                {company.name}
+              </Typography>
             )}
           </div>
         );
@@ -78,9 +81,15 @@ export default function OverviewSection(props) {
       </div>
       <div className="movie-details">
         <div className="movie-overview">
-          <h4>Overview</h4>
-          <p>{overview}</p>
-          <p>Release: {dateFormat}</p>
+          <Typography variant="h5" component="h2" color="primary">
+            Overview
+          </Typography>
+          <Typography variant="body2" color="textPrimary" component="p">
+            {overview}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Release: {dateFormat}
+          </Typography>
           <span>{status && "Status: " + status}</span>
         </div>
         <div className="chips">{chips}</div>

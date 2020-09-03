@@ -16,7 +16,6 @@
   }
 }
 
-
 .movie-page-content {
   padding: 30px;
   display: flex;
@@ -25,7 +24,6 @@
   background-color: white;
 
   .poster-div {
-
     img {
       // width: 100%;
       // box-shadow:5px 5px 10px rgb(29, 29, 29);
@@ -40,12 +38,14 @@
     align-items: flex-start;
     padding: 3%;
     line-height: 1.5em;
-
+    .movie-overview {
+      max-width: 500px;
+    }
     .chips {
       margin: 15px 0;
     }
 
-    .chips>* {
+    .chips > * {
       margin-right: 5px;
     }
 
@@ -55,9 +55,8 @@
       align-items: center;
     }
 
-    .movie-companies>* {
+    .movie-companies > * {
       margin-right: 15px;
-
     }
 
     .company-div {
@@ -94,7 +93,6 @@
       }
 
       .movie-homepage {
-
         margin-right: 30px;
       }
 

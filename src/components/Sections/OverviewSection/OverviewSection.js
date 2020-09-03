@@ -20,6 +20,7 @@ export default function OverviewSection(props) {
     genres,
     id,
     type,
+    status,
   } = props;
 
   let homepageOption =
@@ -52,7 +53,16 @@ export default function OverviewSection(props) {
         );
       })
     : "";
-
+  let date = release_date && new Date(release_date);
+  console.log(date && date.getFullYear());
+  let dateFormat = date
+    ? date.getMonth() +
+      1 +
+      "/" +
+      (date.getDate() + 1) +
+      "/" +
+      date.getFullYear()
+    : "NA";
   return (
     <div className="movie-page-content">
       <div className="poster-div">
@@ -70,7 +80,8 @@ export default function OverviewSection(props) {
         <div className="movie-overview">
           <h4>Overview</h4>
           <p>{overview}</p>
-          <p>{release_date && release_date.substring(0, 4)}</p>
+          <p>Release: {dateFormat}</p>
+          <span>{status && "Status: " + status}</span>
         </div>
         <div className="chips">{chips}</div>
         <div className="movie-companies">{companiesjsx}</div>

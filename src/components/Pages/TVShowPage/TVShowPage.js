@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Typography from "@material-ui/core/Typography";
+
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import ActorCard from "../../Cards/ActorCard/ActorCard";
 import MovieReviewCard from "../../Cards/MovieReviewCard/MovieReviewCard";
@@ -234,6 +236,7 @@ class TVShowPage extends Component {
           genres={genres}
           id={tvshow.id}
           overview={tvshow.overview}
+          status={status}
         ></OverviewSection>
         <div
           className="parallax"

@@ -6,9 +6,9 @@ import ButtonToggle from "../../Features/ButtonToggle/ButtonToggle";
 import "./ScrollDiv.scss";
 import ScrollDivMobile from "../../Features/ScrollDivMobile/ScrollDivMobile";
 import ScrollMenu from "react-horizontal-scrolling-menu";
-import { findByLabelText } from "@testing-library/react";
 import { useWindowDimensions } from "../WindowHook/getWindowDimensions";
-
+import { Typography } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 export default function ScrollDiv(props) {
   const {
     height,
@@ -60,10 +60,14 @@ export default function ScrollDiv(props) {
     return cards;
   };
   const cards = makeCards();
+  const theme = useTheme();
+
   return (
     cards.length > 0 && (
       <div className="scroll-container-div">
-        <h2 className="scroll-title">{props.title}</h2>
+        <Typography variant="h5" component="h2" color="primary">
+          {props.title}
+        </Typography>
         <div className="buttons">{buttons}</div>
         {desktopSize || tabletSize ? (
           <ScrollMenu

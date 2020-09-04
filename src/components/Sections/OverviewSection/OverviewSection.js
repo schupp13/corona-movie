@@ -7,7 +7,7 @@ import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 import netflixpic from "../../../img/netflix.png";
 import Typography from "@material-ui/core/Typography";
-
+import Favorite from "../../Forms/Favorite/Favorite";
 export default function OverviewSection(props) {
   console.log(props);
   let {
@@ -90,7 +90,9 @@ export default function OverviewSection(props) {
           <Typography variant="body2" color="textSecondary" component="p">
             Release: {dateFormat}
           </Typography>
-          <span>{status && "Status: " + status}</span>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {status && "Status: " + status}
+          </Typography>
         </div>
         <div className="chips">{chips}</div>
         <div className="movie-companies">{companiesjsx}</div>
@@ -104,6 +106,13 @@ export default function OverviewSection(props) {
           <div className="movie-trailer">
             <TrailerModal type={type} id={id} />
           </div>
+
+          <Favorite
+            type={type}
+            id={id}
+            liked={props.liked}
+            handleLike={props.handleLike}
+          />
         </div>
       </div>
     </div>

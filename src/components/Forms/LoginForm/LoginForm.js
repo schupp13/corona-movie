@@ -7,6 +7,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import Typography from "@material-ui/core/Typography";
 
 import InputField from "../InputField/InputField";
 import "./LoginForm.scss";
@@ -69,17 +70,19 @@ export default function LoginForm(props) {
           noValidate
           autoComplete="off"
         >
-          <h2 className="login-heading">Login</h2>
-          {errorsjsx}
-          {/* <TextField
-            autoFocus
-            value={username}
-            name="username"
-            id="outlined-basic"
-            label="Username"
-            variant="outlined"
-            onChange={handleChangeUsername}
-          /> */}
+          <Typography
+            color="primary"
+            variant="h4"
+            component="h1"
+            align="center"
+          >
+            Login
+          </Typography>
+
+          <Typography color="error" variant="h6" component="p">
+            {errorsjsx}
+          </Typography>
+
           <InputField
             name="username"
             value={username}

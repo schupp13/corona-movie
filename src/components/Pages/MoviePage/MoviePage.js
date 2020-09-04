@@ -32,11 +32,13 @@ export default class MoviePage extends Component {
       companies: [],
       movie_posters: [],
       movie_backdrops: [],
+      userLiked: false,
     };
   }
 
   componentDidMount() {
     this.getMovie();
+    this.checkIfLiked();
   }
 
   componentDidUpdate(prevProps) {
@@ -48,6 +50,22 @@ export default class MoviePage extends Component {
       });
     }
   }
+  checkIfLiked = () => {
+    console.log(this.props.match.params.id);
+    let movie_id = this.props.match.params.id;
+    let user_id = JSON.parse(localStorage.getItem("user")).id;
+    console.log(user_id.id);
+    axios
+      .post(`/api/movie/checkFavorite`, { user_id, movie_id })
+      .then((data) => {
+        console.log(data.data);
+        this.setState({ userLiked: true });
+      })
+      .catch((error) => {
+        this.setState({ userLiked: false });
+      });
+    console.log(this.state);
+  };
 
   getMovie = () => {
     let movieID = this.props.match.params.id;
@@ -139,6 +157,18 @@ export default class MoviePage extends Component {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
   };
 
+  handleLike = (e) => {
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+
+    let movie_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/movie/createFavorite`, { movie_id, user_id })
+      .then((data) => this.setState({ userLiked: data.data.userLiked }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   render() {
     let {
       movie,
@@ -155,6 +185,7 @@ export default class MoviePage extends Component {
       movie_posters,
       movie_backdrops,
       crew,
+      userLiked,
     } = this.state;
 
     let Background =
@@ -218,7 +249,6 @@ export default class MoviePage extends Component {
     });
 
     let videosJSX = videos.map((movie, index) => {
-      console.log(movie);
       return <MovieVideo movie={movie} key={index} />;
     });
 
@@ -241,6 +271,8 @@ export default class MoviePage extends Component {
           id={movie.id}
           overview={movie.overview}
           companies={companies}
+          liked={userLiked}
+          handleLike={this.handleLike}
         ></OverviewSection>
 
         <div

@@ -44,7 +44,7 @@ export default function MovieCard(props) {
       : "tv";
 
   const theme = useTheme();
-  console.log(theme);
+  // console.log(theme);
   return (
     <div style={{ padding: 10 }}>
       <Card className="movie-card">

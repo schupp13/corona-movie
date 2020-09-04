@@ -36,11 +36,13 @@ class TVShowPage extends Component {
       networks: [],
       backdrops: [],
       posters: [],
+      userLiked: false,
     };
   }
 
   componentDidMount() {
     this.getTVShow();
+    this.checkIfLiked();
   }
 
   componentDidUpdate(prevProps) {
@@ -52,6 +54,36 @@ class TVShowPage extends Component {
       });
     }
   }
+
+  checkIfLiked = () => {
+    console.log(this.props.match.params.id);
+    let tvshow_id = this.props.match.params.id;
+    let user_id = JSON.parse(localStorage.getItem("user")).id;
+    console.log(user_id.id);
+    axios
+      .post(`/api/tvshow/checkFavorite`, { user_id, tvshow_id })
+      .then((data) => {
+        console.log(data.data);
+        this.setState({ userLiked: true });
+      })
+      .catch((error) => {
+        this.setState({ userLiked: false });
+      });
+    console.log(this.state);
+  };
+
+  handleLike = (e) => {
+    console.log("l;jdl;fjl;ajdlkf;jlkdfjlkjffdld");
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+
+    let tvshow_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/tvshow/createFavorite`, { tvshow_id, user_id })
+      .then((data) => this.setState({ userLiked: data.data.userLiked }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   handleScroll = () => {};
 
@@ -135,6 +167,7 @@ class TVShowPage extends Component {
       networks,
       similar_page,
       similar_total_pages,
+      userLiked,
     } = this.state;
 
     let tvPosters = posters.map((element, index) => {
@@ -237,6 +270,8 @@ class TVShowPage extends Component {
           id={tvshow.id}
           overview={tvshow.overview}
           status={status}
+          liked={userLiked}
+          handleLike={this.handleLike}
         ></OverviewSection>
         <div
           className="parallax"

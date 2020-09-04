@@ -8,6 +8,7 @@ import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 import netflixpic from "../../../img/netflix.png";
 import Typography from "@material-ui/core/Typography";
 import Favorite from "../../Forms/Favorite/Favorite";
+import WatchList from "../../Forms/WatchList/WatchList";
 export default function OverviewSection(props) {
   console.log(props);
   let {
@@ -112,6 +113,12 @@ export default function OverviewSection(props) {
             id={id}
             liked={props.liked}
             handleLike={props.handleLike}
+          />
+          <WatchList
+            type={type}
+            id={id}
+            watchList={props.watchList}
+            handleWatchList={props.handleWatchList}
           />
         </div>
       </div>

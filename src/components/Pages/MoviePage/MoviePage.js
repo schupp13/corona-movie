@@ -33,12 +33,13 @@ export default class MoviePage extends Component {
       movie_posters: [],
       movie_backdrops: [],
       userLiked: false,
+      userWatchList: false,
     };
   }
 
   componentDidMount() {
     this.getMovie();
-    this.checkIfLiked();
+    this.checkUserState();
   }
 
   componentDidUpdate(prevProps) {
@@ -50,19 +51,27 @@ export default class MoviePage extends Component {
       });
     }
   }
-  checkIfLiked = () => {
-    console.log(this.props.match.params.id);
+  checkUserState = () => {
     let movie_id = this.props.match.params.id;
     let user_id = JSON.parse(localStorage.getItem("user")).id;
-    console.log(user_id.id);
     axios
-      .post(`/api/movie/checkFavorite`, { user_id, movie_id })
-      .then((data) => {
-        console.log(data.data);
-        this.setState({ userLiked: true });
+      .post(`/api/movie/user/state`, { user_id, movie_id })
+      .then((result) => {
+        console.log(result.data);
+        if (result.data.length > 0) {
+          result.data.map((feat) => {
+            if (feat["?column?"] === "userWatchlist") {
+              this.setState({ userWatchList: true });
+            } else if (feat["?column?"] === "userLiked") {
+              this.setState({ userLiked: true });
+            }
+          });
+        } else {
+          this.setState({ userLiked: false, userWatchList: false });
+        }
       })
       .catch((error) => {
-        this.setState({ userLiked: false });
+        // this.setState({ userLiked: false });
       });
     console.log(this.state);
   };
@@ -168,6 +177,17 @@ export default class MoviePage extends Component {
         console.log(error);
       });
   };
+  handleWatchList = (e) => {
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+
+    let movie_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/movie/createWatchList`, { movie_id, user_id })
+      .then((data) => this.setState({ userWatchList: data.data.userLiked }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   render() {
     let {
@@ -186,6 +206,7 @@ export default class MoviePage extends Component {
       movie_backdrops,
       crew,
       userLiked,
+      userWatchList,
     } = this.state;
 
     let Background =
@@ -273,6 +294,8 @@ export default class MoviePage extends Component {
           companies={companies}
           liked={userLiked}
           handleLike={this.handleLike}
+          watchList={userWatchList}
+          handleWatchList={this.handleWatchList}
         ></OverviewSection>
 
         <div

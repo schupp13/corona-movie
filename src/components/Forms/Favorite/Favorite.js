@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import StarsIcon from "@material-ui/icons/Stars";
 import { SessionContext } from "../../SessionContext/SessionContext";
-import axios from "axios";
 import "./Favorite.scss";
 
 export default function Favorite(props) {
@@ -20,7 +19,7 @@ export default function Favorite(props) {
   return (
     <div className="fav-div">
       <Tooltip
-        title={props.liked ? "You currently like this." : "Like This Video"}
+        title={props.liked ? "Remove from favorites." : "Add to Favorites"}
       >
         <Button
           size="small"

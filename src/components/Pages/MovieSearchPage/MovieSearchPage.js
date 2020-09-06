@@ -11,7 +11,7 @@ import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 
 export default function MovieSearchPage() {
   let [results, setResults] = useState([]);
-  let [genres, setGenres] = useState([]);
+  // let [genres, setGenres] = useState([]);
   let [selectedGenres, setSelectedGenres] = useState([]);
   let [page, setPage] = useState([]);
   let [totalPages, setTotalPages] = useState([]);

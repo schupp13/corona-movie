@@ -32,11 +32,14 @@ export default class MoviePage extends Component {
       companies: [],
       movie_posters: [],
       movie_backdrops: [],
+      userLiked: false,
+      userWatchList: false,
     };
   }
 
   componentDidMount() {
     this.getMovie();
+    this.checkUserState();
   }
 
   componentDidUpdate(prevProps) {
@@ -48,6 +51,30 @@ export default class MoviePage extends Component {
       });
     }
   }
+  checkUserState = () => {
+    let movie_id = this.props.match.params.id;
+    let user_id = JSON.parse(localStorage.getItem("user")).id;
+    axios
+      .post(`/api/movie/user/state`, { user_id, movie_id })
+      .then((result) => {
+        console.log(result.data);
+        if (result.data.length > 0) {
+          result.data.map((feat) => {
+            if (feat["?column?"] === "userWatchlist") {
+              this.setState({ userWatchList: true });
+            } else if (feat["?column?"] === "userLiked") {
+              this.setState({ userLiked: true });
+            }
+          });
+        } else {
+          this.setState({ userLiked: false, userWatchList: false });
+        }
+      })
+      .catch((error) => {
+        // this.setState({ userLiked: false });
+      });
+    console.log(this.state);
+  };
 
   getMovie = () => {
     let movieID = this.props.match.params.id;
@@ -139,6 +166,29 @@ export default class MoviePage extends Component {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
   };
 
+  handleLike = (e) => {
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+
+    let movie_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/movie/createFavorite`, { movie_id, user_id })
+      .then((data) => this.setState({ userLiked: data.data.userLiked }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  handleWatchList = (e) => {
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+
+    let movie_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/movie/createWatchList`, { movie_id, user_id })
+      .then((data) => this.setState({ userWatchList: data.data.userLiked }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   render() {
     let {
       movie,
@@ -155,6 +205,8 @@ export default class MoviePage extends Component {
       movie_posters,
       movie_backdrops,
       crew,
+      userLiked,
+      userWatchList,
     } = this.state;
 
     let Background =
@@ -218,7 +270,6 @@ export default class MoviePage extends Component {
     });
 
     let videosJSX = videos.map((movie, index) => {
-      console.log(movie);
       return <MovieVideo movie={movie} key={index} />;
     });
 
@@ -241,6 +292,10 @@ export default class MoviePage extends Component {
           id={movie.id}
           overview={movie.overview}
           companies={companies}
+          liked={userLiked}
+          handleLike={this.handleLike}
+          watchList={userWatchList}
+          handleWatchList={this.handleWatchList}
         ></OverviewSection>
 
         <div

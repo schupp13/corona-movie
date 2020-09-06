@@ -10,8 +10,9 @@ import Chip from "@material-ui/core/Chip";
 import AverageRating from "../../Features/AverageRating/AverageRating";
 import { Link } from "react-router-dom";
 import "./MovieCard.scss";
-import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 
+import TrailerModal from "../../Features/TrailerModal/TrailerModal";
+import { useTheme } from "@material-ui/core/styles";
 export default function MovieCard(props) {
   const handleError = (e) => {
     console.log(e);
@@ -42,6 +43,8 @@ export default function MovieCard(props) {
       ? "episode"
       : "tv";
 
+  const theme = useTheme();
+  // console.log(theme);
   return (
     <div style={{ padding: 10 }}>
       <Card className="movie-card">
@@ -59,7 +62,7 @@ export default function MovieCard(props) {
 
           <CardContent>
             <div className="title-div">
-              <Typography variant="h5" component="h2">
+              <Typography variant="h5" component="h2" color="primary">
                 {showMore ? props.title : shortTitle}
               </Typography>
               <div className="rating-div">
@@ -74,7 +77,7 @@ export default function MovieCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions className="card-actions">
-          <Button component={Link} to={link} size="small" color="primary">
+          <Button component={Link} to={link} size="small">
             More Info
           </Button>
 

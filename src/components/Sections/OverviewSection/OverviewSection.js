@@ -6,7 +6,9 @@ import HomeIcon from "@material-ui/icons/Home";
 import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 import netflixpic from "../../../img/netflix.png";
-
+import Typography from "@material-ui/core/Typography";
+import Favorite from "../../Forms/Favorite/Favorite";
+import WatchList from "../../Forms/WatchList/WatchList";
 export default function OverviewSection(props) {
   console.log(props);
   let {
@@ -20,6 +22,7 @@ export default function OverviewSection(props) {
     genres,
     id,
     type,
+    status,
   } = props;
 
   let homepageOption =
@@ -46,13 +49,24 @@ export default function OverviewSection(props) {
                 src={`https://image.tmdb.org/t/p/w45/${company.logo_path}`}
               ></img>
             ) : (
-              <h6>{company.name}</h6>
+              <Typography variant="h6" component="p" color="primary">
+                {company.name}
+              </Typography>
             )}
           </div>
         );
       })
     : "";
-
+  let date = release_date && new Date(release_date);
+  console.log(date && date.getFullYear());
+  let dateFormat = date
+    ? date.getMonth() +
+      1 +
+      "/" +
+      (date.getDate() + 1) +
+      "/" +
+      date.getFullYear()
+    : "NA";
   return (
     <div className="movie-page-content">
       <div className="poster-div">
@@ -68,9 +82,18 @@ export default function OverviewSection(props) {
       </div>
       <div className="movie-details">
         <div className="movie-overview">
-          <h4>Overview</h4>
-          <p>{overview}</p>
-          <p>{release_date && release_date.substring(0, 4)}</p>
+          <Typography variant="h5" component="h2" color="primary">
+            Overview
+          </Typography>
+          <Typography variant="body2" color="textPrimary" component="p">
+            {overview}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Release: {dateFormat}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {status && "Status: " + status}
+          </Typography>
         </div>
         <div className="chips">{chips}</div>
         <div className="movie-companies">{companiesjsx}</div>
@@ -84,6 +107,19 @@ export default function OverviewSection(props) {
           <div className="movie-trailer">
             <TrailerModal type={type} id={id} />
           </div>
+
+          <Favorite
+            type={type}
+            id={id}
+            liked={props.liked}
+            handleLike={props.handleLike}
+          />
+          <WatchList
+            type={type}
+            id={id}
+            watchList={props.watchList}
+            handleWatchList={props.handleWatchList}
+          />
         </div>
       </div>
     </div>

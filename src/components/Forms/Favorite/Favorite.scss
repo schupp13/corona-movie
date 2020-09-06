@@ -1,0 +1,12 @@
+@import "../../../App.scss";
+.fav-div {
+  .liked {
+    font-size: 2rem;
+    color: $AccentColor;
+    background-color: $primaryColor;
+  }
+  .not-liked {
+    font-size: 1rem;
+    color: rgb(151, 151, 151);
+  }
+}

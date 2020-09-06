@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Typography from "@material-ui/core/Typography";
+
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import ActorCard from "../../Cards/ActorCard/ActorCard";
 import MovieReviewCard from "../../Cards/MovieReviewCard/MovieReviewCard";
@@ -34,11 +36,14 @@ class TVShowPage extends Component {
       networks: [],
       backdrops: [],
       posters: [],
+      userLiked: false,
+      userWatchList: false,
     };
   }
 
   componentDidMount() {
     this.getTVShow();
+    this.checkUserState();
   }
 
   componentDidUpdate(prevProps) {
@@ -50,6 +55,56 @@ class TVShowPage extends Component {
       });
     }
   }
+
+  checkUserState = () => {
+    let tvshow_id = parseInt(this.props.match.params.id);
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+    axios
+      .post(`/api/tvshow/user/state`, { user_id, tvshow_id })
+      .then((result) => {
+        console.log(result.data);
+        if (result.data.length > 0) {
+          result.data.map((feat) => {
+            if (feat["?column?"] === "userWatchlist") {
+              this.setState({ userWatchList: true });
+            } else if (feat["?column?"] === "userLiked") {
+              this.setState({ userLiked: true });
+            }
+          });
+        } else {
+          this.setState({ userLiked: false, userWatchList: false });
+        }
+      })
+      .catch((error) => {
+        // this.setState({ userLiked: false });
+      });
+    console.log(this.state);
+  };
+
+  handleLike = (e) => {
+    console.log("l;jdl;fjl;ajdlkf;jlkdfjlkjffdld");
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+
+    let tvshow_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/tvshow/createFavorite`, { tvshow_id, user_id })
+      .then((data) => this.setState({ userLiked: data.data.userLiked }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  handleWatchList = (e) => {
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+
+    let tvshow_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/tvshow/createWatchList`, { tvshow_id, user_id })
+      .then((data) => this.setState({ userWatchList: data.data.userLiked }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   handleScroll = () => {};
 
@@ -133,6 +188,8 @@ class TVShowPage extends Component {
       networks,
       similar_page,
       similar_total_pages,
+      userLiked,
+      userWatchList,
     } = this.state;
 
     let tvPosters = posters.map((element, index) => {
@@ -234,6 +291,11 @@ class TVShowPage extends Component {
           genres={genres}
           id={tvshow.id}
           overview={tvshow.overview}
+          status={status}
+          liked={userLiked}
+          handleLike={this.handleLike}
+          watchList={userWatchList}
+          handleWatchList={this.handleWatchList}
         ></OverviewSection>
         <div
           className="parallax"

@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const AC = require("./controllers/auth_controller");
 const MC = require("./controllers/movie_controller");
 const TVC = require("./controllers/tv_controller");
+const FC = require("./controllers/user_actions_controller");
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
 
 const app = express();
@@ -26,6 +27,11 @@ app.use(
 massive(CONNECTION_STRING).then((db) => {
   app.set("db", db);
 });
+
+// Create Fav
+app.post("/api/favorites", FC.createFav);
+app.post("/api/watchlist", FC.createWatch);
+app.post("/api/user/state", FC.userState);
 
 // Tvshow controller enpoints
 app.post("/api/tvshow/user/state", TVC.getUserState);

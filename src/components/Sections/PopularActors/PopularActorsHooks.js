@@ -60,8 +60,8 @@ export default function PopularActorsHooks(props) {
   return (
     <div className="trending">
       <ScrollDiv
-        title="Popular Actors"
         cards={actors}
+        title="Popular Actors"
         handleScroll={handleScroll}
         page={results.page}
         total_pages={results.totalPages}

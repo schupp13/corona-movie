@@ -22,7 +22,6 @@ module.exports = {
   },
   createWatchList: async (req, res) => {
     const { user_id, movie_id } = req.body;
-    console.log(movie_id);
     const check = await req.app
       .get("db")
       .movie_create_watch_list(movie_id, user_id);
@@ -50,7 +49,6 @@ module.exports = {
       .get("db")
       .movie_get_user_state(movie_id, user_id);
 
-    console.log(check);
     res.status(200).send(check);
   },
 };

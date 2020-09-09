@@ -1,22 +1,18 @@
 @import "../../../App.scss";
 
-
-
-
 .parallax {
- /* The image used */
+  /* The image used */
 
- /* Set a specific height */
- min-height: 300px;
+  /* Set a specific height */
+  min-height: 250px;
 
- /* Create the parallax scrolling effect */
- background-attachment: fixed;
- background-position: center;
- background-repeat: no-repeat;
- background-size: cover;
- color: white;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
 }
 
 @media only screen and (max-width: 600px) {
- 
 }

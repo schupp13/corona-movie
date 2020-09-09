@@ -65,9 +65,11 @@ export default function ScrollDiv(props) {
   return (
     cards.length > 0 && (
       <div className="scroll-container-div">
-        <Typography variant="h5" component="h2" color="primary">
-          {props.title}
-        </Typography>
+        {props.title && (
+          <Typography variant="h5" component="h2" color="textSecondary">
+            {props.title}
+          </Typography>
+        )}
         <div className="buttons">{buttons}</div>
         {desktopSize || tabletSize ? (
           <ScrollMenu

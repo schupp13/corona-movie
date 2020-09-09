@@ -1,8 +1,20 @@
 import React from "react";
+import NewTrailerModal from "../NewTrailerModal/NewTrailerModal";
+import Favorite from "../../Forms/Favorite/Favorite";
+import WatchList from "../../Forms/WatchList/WatchList";
 import MultiSearch from "../../Forms/MultiSearch/MultiSearch";
 import "./Banner.scss";
 export default function Banner(props) {
-  let { background, title, options, tagline, search, companies } = props;
+  let {
+    background,
+    title,
+    options,
+    tagline,
+    search,
+    companies,
+    id,
+    type,
+  } = props;
 
   return (
     <div className="banner" style={{ backgroundImage: `url(${background})` }}>
@@ -12,6 +24,25 @@ export default function Banner(props) {
           <p>{tagline}</p>
           {options}
           {search && <MultiSearch></MultiSearch>}
+          {!search && (
+            <div className="user-options">
+              <Favorite
+                type={type}
+                id={id}
+                liked={props.liked}
+                handleLike={props.handleLike}
+              />
+
+              <WatchList
+                type={type}
+                id={id}
+                watchList={props.watchList}
+                handleWatchList={props.handleWatchList}
+              />
+
+              {props.trailer && <NewTrailerModal trailer={props.trailer} />}
+            </div>
+          )}
         </div>
       </div>
     </div>

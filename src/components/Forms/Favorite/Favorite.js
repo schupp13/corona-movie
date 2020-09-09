@@ -1,21 +1,22 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import StarsIcon from "@material-ui/icons/Stars";
-import { SessionContext } from "../../SessionContext/SessionContext";
+import SnackBar from "../../Features/SnackBar/SnackBar";
 import "./Favorite.scss";
 
 export default function Favorite(props) {
-  let [session, setSession, logoutSession, getSession, loggedIn] = useContext(
-    SessionContext
-  );
-
   useEffect(() => {}, []);
+  let [open, setOpen] = useState(false);
 
   const handleSubmit = () => {
     props.handleLike();
+    setOpen(true);
   };
-  console.log(props);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="fav-div">
       <Tooltip
@@ -29,6 +30,14 @@ export default function Favorite(props) {
           <StarsIcon fontSize="large"></StarsIcon>
         </Button>
       </Tooltip>
+
+      <SnackBar
+        message={
+          props.liked ? "Added to your favorites" : "Removed from Favorites"
+        }
+        open={open}
+        handleClose={handleClose}
+      ></SnackBar>
     </div>
   );
 }

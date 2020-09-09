@@ -87,6 +87,7 @@ export default function TopRatedTVShowsHooks(props) {
       <MovieCard
         message={`#${index + 1} ${message}`}
         tvshow={tvshow}
+        title={""}
         key={index}
         id={tvshow.id}
         title={tvshow.name}
@@ -101,8 +102,8 @@ export default function TopRatedTVShowsHooks(props) {
   return (
     <div className="trending">
       <ScrollDiv
+        title="TV Shows"
         buttons={buttons}
-        title={`TV - ${message}`}
         cards={tvshows}
         handleScroll={handleScroll}
         page={results.page}

@@ -118,50 +118,9 @@ class TopRatedTVShow extends Component {
 
     return (
       <div className="trending">
-        {/* <ButtonGroup size="small" aria-label="small outlined button group">
-          <Button
-            onClick={() => {
-              this.changeType("top_rated");
-            }}
-            name="day"
-            className={this.state.type === 'top_rated' ? 'active trending-button': 'trending-button'}
-          >
-            Top Rated
-          </Button>
-          <Button
-            onClick={() => {
-              this.changeType("popular");
-            }}
-            name="week"
-            className={this.state.type === 'popular' ? 'active trending-button': 'trending-button'}
-
-          >
-            Most Popular
-          </Button>
-          <Button
-            onClick={() => {
-              this.changeType("on_the_air");
-            }}
-            name="week"
-            className={this.state.type === 'on_the_air' ? 'active trending-button': 'trending-button'}
-
-          >
-            On Air
-          </Button>
-          <Button
-            onClick={() => {
-              this.changeType("airing_today");
-            }}
-            name="week"
-            className={this.state.type === 'airing_today' ? 'active trending-button': 'trending-button'}
-
-          >
-            On Air Today
-          </Button>
-        </ButtonGroup> */}
         <ScrollDiv
           buttons={buttons}
-          title={`TV - ${message}`}
+          title={`TV Shows`}
           cards={tvshows}
           handleScroll={this.handleScroll}
           page={page}

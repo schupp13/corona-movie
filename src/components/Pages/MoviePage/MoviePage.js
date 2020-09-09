@@ -52,12 +52,13 @@ export default class MoviePage extends Component {
     }
   }
   checkUserState = () => {
-    let movie_id = this.props.match.params.id;
-    let user_id = JSON.parse(localStorage.getItem("user")).id;
+    let item_id = parseInt(this.props.match.params.id);
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+    let media_id = 1; // 1 is for movies
     axios
-      .post(`/api/movie/user/state`, { user_id, movie_id })
+      .post(`/api/user/state`, { user_id, item_id, media_id })
       .then((result) => {
-        console.log(result.data);
+        console.log(result);
         if (result.data.length > 0) {
           result.data.map((feat) => {
             if (feat["?column?"] === "userWatchlist") {
@@ -71,9 +72,35 @@ export default class MoviePage extends Component {
         }
       })
       .catch((error) => {
-        // this.setState({ userLiked: false });
+        this.setState({ userLiked: false, userWatchList: false });
       });
-    console.log(this.state);
+  };
+
+  handleLike = (e) => {
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+    let media_id = 1; // 1 is for movies
+    let item_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/favorites`, { item_id, user_id, media_id })
+      .then((data) => this.setState({ userLiked: data.data[0] ? true : false }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  handleWatchList = (e) => {
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+    let media_id = 1; // 1 is for movies
+    let item_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/watchlist`, { item_id, user_id, media_id })
+      .then((data) => {
+        console.log(data);
+        this.setState({ userWatchList: data.data[0] ? true : false });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   getMovie = () => {
@@ -83,7 +110,6 @@ export default class MoviePage extends Component {
         `https://api.themoviedb.org/3/movie/${movieID}?api_key=12aa3499b6032630961640574aa332a9&append_to_response=credits,images,videos,reviews,similar`
       )
       .then((results) => {
-        console.log(results);
         this.setState({
           movie: results.data,
           actors: results.data.credits.cast,
@@ -100,7 +126,6 @@ export default class MoviePage extends Component {
           genres: results.data.genres,
           companies: results.data.production_companies,
         });
-        console.log(this.state);
       })
       .catch((error) => {
         console.log(error);
@@ -161,32 +186,8 @@ export default class MoviePage extends Component {
     );
   };
   handleError = (e) => {
-    console.log(e);
     e.target.src =
       "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
-  };
-
-  handleLike = (e) => {
-    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
-
-    let movie_id = parseInt(this.props.match.params.id);
-    axios
-      .post(`/api/movie/createFavorite`, { movie_id, user_id })
-      .then((data) => this.setState({ userLiked: data.data.userLiked }))
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  handleWatchList = (e) => {
-    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
-
-    let movie_id = parseInt(this.props.match.params.id);
-    axios
-      .post(`/api/movie/createWatchList`, { movie_id, user_id })
-      .then((data) => this.setState({ userWatchList: data.data.userLiked }))
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   render() {
@@ -272,6 +273,9 @@ export default class MoviePage extends Component {
     let videosJSX = videos.map((movie, index) => {
       return <MovieVideo movie={movie} key={index} />;
     });
+    let trailer = videos.filter((movie, index) => {
+      return movie.type === "Trailer";
+    });
 
     return (
       <>
@@ -280,6 +284,13 @@ export default class MoviePage extends Component {
           title={movie.title}
           tagline={movie.tagline}
           search={false}
+          liked={userLiked}
+          type="movie"
+          id={movie.id}
+          handleLike={this.handleLike}
+          watchList={userWatchList}
+          handleWatchList={this.handleWatchList}
+          trailer={trailer}
         />
         <OverviewSection
           type="movie"

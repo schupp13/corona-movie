@@ -26,6 +26,8 @@ class ActorsPage extends Component {
       total_results: 0,
       actor_images: [],
       header: "Popular",
+      userLiked: false,
+      userWatchList: false,
     };
   }
 
@@ -33,6 +35,7 @@ class ActorsPage extends Component {
     this.getActor();
     this.discoverActorByID();
     this.getActorImages();
+    this.checkUserState();
   }
 
   getActor = () => {
@@ -127,6 +130,40 @@ class ActorsPage extends Component {
       this.discoverActorByID
     );
   };
+  checkUserState = () => {
+    let item_id = parseInt(this.props.match.params.id);
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+    let media_id = 5; // 5 is for actors
+    axios
+      .post(`/api/user/state`, { user_id, item_id, media_id })
+      .then((result) => {
+        console.log(result);
+        if (result.data.length > 0) {
+          result.data.map((feat) => {
+            if (feat["?column?"] === "userLiked") {
+              this.setState({ userLiked: true });
+            }
+          });
+        } else {
+          this.setState({ userLiked: false });
+        }
+      })
+      .catch((error) => {
+        this.setState({ userLiked: false });
+      });
+  };
+
+  handleLike = (e) => {
+    let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+    let media_id = 5; // 1 is for movies
+    let item_id = parseInt(this.props.match.params.id);
+    axios
+      .post(`/api/favorites`, { item_id, user_id, media_id })
+      .then((data) => this.setState({ userLiked: data.data[0] ? true : false }))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   handleScroll = () => {};
 
@@ -184,6 +221,8 @@ class ActorsPage extends Component {
           place_of_birth={actor.place_of_birth}
           birthday={actor.birthday}
           deathday={actor.deathday}
+          liked={this.state.userLiked}
+          handleLike={this.handleLike}
         />
 
         <ScrollDiv

@@ -7,10 +7,8 @@ import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import TrailerModal from "../../Features/TrailerModal/TrailerModal";
 import netflixpic from "../../../img/netflix.png";
 import Typography from "@material-ui/core/Typography";
-import Favorite from "../../Forms/Favorite/Favorite";
-import WatchList from "../../Forms/WatchList/WatchList";
+
 export default function OverviewSection(props) {
-  console.log(props);
   let {
     title,
     overview,
@@ -49,7 +47,7 @@ export default function OverviewSection(props) {
                 src={`https://image.tmdb.org/t/p/w45/${company.logo_path}`}
               ></img>
             ) : (
-              <Typography variant="h6" component="p" color="primary">
+              <Typography variant="h6" component="p" color="textSecondary">
                 {company.name}
               </Typography>
             )}
@@ -58,7 +56,6 @@ export default function OverviewSection(props) {
       })
     : "";
   let date = release_date && new Date(release_date);
-  console.log(date && date.getFullYear());
   let dateFormat = date
     ? date.getMonth() +
       1 +
@@ -99,27 +96,13 @@ export default function OverviewSection(props) {
         <div className="movie-companies">{companiesjsx}</div>
 
         <div className="movie-bottom">
-          <div className="movie-homepage">
-            <a href={homepage} target="__blank">
-              {homepageOption}
-            </a>
-          </div>
-          <div className="movie-trailer">
-            <TrailerModal type={type} id={id} />
-          </div>
-
-          <Favorite
-            type={type}
-            id={id}
-            liked={props.liked}
-            handleLike={props.handleLike}
-          />
-          <WatchList
-            type={type}
-            id={id}
-            watchList={props.watchList}
-            handleWatchList={props.handleWatchList}
-          />
+          {homepage && (
+            <div className="movie-homepage">
+              <a href={homepage} target="__blank">
+                {homepageOption}
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import MovieSearchPage from "../components/Pages/MovieSearchPage/MovieSearchPage
 import TVSearchPage from "../components/Pages/TVSearchPage/TVSearchPage";
 import NavBar from "../components/Sections/NavBar/NavBar";
 import Footer from "../components/Sections/Footer/Footer";
+import EpisodePage from "../components/Pages/EpisodePage/EpisodePage";
 
 const DefaultContainer = () => (
   <>
@@ -20,9 +21,14 @@ const DefaultContainer = () => (
       <Route path="/welcome" component={HomePage}></Route>
       <Route path="/movies/:id" component={MoviePage}></Route>
       <Route
+        exact
+        path="/tvshows/:id/seasons/:seasonid/episodes/:episodeid"
+        component={EpisodePage}
+      ></Route>
+      <Route
+        exact
         path="/tvshows/:id/seasons/:seasonid"
         component={SeasonPage}
-        render={(props) => <Component {...props} />}
       ></Route>
       <Route exact path="/tvshows/:id" component={TVShowPage}></Route>
       <Route path="/search/:search" component={SearchPage}></Route>

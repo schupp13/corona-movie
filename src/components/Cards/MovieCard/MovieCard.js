@@ -35,6 +35,7 @@ export default function MovieCard(props) {
     props.backdropPath &&
     `https://image.tmdb.org/t/p/w500/${props.backdropPath}`;
   const [showMore, setShowMore] = useState(false);
+
   let link = `/${props.type}/${props.id}`;
   let trailerLink =
     props.type === "movies"
@@ -68,7 +69,6 @@ export default function MovieCard(props) {
               <div className="rating-div">
                 <AverageRating rating={Math.round(props.voteAverage * 10)} />
               </div>
-
               <Chip className="movie-badge" label={props.message} />
             </div>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -77,10 +77,13 @@ export default function MovieCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions className="card-actions">
-          <Button component={Link} to={link} size="small">
+          <Button
+            component={Link}
+            to={props.episodeLink ? props.episodeLink : link}
+            size="small"
+          >
             More Info
           </Button>
-
           <TrailerModal type={trailerLink} id={props.id} movie={props.movie} />
         </CardActions>
       </Card>

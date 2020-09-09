@@ -55,11 +55,11 @@ export default function SomethingElse() {
             TV
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/actors" onClick={navSlide}>
             Actors
           </Link>
-        </li>
+        </li> */}
         {session && (
           <>
             <li>

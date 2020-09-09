@@ -1,38 +1,9 @@
-@import '../../../App.scss';
+@import "../../../App.scss";
 
-
-.season-page{
-    @include pageCenter(100%);
-    .container{
-        @include container();
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-       
-                    .scroll-container-div {
-                        width: 100%;
-                      
-                        background-color: white;
-                      
-                        h2 {
-                         padding: 12px;
-                        }
-                      
-                        .scroll-div {
-                         width: 100%;
-                         display: flex;
-                         overflow-x: scroll;
-                         overflow-y: hidden;
-                         padding: 15px;
-                        }
-                       }
-            
-        }
-       
-    }
-    @media only screen and (max-width: 500px) {
-    
-        .banner-content{
-           flex-direction: column;
-        }
-          }
+.season-page {
+}
+@media only screen and (max-width: 500px) {
+  .banner-content {
+    flex-direction: column;
+  }
+}

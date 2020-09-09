@@ -94,8 +94,8 @@ export default function TrendingMoviesHook(props) {
   return (
     <div className="trending">
       <ScrollDiv
+        title="Movies"
         buttons={buttons}
-        title={`Movies - Trending ${results.header}`}
         cards={movies}
         handleScroll={() => {}}
         page={results.page}

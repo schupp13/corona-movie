@@ -57,12 +57,13 @@ class TVShowPage extends Component {
   }
 
   checkUserState = () => {
-    let tvshow_id = parseInt(this.props.match.params.id);
+    let item_id = parseInt(this.props.match.params.id);
     let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
+    let media_id = 2; // 2 is for tvshows
     axios
-      .post(`/api/tvshow/user/state`, { user_id, tvshow_id })
+      .post(`/api/user/state`, { user_id, item_id, media_id })
       .then((result) => {
-        console.log(result.data);
+        console.log(result);
         if (result.data.length > 0) {
           result.data.map((feat) => {
             if (feat["?column?"] === "userWatchlist") {
@@ -78,17 +79,15 @@ class TVShowPage extends Component {
       .catch((error) => {
         // this.setState({ userLiked: false });
       });
-    console.log(this.state);
   };
 
   handleLike = (e) => {
-    console.log("l;jdl;fjl;ajdlkf;jlkdfjlkjffdld");
     let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
-
-    let tvshow_id = parseInt(this.props.match.params.id);
+    let media_id = 2; // 2 is for tvshows
+    let item_id = parseInt(this.props.match.params.id);
     axios
-      .post(`/api/tvshow/createFavorite`, { tvshow_id, user_id })
-      .then((data) => this.setState({ userLiked: data.data.userLiked }))
+      .post(`/api/favorites`, { item_id, user_id, media_id })
+      .then((data) => this.setState({ userLiked: data.data[0] ? true : false }))
       .catch((error) => {
         console.log(error);
       });
@@ -96,11 +95,14 @@ class TVShowPage extends Component {
 
   handleWatchList = (e) => {
     let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
-
-    let tvshow_id = parseInt(this.props.match.params.id);
+    let media_id = 2; // 2 is for tvshows
+    let item_id = parseInt(this.props.match.params.id);
     axios
-      .post(`/api/tvshow/createWatchList`, { tvshow_id, user_id })
-      .then((data) => this.setState({ userWatchList: data.data.userLiked }))
+      .post(`/api/watchlist`, { item_id, user_id, media_id })
+      .then((data) => {
+        console.log(data);
+        this.setState({ userWatchList: data.data[0] ? true : false });
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -115,7 +117,6 @@ class TVShowPage extends Component {
         `https://api.themoviedb.org/3/tv/${tvshowID}?api_key=12aa3499b6032630961640574aa332a9&append_to_response=credits,images,videos,reviews,similar`
       )
       .then((results) => {
-        console.log(results);
         this.setState({
           backdrops: results.data.images.backdrops,
           posters: results.data.images.posters,
@@ -271,6 +272,9 @@ class TVShowPage extends Component {
         />
       );
     });
+    let trailer = videos.filter((movie, index) => {
+      return movie.type === "Trailer";
+    });
 
     return (
       <>
@@ -280,6 +284,11 @@ class TVShowPage extends Component {
           tagline={tvshow.tagline}
           search={false}
           companies={networks}
+          trailer={trailer}
+          liked={userLiked}
+          handleLike={this.handleLike}
+          watchList={userWatchList}
+          handleWatchList={this.handleWatchList}
         />
         <OverviewSection
           type="tv"
@@ -319,48 +328,13 @@ class TVShowPage extends Component {
           addPage={this.addSimilarPage}
         ></ScrollDiv>
 
-        <div
-          className="parallax"
-          style={{ backgroundImage: `url(${Background})` }}
-        >
-          <ScrollDiv
-            title="Posters"
-            cards={tvPosters}
-            handleScroll={() => {}}
-            page={0}
-            total_pages={0}
-            addPage={() => {}}
-          ></ScrollDiv>
-        </div>
         <ScrollDiv
-          title="Reviews"
-          cards={reviewsjsx}
-          handleScroll={this.handleScroll}
+          title="Posters"
+          cards={tvPosters}
+          handleScroll={() => {}}
           page={0}
           total_pages={0}
-          addPage={this.addSimilarPage}
-        ></ScrollDiv>
-        <div
-          className="parallax"
-          style={{ backgroundImage: `url(${Background})` }}
-        >
-          <ScrollDiv
-            title="Crew"
-            cards={crewjsx}
-            handleScroll={this.handleScroll}
-            page={0}
-            total_pages={0}
-            addPage={() => {}}
-          ></ScrollDiv>
-        </div>
-
-        <ScrollDiv
-          title="TV Show Trailers"
-          cards={videosjsx}
-          handleScroll={this.handleScroll}
-          page={0}
-          total_pages={0}
-          addPage={this.addSimilarPage}
+          addPage={() => {}}
         ></ScrollDiv>
         <ScrollDiv
           title="Backdrops"
@@ -371,6 +345,37 @@ class TVShowPage extends Component {
           addPage={() => {}}
         ></ScrollDiv>
 
+        <ScrollDiv
+          title="Reviews"
+          cards={reviewsjsx}
+          handleScroll={this.handleScroll}
+          page={0}
+          total_pages={0}
+          addPage={this.addSimilarPage}
+        ></ScrollDiv>
+
+        <ScrollDiv
+          title="Crew"
+          cards={crewjsx}
+          handleScroll={this.handleScroll}
+          page={0}
+          total_pages={0}
+          addPage={() => {}}
+        ></ScrollDiv>
+
+        <div
+          className="parallax"
+          style={{ backgroundImage: `url(${Background})` }}
+        >
+          <ScrollDiv
+            title="TV Show Trailers"
+            cards={videosjsx}
+            handleScroll={this.handleScroll}
+            page={0}
+            total_pages={0}
+            addPage={this.addSimilarPage}
+          ></ScrollDiv>
+        </div>
         <ScrollDiv
           title="Similar TV Shows"
           cards={similarTvShowsjsx}

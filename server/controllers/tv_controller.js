@@ -46,14 +46,11 @@ module.exports = {
     }
   },
   getUserState: async (req, res) => {
-    console.log("hit");
     const { user_id, tvshow_id } = req.body;
-    console.log(tvshow_id);
     const check = await req.app
       .get("db")
       .tvshow_get_user_state(tvshow_id, user_id);
 
-    console.log(check);
     res.status(200).send(check);
   },
 };

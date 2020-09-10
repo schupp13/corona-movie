@@ -38,7 +38,7 @@
   }
   .right-div {
     display: flex;
-    width: 50%;
+    width: 30%;
 
     .nav-links {
       width: 90%;
@@ -90,14 +90,17 @@
   .close-search {
     animation: mymoveback 0.5s ease-in-out;
     opacity: 0;
-    display: none;
+    display: none !important;
   }
 }
 
 @media screen and (max-width: 1300px) {
   .nav-bar {
-    .nav-links {
+    .right-div {
       width: 50%;
+      .nav-links {
+        // width: 50%;
+      }
     }
   }
 }
@@ -125,45 +128,47 @@
 
 @media screen and (max-width: 768px) {
   .nav-bar {
-    .nav-links {
-      position: fixed;
-      right: 0px;
-      height: calc(100vh - #{$navHeight});
-      top: $navHeight;
-      background-color: $primaryColor;
-      display: flex;
-      flex-direction: column;
-      margin: 0px;
-      align-items: center;
-      width: 100%;
-      transform: translateX(100%);
-      transition: transform 0.5s ease-in-out;
-      background: rgb(2, 0, 36);
-      background: linear-gradient(
-        180deg,
-        $primaryColor 0%,
-        $SecondaryColor 100%
-      );
-      opacity: 0.98;
-    }
+    .right-div {
+      .nav-links {
+        position: fixed;
+        right: 0px;
+        height: calc(100vh - #{$navHeight});
+        top: $navHeight;
+        background-color: $primaryColor;
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+        align-items: center;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in-out;
+        background: rgb(2, 0, 36);
+        background: linear-gradient(
+          180deg,
+          $primaryColor 0%,
+          $SecondaryColor 100%
+        );
+        opacity: 0.98;
+      }
 
-    .nav-active {
-      transform: translateX(0%);
-      $list: (
-        "1": 0.2,
-        "2": 0.4,
-        "3": 0.6,
-        "4": 0.8,
-        "5": 1,
-      );
+      .nav-active {
+        transform: translateX(0%);
+        $list: (
+          "1": 0.2,
+          "2": 0.4,
+          "3": 0.6,
+          "4": 0.8,
+          "5": 1,
+        );
 
-      @each $property, $value in $list {
-        li:nth-child(#{$property}) {
-          animation: navLinkFade #{$value}s linear;
+        @each $property, $value in $list {
+          li:nth-child(#{$property}) {
+            animation: navLinkFade #{$value}s linear;
 
-          a,
-          p {
-            font-size: 20px;
+            a,
+            p {
+              font-size: 20px;
+            }
           }
         }
       }

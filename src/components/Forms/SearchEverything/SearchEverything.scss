@@ -1,0 +1,10 @@
+@import "../../../App.scss";
+
+.search-everything-di {
+  width: 100vw;
+  position: fixed;
+  top: $navHeight;
+  background-color: $textColorWhite;
+  display: flex;
+  justify-content: center;
+}

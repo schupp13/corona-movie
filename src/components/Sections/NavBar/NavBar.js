@@ -2,8 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../../SessionContext/SessionContext";
 import { Redirect, Link } from "react-router-dom";
 import LiveTvIcon from "@material-ui/icons/LiveTv";
+import SearchIcon from "@material-ui/icons/Search";
+import CloseIcon from "@material-ui/icons/Close";
 import "./NavBar.scss";
+import Button from "@material-ui/core/Button";
+
 import axios from "axios";
+import SearchEverything from "../../Forms/SearchEverything/SearchEverything";
 
 export default function SomethingElse() {
   let [active, setActive] = useState("");
@@ -12,6 +17,7 @@ export default function SomethingElse() {
   let [session, setSession, logoutSession, getSession, loggedIn] = useContext(
     SessionContext
   );
+  let [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     checkSession();
@@ -36,6 +42,12 @@ export default function SomethingElse() {
     navSlide();
   };
 
+  const searchSwitch = () => {
+    const opp = !showSearch;
+    setShowSearch(opp);
+    navSlide();
+  };
+
   return (
     <nav className="nav-bar">
       <div className="logo-div">
@@ -55,11 +67,7 @@ export default function SomethingElse() {
             TV
           </Link>
         </li>
-        {/* <li>
-          <Link to="/actors" onClick={navSlide}>
-            Actors
-          </Link>
-        </li> */}
+
         {session && (
           <>
             <li>
@@ -72,7 +80,32 @@ export default function SomethingElse() {
             </li>
           </>
         )}
+
+        {!showSearch ? (
+          <Button onClick={searchSwitch} className="search-button">
+            <SearchIcon />
+          </Button>
+        ) : (
+          <Button onClick={searchSwitch} className="close-search-button">
+            <CloseIcon />
+          </Button>
+        )}
       </ul>
+
+      <div
+        className={showSearch ? `search-everything-div ` : `close-search`}
+        style={{
+          width: "100vw",
+          position: "fixed",
+          top: "56px",
+          backgroundColor: "white",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <SearchEverything />
+      </div>
+
       <div className={`${burger} burger`} onClick={navSlide}>
         <div className="line1"></div>
         <div className="line2"></div>

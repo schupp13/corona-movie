@@ -45,7 +45,6 @@ class ActorsPage extends Component {
         `https://api.themoviedb.org/3/person/${actorsID}?api_key=12aa3499b6032630961640574aa332a9`
       )
       .then((results) => {
-        console.log(results.data);
         this.setState({
           actor: results.data,
         });
@@ -197,7 +196,6 @@ class ActorsPage extends Component {
     });
 
     let DiscoverActor = known_for.map((element, index) => {
-      console.log(element);
       return (
         <MoviePoster
           key={index}

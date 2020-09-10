@@ -4,6 +4,7 @@ import Favorite from "../../Forms/Favorite/Favorite";
 import WatchList from "../../Forms/WatchList/WatchList";
 import MultiSearch from "../../Forms/MultiSearch/MultiSearch";
 import "./Banner.scss";
+import SearchEverything from "../../Forms/SearchEverything/SearchEverything";
 export default function Banner(props) {
   let {
     background,
@@ -23,7 +24,7 @@ export default function Banner(props) {
           <h1>{title}</h1>
           <p>{tagline}</p>
           {options}
-          {search && <MultiSearch></MultiSearch>}
+          {/* {search && <SearchEverything />} */}
           {!search && (
             <div className="user-options">
               <Favorite

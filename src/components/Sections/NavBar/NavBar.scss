@@ -10,6 +10,7 @@
   z-index: 5;
   position: fixed;
   top: 0;
+
   .burger {
     display: none;
     cursor: pointer;
@@ -35,44 +36,52 @@
       margin-left: 20px;
     }
   }
-
-  .nav-links {
-    width: 30%;
+  .right-div {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-right: 10px;
-    z-index: 5;
+    width: 50%;
 
-    .close-search-button {
-      color: $primaryColor;
-      background-color: $AccentColor;
-    }
-    .search-button {
-      background-color: $primaryColor;
-      color: $AccentColor;
-    }
+    .nav-links {
+      width: 90%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-right: 10px;
+      z-index: 5;
 
-    li {
-      list-style: none;
+      li {
+        list-style: none;
 
-      a,
-      p {
-        color: rgb(212, 212, 212);
-        text-decoration: none;
-        letter-spacing: 3px;
-        font-weight: bold;
-        font-size: 14px;
-        width: 100%;
-        padding: 10px;
-        margin: 15px;
-      }
+        a,
+        p {
+          color: rgb(212, 212, 212);
+          text-decoration: none;
+          letter-spacing: 3px;
+          font-weight: bold;
+          font-size: 14px;
+          width: 100%;
+          padding: 10px;
+          margin: 15px;
+        }
 
-      a:hover,
-      p:hover {
-        color: $AccentColor;
+        a:hover,
+        p:hover {
+          color: $AccentColor;
+        }
       }
     }
+  }
+  .close-search-button {
+    color: $primaryColor;
+    background-color: $AccentColor;
+  }
+
+  .close-search-button:hover {
+    background-color: $primaryColor;
+    color: $AccentColor;
+  }
+  .search-button {
+    background-color: $primaryColor;
+    color: $AccentColor;
   }
 
   .search-everything-div {

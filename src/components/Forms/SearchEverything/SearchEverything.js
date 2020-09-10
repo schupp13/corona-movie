@@ -48,6 +48,7 @@ export default function SearchEverything(props) {
       onSubmit={submitForm}
       style={{
         maxWidth: "1200px",
+        padding: 5,
       }}
     >
       <Autocomplete
@@ -62,7 +63,6 @@ export default function SearchEverything(props) {
         renderInput={(params) => (
           <TextField
             {...params}
-            style={{ backgroundColor: "white" }}
             label="Tv Show, Movie, Actors"
             margin="normal"
             variant="outlined"

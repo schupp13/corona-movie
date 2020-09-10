@@ -45,7 +45,6 @@ export default function SomethingElse() {
   const searchSwitch = () => {
     const opp = !showSearch;
     setShowSearch(opp);
-    navSlide();
   };
 
   return (
@@ -56,31 +55,32 @@ export default function SomethingElse() {
           <LiveTvIcon className="tv-icon" />
         </Link>
       </div>
-      <ul className={`${active} nav-links`}>
-        <li>
-          <Link to="/moviesearch" onClick={navSlide}>
-            Movies
-          </Link>
-        </li>
-        <li>
-          <Link to="/tvsearch" onClick={navSlide}>
-            TV
-          </Link>
-        </li>
+      <div className="right-div">
+        <ul className={`${active} nav-links`}>
+          <li>
+            <Link to="/moviesearch" onClick={navSlide}>
+              Movies
+            </Link>
+          </li>
+          <li>
+            <Link to="/tvsearch" onClick={navSlide}>
+              TV
+            </Link>
+          </li>
 
-        {session && (
-          <>
-            <li>
-              <Link to={`profile/${session.id}`}>{session.username}</Link>
-            </li>
-            <li onClick={logout}>
-              <p className="logout" onClick={logout}>
-                Logout
-              </p>
-            </li>
-          </>
-        )}
-
+          {session && (
+            <>
+              <li>
+                <Link to={`profile/${session.id}`}>{session.username}</Link>
+              </li>
+              <li onClick={logout}>
+                <p className="logout" onClick={logout}>
+                  Logout
+                </p>
+              </li>
+            </>
+          )}
+        </ul>
         {!showSearch ? (
           <Button onClick={searchSwitch} className="search-button">
             <SearchIcon />
@@ -90,8 +90,7 @@ export default function SomethingElse() {
             <CloseIcon />
           </Button>
         )}
-      </ul>
-
+      </div>
       <div
         className={showSearch ? `search-everything-div ` : `close-search`}
         style={{
@@ -104,6 +103,9 @@ export default function SomethingElse() {
         }}
       >
         <SearchEverything />
+        <Button onClick={searchSwitch}>
+          <CloseIcon />
+        </Button>
       </div>
 
       <div className={`${burger} burger`} onClick={navSlide}>

@@ -125,20 +125,46 @@ export default function MovieSearchPage() {
 
   return (
     <div className="movie-page">
-      <ScrollDiv
+      <div className="options">
+        <SelectMultipleGenre
+          selectedOptions={selectedGenres}
+          handleChange={handleGenreChange}
+          title="Genre"
+          key="1"
+          type="movie"
+        />
+        <SelectMultipleCertifications
+          selectedOptions={selectedCertifications}
+          handleChange={handleCertificationChange}
+          title="Certifications"
+          key="2"
+          type="movie"
+        />
+        <SearchKeywords handleClick={handleKeywords} key="3" type="movie" />
+        <SelectMultipleSortBy
+          selectedOptions={sortby}
+          handleChange={handleSortby}
+          title="Sort By"
+          key="5"
+          type="movie"
+        />
+      </div>
+      {/* <ScrollDiv
         title=""
         cards={filters()}
         handleScroll={() => {}}
         page={0}
         total_pages={0}
         addPage={0}
-      ></ScrollDiv>
-      <div className="movie-results">{movieResults}</div>
-      <Pagination
-        page={parseInt(page)}
-        count={parseInt(totalPages)}
-        setPage={paginate}
-      />
+      ></ScrollDiv> */}
+      <div className="right-div">
+        <div className="movie-results">{movieResults}</div>
+        <Pagination
+          page={parseInt(page)}
+          count={parseInt(totalPages)}
+          setPage={paginate}
+        />
+      </div>
     </div>
   );
 }

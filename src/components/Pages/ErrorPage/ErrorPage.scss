@@ -1,0 +1,20 @@
+@import "../../../App.scss";
+
+.error-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 37, 63, 1),
+    rgba(144, 206, 161, 1)
+  );
+
+  .error-page-content {
+    max-width: 500px;
+    text-align: center;
+  }
+}

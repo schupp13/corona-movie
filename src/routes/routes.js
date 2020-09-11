@@ -12,29 +12,30 @@ import TVSearchPage from "../components/Pages/TVSearchPage/TVSearchPage";
 import NavBar from "../components/Sections/NavBar/NavBar";
 import Footer from "../components/Sections/Footer/Footer";
 import EpisodePage from "../components/Pages/EpisodePage/EpisodePage";
+import ErrorPage from "../components/Pages/ErrorPage/ErrorPage";
 
 const DefaultContainer = () => (
   <>
     <NavBar />
     <div className="container">
-      <Route exact path="/" component={LandingPage}></Route>
-      <Route path="/welcome" component={HomePage}></Route>
-      <Route path="/movies/:id" component={MoviePage}></Route>
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/welcome" component={HomePage} />
+      <Route exact path="/movies/:id" component={MoviePage} />
       <Route
         exact
         path="/tvshows/:id/seasons/:seasonid/episodes/:episodeid"
         component={EpisodePage}
-      ></Route>
+      />
       <Route
         exact
         path="/tvshows/:id/seasons/:seasonid"
         component={SeasonPage}
-      ></Route>
-      <Route exact path="/tvshows/:id" component={TVShowPage}></Route>
-      <Route path="/search/:search" component={SearchPage}></Route>
-      <Route path="/actors/:id" component={ActorPage}></Route>
-      <Route path="/moviesearch" component={MovieSearchPage}></Route>
-      <Route path="/tvsearch" component={TVSearchPage}></Route>
+      />
+      <Route exact path="/tvshows/:id" component={TVShowPage} />
+      <Route exact path="/search/:search" component={SearchPage} />
+      <Route exact path="/actors/:id" component={ActorPage} />
+      <Route exact path="/moviesearch" component={MovieSearchPage} />
+      <Route exact path="/tvsearch" component={TVSearchPage} />
     </div>
     <Footer />
   </>
@@ -42,7 +43,7 @@ const DefaultContainer = () => (
 
 export default (
   <Switch>
-    <Route exact path="/" component={LandingPage}></Route>
-    <Route component={DefaultContainer}></Route>
+    <Route exact path="/" component={LandingPage} />
+    <Route component={DefaultContainer} />
   </Switch>
 );

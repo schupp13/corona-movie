@@ -89,7 +89,7 @@ export default function ScrollDiv(props) {
               display: "flex",
               alignItems: "center",
               userSelect: "none",
-              width: "100%",
+              maxWidth: "100%",
               cursor: "pointer",
             }}
             wrapperStyle={{

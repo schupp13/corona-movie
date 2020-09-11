@@ -93,6 +93,7 @@ export default function TVSearchPage() {
       handleChange={handleGenreChange}
       title="Genre"
       type="tv"
+      key="Genre"
     ></SelectMultipleGenre>,
     <SearchKeywords handleClick={handleKeywords} key="3" type="tv" />,
     <SelectMultipleSortBy
@@ -105,17 +106,36 @@ export default function TVSearchPage() {
   ];
 
   return (
-    <div className="movie-page">
-      <ScrollDiv
-        title=""
+    <div className="tv-page">
+      {/* <ScrollDiv
+        title="sadfasfas"
         cards={options}
         handleScroll={() => {}}
         page={0}
         total_pages={0}
         addPage={0}
-      ></ScrollDiv>
-      <div className="movie-results">{tvResults}</div>
-      <Pagination page={page} count={totalPages} setPage={paginate} />
+      ></ScrollDiv> */}
+      <div className="options">
+        <SelectMultipleGenre
+          selectedOptions={selectedGenres}
+          handleChange={handleGenreChange}
+          title="Genre"
+          type="tv"
+          key="Genre"
+        ></SelectMultipleGenre>
+        <SearchKeywords handleClick={handleKeywords} key="3" type="tv" />
+        <SelectMultipleSortBy
+          selectedOptions={sortby}
+          handleChange={handleSortby}
+          title="Sort By"
+          key="5"
+          type="tv"
+        />
+      </div>
+      <div>
+        <div className="movie-results">{tvResults} </div>
+        <Pagination page={page} count={totalPages} setPage={paginate} />
+      </div>
     </div>
   );
 }

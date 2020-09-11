@@ -39,7 +39,8 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(var(--lightGrey), 1);
         h2 {
-          background-color: $SecondaryColor;
+          background-color: $primaryColor;
+          color: $AccentColor;
           padding: 15px;
           width: 100%;
           text-align: center;
@@ -72,14 +73,15 @@
         }
 
         .search-button:active {
-          background-color: $SecondaryColor;
+          background-color: $primaryColor;
           color: white;
           transition: ease-in-out 0.5s;
         }
 
         .search-button:focus {
-          background-color: $SecondaryColor;
-          color: white;
+          background-color: $primaryColor;
+
+          color: $AccentColor;
           transition: ease-in-out 0.5s;
         }
       }

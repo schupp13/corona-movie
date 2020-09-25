@@ -5,6 +5,8 @@ import SearchKeywords from "../../Features/SearchKeywords/SearchKeywords";
 import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
 import MoviePoster from "../../Features/MoviePoster/MoviePoster";
 import Pagination from "../../Features/Pagination/Pagination";
+import TextModal from "../../Features/TextModal/TextModal";
+import { Typography } from "@material-ui/core";
 import SelectMultipleGenre from "../../Features/SelectMultipleGenre/SelectMultipleGenre";
 import "./TVSearchPage.scss";
 
@@ -32,7 +34,6 @@ export default function TVSearchPage() {
           api_key: "12aa3499b6032630961640574aa332a9",
           language: "en",
           certification_country: "US",
-
           page: page,
           with_genres: genresReady,
           with_keywords: keywordsReady,
@@ -87,55 +88,47 @@ export default function TVSearchPage() {
     );
   });
 
-  let options = [
-    <SelectMultipleGenre
-      selectedOptions={selectedGenres}
-      handleChange={handleGenreChange}
-      title="Genre"
-      type="tv"
-      key="Genre"
-    ></SelectMultipleGenre>,
-    <SearchKeywords handleClick={handleKeywords} key="3" type="tv" />,
-    <SelectMultipleSortBy
-      selectedOptions={sortby}
-      handleChange={handleSortby}
-      title="Sort By"
-      key="5"
-      type="tv"
-    />,
-  ];
+  let options = (
+    <>
+      <SelectMultipleGenre
+        selectedOptions={selectedGenres}
+        handleChange={handleGenreChange}
+        title="Genre"
+        type="tv"
+        key="Genre"
+      ></SelectMultipleGenre>
+      ,
+      <SearchKeywords handleClick={handleKeywords} key="3" type="tv" />,
+      <SelectMultipleSortBy
+        selectedOptions={sortby}
+        handleChange={handleSortby}
+        title="Sort By"
+        key="5"
+        type="tv"
+      />
+    </>
+  );
 
   return (
     <div className="tv-page">
-      {/* <ScrollDiv
-        title="sadfasfas"
-        cards={options}
-        handleScroll={() => {}}
-        page={0}
-        total_pages={0}
-        addPage={0}
-      ></ScrollDiv> */}
-      <div className="options">
-        <SelectMultipleGenre
-          selectedOptions={selectedGenres}
-          handleChange={handleGenreChange}
-          title="Genre"
-          type="tv"
-          key="Genre"
-        ></SelectMultipleGenre>
-        <SearchKeywords handleClick={handleKeywords} key="3" type="tv" />
-        <SelectMultipleSortBy
-          selectedOptions={sortby}
-          handleChange={handleSortby}
-          title="Sort By"
-          key="5"
-          type="tv"
+      <div className="header">
+        <Typography
+          color="textSecondary"
+          className="tv-page-header"
+          variant="h4"
+          component="h1"
+        >
+          TV Show Search
+        </Typography>
+
+        <TextModal
+          text={options}
+          buttonName="Filter"
+          header="Break-it-on-down"
         />
-      </div>
-      <div>
-        <div className="movie-results">{tvResults} </div>
         <Pagination page={page} count={totalPages} setPage={paginate} />
       </div>
+      <div className="movie-results">{tvResults} </div>
     </div>
   );
 }

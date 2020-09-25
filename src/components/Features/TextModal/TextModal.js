@@ -5,6 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { PlayCircleFilledWhite } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -13,18 +14,21 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   paper: {
-    backgroundColor: `   background: rgb(2, 0, 36);
-    background: linear-gradient(
-      to bottom,
-      rgba(13, 37, 63, .7),
-      rgba(13, 37, 63, 0.6)
-    )`,
+    // backgroundColor: `   background: rgb(2, 0, 36);
+    // background: linear-gradient(
+    //   to bottom,
+    //   rgba(13, 37, 63, .7),
+    //   rgba(13, 37, 63, 0.6)
+    // )`,
+    backgroundColor: "white",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     maxHeight: "50vh",
-    width: "90%",
     overflowY: "scroll",
-    color: "white",
+  },
+  button: {
+    background: "#0d253f",
+    color: "#90cea1",
   },
 }));
 
@@ -42,7 +46,7 @@ export default function TextModal(props) {
 
   return (
     <div>
-      <Button type="button" onClick={handleOpen}>
+      <Button type="button" onClick={handleOpen} className={classes.button}>
         {props.buttonName}
       </Button>
       <Modal
@@ -59,8 +63,10 @@ export default function TextModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">{props.header}</h2>
-            <Typography className="actor-bio" variant="body2" component="p">
+            <Typography id="transition-modal-title" variant="h5" component="h2">
+              {props.header}
+            </Typography>
+            <Typography className="actor-bio" variant="body2" component="div">
               {props.text}
             </Typography>
           </div>

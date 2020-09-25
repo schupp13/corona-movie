@@ -19,7 +19,7 @@ export default function ActorProfile(props) {
   // const shortDescription =
   //   bio && bio.length > 100 ? bio.slice(0, 100) + "..." : bio ? bio : "";
   const [showMore, setShowMore] = useState(false);
-
+  console.log(props.liked);
   return (
     <div className="actor-container">
       <div className="banner-overlay">

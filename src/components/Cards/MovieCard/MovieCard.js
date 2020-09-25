@@ -31,9 +31,9 @@ export default function MovieCard(props) {
       : props.overview
       ? props.overview
       : "";
-  let pic =
-    props.backdropPath &&
-    `https://image.tmdb.org/t/p/w500/${props.backdropPath}`;
+  let pic = props.backdropPath
+    ? `https://image.tmdb.org/t/p/w500/${props.backdropPath}`
+    : `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png`;
   const [showMore, setShowMore] = useState(false);
 
   let link = `/${props.type}/${props.id}`;

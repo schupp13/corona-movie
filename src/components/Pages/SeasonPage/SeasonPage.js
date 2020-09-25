@@ -21,7 +21,11 @@ export default function SeasonPage(props) {
     getShow();
     getSeasons();
     checkUserState();
-  }, [props.match.params]);
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [props.match.params.seasonid]);
 
   const getShow = () => {
     const { id } = props.match.params;
@@ -85,7 +89,10 @@ export default function SeasonPage(props) {
   const handleLike = (e) => {
     let user_id = parseInt(JSON.parse(localStorage.getItem("user")).id);
     let media_id = 4; // 4 is for seasons
-    let item_id = parseInt(props.match.params.seasonid);
+    let item_id =
+      parseInt(props.match.params.id) +
+      "/" +
+      parseInt(props.match.params.seasonid);
     axios
       .post(`/api/favorites`, { item_id, user_id, media_id })
       .then((data) => {

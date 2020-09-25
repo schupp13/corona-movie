@@ -1,52 +1,70 @@
-.movie-poster-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  border: 0.5px solid lightgrey;
-  min-width: 185px;
-  width: 185px;
-  .movie-poster-image {
-    position: relative;
-    // width: 100%;
+.movie-poster {
+  padding: 10px;
+  .movie-poster-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    border-radius: 15px 15px 0 0;
-    min-height: 265px;
-    .average-rating {
-      position: absolute;
-      bottom: -35px;
-      right: -30px;
-      width: 65%;
-    }
+    justify-content: flex-start;
 
-    a {
-      margin: 0;
-      padding: 0;
-      border-radius: 15px 15px 0 0;
-
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    border: 0.5px solid lightgrey;
+    min-width: 185px;
+    width: 185px;
+    .movie-poster-image {
+      position: relative;
       // width: 100%;
-      img {
-        border-radius: 15px 15px 0 0 !important;
+      align-items: center;
+      border-radius: 15px 15px 0 0;
+      min-height: 265px;
+      .average-rating {
+        position: absolute;
+        bottom: -35px;
+        right: -30px;
+        width: 65%;
+      }
+
+      a {
+        margin: 0;
+        padding: 0;
+        border-radius: 15px 15px 0 0;
+
         // width: 100%;
+        img {
+          border-radius: 15px 15px 0 0 !important;
+          // width: 100%;
+        }
       }
     }
-  }
 
-  .date {
-    font-size: 10px;
-    color: rgb(106, 106, 106);
-    margin-left: 8px;
-    margin: 5px;
-    align-self: flex-start;
-  }
+    .date {
+      font-size: 10px;
+      color: rgb(106, 106, 106);
+      margin-left: 8px;
+      margin: 5px;
+      align-self: flex-start;
+    }
 
-  .title {
-    max-width: 60%;
-    align-self: flex-start;
-    margin-left: 8px;
-    font-size: 10px;
+    .title {
+      max-width: 60%;
+      align-self: flex-start;
+      margin-left: 8px;
+      font-size: 10px;
+    }
+  }
+}
+@media screen and (max-width: 812px) {
+  .movie-poster {
+    padding: 2px;
+    .movie-poster-container {
+      width: 105px !important;
+      min-width: 105px;
+      .movie-poster-image {
+        min-height: fit-content;
+        img {
+          width: 100%;
+        }
+      }
+    }
   }
 }

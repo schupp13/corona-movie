@@ -7,7 +7,8 @@ import SelectMultipleCertifications from "../../Features/SelectMultipleCertifica
 import Pagination from "../../Features/Pagination/Pagination";
 import "./MovieSearchPage.scss";
 import SelectMultipleSortBy from "../../Features/SelectMultipleSortBy/SelectMultipleSortBy";
-import ScrollDiv from "../../Features/ScrollDiv/ScrollDiv";
+import TextModal from "../../Features/TextModal/TextModal";
+import { Typography } from "@material-ui/core";
 
 export default function MovieSearchPage() {
   let [results, setResults] = useState([]);
@@ -49,10 +50,18 @@ export default function MovieSearchPage() {
         setResults(results.data.results);
         setPage(results.data.page);
         setTotalPages(results.data.total_pages);
+        windowScroll();
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const windowScroll = () => {
+    window.scroll({
+      top: 0,
+      behavior: "auto",
+    });
   };
 
   const handleGenreChange = (value) => {
@@ -96,75 +105,57 @@ export default function MovieSearchPage() {
     );
   });
 
-  const filters = () => {
-    return [
+  const options = (
+    <>
       <SelectMultipleGenre
         selectedOptions={selectedGenres}
         handleChange={handleGenreChange}
         title="Genre"
         key="1"
         type="movie"
-      />,
+      />
       <SelectMultipleCertifications
         selectedOptions={selectedCertifications}
         handleChange={handleCertificationChange}
         title="Certifications"
         key="2"
         type="movie"
-      />,
-      <SearchKeywords handleClick={handleKeywords} key="3" type="movie" />,
+      />
+      <SearchKeywords handleClick={handleKeywords} key="3" type="movie" />
       <SelectMultipleSortBy
         selectedOptions={sortby}
         handleChange={handleSortby}
         title="Sort By"
         key="5"
         type="movie"
-      />,
-    ];
-  };
+      />
+    </>
+  );
 
   return (
     <div className="movie-page">
-      <div className="options">
-        <SelectMultipleGenre
-          selectedOptions={selectedGenres}
-          handleChange={handleGenreChange}
-          title="Genre"
-          key="1"
-          type="movie"
+      <div className="header">
+        <Typography
+          className="movie-page-header"
+          variant="h5"
+          component="h1"
+          color="textSecondary"
+        >
+          Movie Search
+        </Typography>
+
+        <TextModal
+          text={options}
+          buttonName="Filter"
+          header="Break-it-on-down"
         />
-        <SelectMultipleCertifications
-          selectedOptions={selectedCertifications}
-          handleChange={handleCertificationChange}
-          title="Certifications"
-          key="2"
-          type="movie"
-        />
-        <SearchKeywords handleClick={handleKeywords} key="3" type="movie" />
-        <SelectMultipleSortBy
-          selectedOptions={sortby}
-          handleChange={handleSortby}
-          title="Sort By"
-          key="5"
-          type="movie"
-        />
-      </div>
-      {/* <ScrollDiv
-        title=""
-        cards={filters()}
-        handleScroll={() => {}}
-        page={0}
-        total_pages={0}
-        addPage={0}
-      ></ScrollDiv> */}
-      <div className="right-div">
-        <div className="movie-results">{movieResults}</div>
         <Pagination
           page={parseInt(page)}
           count={parseInt(totalPages)}
           setPage={paginate}
         />
       </div>
+      <div className="movie-results">{movieResults}</div>
     </div>
   );
 }

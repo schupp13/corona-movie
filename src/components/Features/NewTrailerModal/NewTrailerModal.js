@@ -6,6 +6,7 @@ import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import axios from "axios";
 import Tooltip from "@material-ui/core/Tooltip";
 import Button from "@material-ui/core/Button";
+import Progress from "../Porgress/Progress";
 
 // import CloseIcon from '@material-ui/icons/Close';
 function rand() {
@@ -39,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
   },
   trailerDiv: {
-    backgroundImage:
-      'url("https://cdn.dribbble.com/users/24447/screenshots/1201310/inkling_spinner.gif")',
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -79,9 +78,7 @@ export default function NewTrailerModal(props) {
       title={props.name}
     ></iframe>
   ) : (
-    <div className={classes.paper}>
-      <h1>Sorry... No Trailer Available</h1>
-    </div>
+    <Progress />
   );
 
   return (

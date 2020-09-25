@@ -51,7 +51,7 @@ export default function SomethingElse() {
     <nav className="nav-bar">
       <div className="logo-div">
         <Link to="/welcome">
-          <h3>KeepItReel</h3>
+          <h1>MyMovieFeed </h1>
           <LiveTvIcon className="tv-icon" />
         </Link>
       </div>

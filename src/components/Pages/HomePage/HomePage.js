@@ -61,12 +61,9 @@ export default class HomePage extends Component {
       <>
         <Banner
           background={Background}
-          title="Welcome to Keep It Reel"
-          tagline={"... now keep it real."}
-          search={true}
-        >
-          {" "}
-        </Banner>
+          title="Welcome to My Movie Feed"
+          tagline="Where staying up-to-date on entertainment is simple"
+        ></Banner>
         <div className="search-results">
           <TrendingMoviesHook />
         </div>

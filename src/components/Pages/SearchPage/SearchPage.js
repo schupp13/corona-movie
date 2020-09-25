@@ -77,14 +77,14 @@ export default class SearchPage extends Component {
   };
 
   getAllSearch = () => {
-    let { search } = this.state;
+    const { search } = this.state;
 
-    let URLMulti = `https://api.themoviedb.org/3/search/multi?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
-    let URLTv = `https://api.themoviedb.org/3/search/tv?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
-    let URLMovie = `https://api.themoviedb.org/3/search/movie?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
-    let URLPerson = `https://api.themoviedb.org/3/search/person?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
-    let URLCollection = `https://api.themoviedb.org/3/search/collection?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
-    let URLCompany = `https://api.themoviedb.org/3/search/company?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+    const URLMulti = `https://api.themoviedb.org/3/search/multi?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+    const URLTv = `https://api.themoviedb.org/3/search/tv?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+    const URLMovie = `https://api.themoviedb.org/3/search/movie?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+    const URLPerson = `https://api.themoviedb.org/3/search/person?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+    const URLCollection = `https://api.themoviedb.org/3/search/collection?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
+    const URLCompany = `https://api.themoviedb.org/3/search/company?api_key=12aa3499b6032630961640574aa332a9&language=en-US&page=1&include_adult=false&query=${search}&page=1`;
 
     const multi = axios.get(URLMulti);
     const tv = axios.get(URLTv);
